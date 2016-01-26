@@ -20,16 +20,18 @@ task compileTicketAllWidgets(type: JavaCompile) {
 
 }
 
-def ticketLogDir = "log/examples/ticket"
-
+//def ticketLogDir = "log/examples/ticket"
+def ticketLogDir = "log/TicketAllWidgets"
+def autDir = "aut"
 
 task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
      manifest {
               attributes 'Main-Class': 'examples.ticket.TicketAllWidgets'
      }
 
-//     mkdir (ticketLogDir + "/dist")
-     destinationDir = file(ticketLogDir + "/dist")
+     mkdir(ticketLogDir)
+//     destinationDir = file(ticketLogDir + "/dist")
+     destinationDir = file(autDir)
      archiveName = "TicketAllWidgets.jar"
      from ("build/classes/main") {
           include("examples/ticket/*")
@@ -37,7 +39,8 @@ task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
 }
 
 task guitarRipperTicketAllWidgets(type: JavaExec, dependsOn: jarTicketAllWidgets) {
-     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+//     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+     classpath = fileTree(autDir) + fileTree("lib")
      main = "edu.umd.cs.guitar.ripper.JFCRipperMain"
      jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
      args = ["-c", "examples.ticket.TicketAllWidgets"
@@ -49,7 +52,8 @@ task guitarRipperTicketAllWidgets(type: JavaExec, dependsOn: jarTicketAllWidgets
 }
 
 task guitarGui2EfgTicketAllWidgets(type: JavaExec, dependsOn: guitarRipperTicketAllWidgets) {
-     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+//     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+     classpath = fileTree(autDir) + fileTree("lib")
      main = "edu.umd.cs.guitar.graph.GUIStructure2GraphConverter"
      jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
      args = ["-p", "EFGConverter"
@@ -58,7 +62,8 @@ task guitarGui2EfgTicketAllWidgets(type: JavaExec, dependsOn: guitarRipperTicket
 }
 
 task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTicketAllWidgets) {
-     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+//     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+     classpath = fileTree(autDir) + fileTree("lib")
      main = "edu.umd.cs.guitar.testcase.TestCaseGenerator"
      jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
      args = ["-p", "RandomSequenceLengthCoverage"
@@ -68,25 +73,55 @@ task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTick
           , "-m", "200"]
 }
 
-task catgMidTicketAllWidgets() {
+task guitarTicketAllWidgets(dependsOn: guitarTestCaseTicketAllWidgets) {}
+
+
+defaultTasks 'clean', 'guitarTicketAllWidgets'
+
+/*
+task guitarReplayTicketAllWidgets() {
     fileTree(ticketLogDir + "/testcases/" ).each {File file ->
-        task "catg_${file.name}" (type: JavaExec, dependsOn: guitarTestCaseTicketAllWidgets)        {
-        classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+        task "guitar_${file.name}" (type: JavaExec, dependsOn: guitarTestCaseTicketAllWidgets)        {
+//        classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+     classpath = fileTree(autDir) + fileTree("lib")
         main = "edu.umd.cs.guitar.replayer.JFCReplayerMain"
         jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
         args = ["-c", "examples.ticket.TicketAllWidgets"
         , "-g", ticketLogDir + "/ticket.GUI"
         , "-e",  ticketLogDir+"/ticket.EFG"
-        , "-t", file.name
+        , "-t", ticketLogDir + "/testcases/" + file.name
         , "-i", "2000"
         , "-d", "200"
         , "-l", ticketLogDir + "/log/" + file.name + ".log"
         , "-gs", ticketLogDir + "/states/" + file.name + ".sta"
-        , "-cf", "./src/main/java/examples/ticket/configure/guitar.xml"
+        , "-cf", "./src/main/java/examples/ticket/configure/configuration.xml"
         , "-ts"]
-
         }
     }
+}
+*/
+task catgTicketAllWidgets(){
+    fileTree(ticketLogDir + "/testcases/" ).each {File file ->
+        task "catg_${file.name}" (type: JavaExec, dependsOn: guitarTestCaseTicketAllWidgets)        {
+//        classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
+       classpath = fileTree(autDir) + fileTree("lib")
+      main = "edu.umd.cs.guitar.replayer.JFCReplayerMain"
+        jvmArgs = ["-Djanala.loggerClass=janala.logger.DirectConcolicExecution"
+                , "-Djanala.conf=./catg.conf"
+                , "-javaagent:./lib/catg-dev.jar"
+                , "-Dlog4j.configuration=log/examples/ticket/guitar.log"]
+        args = ["-c", "examples.ticket.TicketAllWidgets"
+        , "-g", ticketLogDir + "/ticket.GUI"
+        , "-e",  ticketLogDir+"/ticket.EFG"
+        , "-t", ticketLogDir + "/testcases/" + file.name
+        , "-i", "2000"
+        , "-d", "200"
+        , "-l", ticketLogDir + "/log/" + file.name + ".log"
+        , "-gs", ticketLogDir + "/states/" + file.name + ".sta"
+        , "-cf", "./src/main/java/examples/ticket/configure/configuration.xml"
+        , "-ts"]
+        }
+}
 }
 
 task catg(dependsOn: tasks.matching { Task task -> task.name.startsWith("catg_")}){

@@ -1,0 +1,114 @@
+[main] INFO  ------- BEGIN REPLAY -------
+[main] DEBUG Parsing window: 
+[main] INFO  ------ BEGIN TESTCASE -----
+[main] INFO  Setting up JFCReplayer monitor
+[main] INFO  Connecting to application
+[main] INFO  Loading URL
+[main] INFO  Loading URL - DONE
+[main] DEBUG =============================
+[main] DEBUG Application Parameters: 
+[main] DEBUG -----------------------------
+[main] DEBUG 
+[main] DEBUG Main method FOUND!
+[main] DEBUG Main method INVOKED!
+[main] INFO  Waiting for applicationt to start 2000ms
+[main] INFO  Application is connected.
+[main] INFO  Test monitor: edu.umd.cs.guitar.replayer.JFCReplayerMonitor is initialized
+[main] ERROR log/TicketAllWidgets/states/t_e1285101522_e426422292_e3379743844.sta NOT FOUND!!!
+[main] INFO  Test monitor: edu.umd.cs.guitar.replayer.JFCReplayerMonitor is initialized
+[main] INFO  Test monitor: edu.umd.cs.guitar.replayer.JFCReplayerMonitor is initialized
+[main] INFO  Testcase size 3 steps
+[main] INFO  ------- BEGIN STEP --------
+[main] INFO  Executing Step EventID = e1285101522
+[main] DEBUG Getting widget ID and actions...
+[main] DEBUG Locating step event in EFG...
+[main] DEBUG DONE
+[main] DEBUG Looking up window for widget/event...
+[main] DEBUG DONE
+[main] INFO  Waiting for window:
+[main] INFO  Window Title = 
+[main] INFO  Widget ID    = w1285101522
+[main] INFO  getOwnedWindowByID: Looking for  got 
+[main] INFO  FOUND window
+[main] INFO  
+[main] INFO  Searching for widget:
+[main] INFO  Widget ID = w1285101522
+[main] INFO  FOUND widget
+[main] INFO  Widget Title = gender:
+[main] INFO  Action: *edu.umd.cs.guitar.event.JFCActionHandler
+[main] INFO  
+[main] INFO  Delaying for 200 ms to get a stable GUI state....
+[main] INFO  Recording GUI state....
+[main] INFO  DONE
+[main] INFO  Dumping out state ... 
+[main] ERROR log/TicketAllWidgets/states/t_e1285101522_e426422292_e3379743844.sta NOT FOUND!!!
+[main] INFO  DONE
+[main] INFO  Step Timer elapsed Time: 265
+[main] INFO  -------- END STEP ---------
+[main] INFO  ------- BEGIN STEP --------
+[main] INFO  Executing Step EventID = e426422292
+[main] DEBUG Getting widget ID and actions...
+[main] DEBUG Locating step event in EFG...
+[main] DEBUG DONE
+[main] DEBUG Looking up window for widget/event...
+[main] DEBUG DONE
+[main] INFO  Waiting for window:
+[main] INFO  Window Title = 
+[main] INFO  Widget ID    = w426422292
+[main] INFO  getOwnedWindowByID: Looking for  got 
+[main] INFO  FOUND window
+[main] INFO  
+[main] INFO  Searching for widget:
+[main] INFO  Widget ID = w426422292
+[main] INFO  FOUND widget
+[main] INFO  Widget Title = Buy
+[main] INFO  Action: *edu.umd.cs.guitar.event.JFCActionHandler
+[main] INFO  
+[main] INFO  Delaying for 200 ms to get a stable GUI state....
+[main] INFO  Recording GUI state....
+[main] INFO  DONE
+[main] INFO  Dumping out state ... 
+[main] ERROR log/TicketAllWidgets/states/t_e1285101522_e426422292_e3379743844.sta NOT FOUND!!!
+[main] INFO  DONE
+[main] INFO  Step Timer elapsed Time: 428
+[main] INFO  -------- END STEP ---------
+[main] INFO  ------- BEGIN STEP --------
+[main] INFO  Executing Step EventID = e3379743844
+[main] DEBUG Getting widget ID and actions...
+[main] DEBUG Locating step event in EFG...
+[main] DEBUG DONE
+[main] DEBUG Looking up window for widget/event...
+[main] DEBUG DONE
+[main] INFO  Waiting for window:
+[main] INFO  Window Title = 
+[main] INFO  Widget ID    = w3379743844
+[main] INFO  getOwnedWindowByID: Looking for  got 
+[main] INFO  FOUND window
+[main] INFO  
+[main] INFO  Searching for widget:
+[main] INFO  Widget ID = w3379743844
+[main] INFO  FOUND widget
+[main] INFO  Widget Title = Enter your age:
+[main] INFO  Action: *edu.umd.cs.guitar.event.JFCEditableTextHandler
+[main] INFO  
+[main] INFO  Delaying for 200 ms to get a stable GUI state....
+[main] INFO  Recording GUI state....
+[main] INFO  DONE
+[main] INFO  Dumping out state ... 
+[main] ERROR log/TicketAllWidgets/states/t_e1285101522_e426422292_e3379743844.sta NOT FOUND!!!
+[main] INFO  DONE
+[main] INFO  Step Timer elapsed Time: 301
+[main] INFO  -------- END STEP ---------
+[main] INFO  Looking for terminal widget....
+[main] INFO  Clicking on terminal: *Buy*
+[main] INFO  Clicking on terminal: *Buy*
+[main] INFO  Clicking on terminal: *Buy*
+[main] INFO  Clicking on terminal: *Buy*
+[main] INFO  Clicking on terminal: *Buy*
+[main] INFO  ------- END TESTCASE ------
+[main] INFO  Pass status    : 0
+[main] INFO  Time Elapsed   : 00 : 00 : 05: 396
+[main] INFO  Testcase       : log/TicketAllWidgets/testcases/t_e1285101522_e426422292_e3379743844.tst
+[main] INFO  Log file       : log/TicketAllWidgets/logs/t_e1285101522_e426422292_e3379743844.log
+[main] INFO  GUI state file : log/TicketAllWidgets/states/t_e1285101522_e426422292_e3379743844.sta
+[main] INFO  -------- END REPLAY --------

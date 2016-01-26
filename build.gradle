@@ -1,7 +1,13 @@
 apply plugin : 'java'
 
+repositories {
+             jcenter()
+}
+
 dependencies {
              compile fileTree("lib")
+             compile 'org.choco-solver:choco-solver:3.3.1'
+             compile 'dk.brics.automaton:automaton:1.11-8'
 }
 
 def a = 1
@@ -34,7 +40,59 @@ task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
      destinationDir = file(autDir)
      archiveName = "TicketAllWidgets.jar"
      from ("build/classes/main") {
-          include("examples/ticket/*")
+          include("examples/ticket/")
+     }
+}
+
+def testLogDir="log/test"
+task jarTestme(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Main-Class': 'examples.test.Testme'
+     }
+
+     mkdir(testLogDir)
+     destinationDir = file(autDir)
+     archiveName = "Testme.jar"
+     from ("build/classes/main") {
+          include("examples/test/")
+     }
+}
+
+def radioLogDir="log/radioButton"
+task jarRadioButton(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Main-Class': 'examples.radioButton.Project'
+     }
+
+     mkdir(radioLogDir)
+     destinationDir = file(autDir)
+     archiveName = "radioButton.jar"
+     from ("build/classes/main") {
+          include("examples/radioButton/")
+     }
+}
+
+task jarWord(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Main-Class': 'crosswordsage.MainScreen'
+     }
+
+     destinationDir = file(autDir)
+     archiveName = "CrosswordSage.jar"
+     from ("build/classes/main") {
+          include("crosswordsage/")
+     }
+}
+
+
+task jarCatg(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Premain-Class': 'janala.instrument.SnoopInstructionTransformer'
+     }
+     destinationDir = file('./lib')
+     archiveName = "catg-dev.jar"
+     from ("build/classes/main") {
+          include("catg/", "janala/")
      }
 }
 
@@ -69,7 +127,7 @@ task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTick
      args = ["-p", "RandomSequenceLengthCoverage"
           , "-e",  ticketLogDir+"/ticket.EFG"
           , "-d",  ticketLogDir+"/testcases"
-          , "-l", "3"
+          , "-l", "0"
           , "-m", "200"]
 }
 

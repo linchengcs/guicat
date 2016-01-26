@@ -45,7 +45,8 @@ def concolic ():
     import time
     i = 1
     while i <= iters:
-      #  time.sleep(2)
+        print "iters: " + "{}".format(i)
+        time.sleep(2)
         try:
             try:
                 with open ("isRealInput", "r") as myfile:
@@ -132,9 +133,10 @@ classpath = ""
 for i in os.listdir("./aut"):
     classpath += "./aut/" + i + ":"
 for i in os.listdir("./lib"):
-    classpath += "./lib/" + i + ":"
+    if i.endswith(".jar"):
+         classpath += "./lib/" + i + ":"
 
-print classpath
+#classpath += "./lib/catg-dev.jar:./lib/asm-all-5.0.4.jar"
 
 args = getArguments()
 iters = args.maxIterations

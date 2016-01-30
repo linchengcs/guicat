@@ -25,8 +25,12 @@ do
     fi
 done
 
+rm inputs* branches/
+rm -rf $AUTDIR branches/
 mkdir $AUTDIR
-rm -fr $AUTDIR"/*"
+mkdir branches/
+touch inputs
+mkdir $AUTDIR"/testcases"
 
 ripperCmd="java -Dlog4j.configuration=$logFile -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 500 -i 2000 -l $logFile"
 
@@ -37,10 +41,10 @@ gui2efgCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guita
 eval $gui2efgCmd
 
 testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p RandomSequenceLengthCoverage -e $efgFile -l 1 -m 200 -d $AUTTESTCASE"
+#testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p BytecodeAnalysis  -e $efgFile -l 1 -m 200 -d $AUTTESTCASE --scope ./aut/radioButton.jar  --method pair --shared 1"
+echo $testcaseCmd
 eval $testcaseCmd
 
-rm -rf branches
-mkdir branches
 for testcase in `find $AUTTESTCASE -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
@@ -48,5 +52,4 @@ do
 #break
 done
 
-rm -rf $AUTDIR"/branches"
 mv branches $AUTDIR

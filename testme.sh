@@ -4,6 +4,7 @@ AUTTESTCASE=$AUTDIR"/testcases"
 
 AUT_MAINCLASS="examples.test.Testme"
 
+rm -rf $AUTDIR
 mkdir $AUTDIR
 rm -rf branches
 mkdir branches

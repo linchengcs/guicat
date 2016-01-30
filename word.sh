@@ -25,8 +25,9 @@ do
     fi
 done
 
-mkdir $AUTDIR
-rm -fr $AUTDIR"/*"
+rm -rf $AUTDIR branches
+mkdir branches  $AUTDIR
+touch inputs
 
 ripperCmd="java -Dlog4j.configuration=$logFile -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 500 -i 2000 -l $logFile"
 
@@ -39,8 +40,6 @@ eval $gui2efgCmd
 testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p RandomSequenceLengthCoverage -e $efgFile -l 1 -m 200 -d $AUTTESTCASE"
 eval $testcaseCmd
 
-rm -rf branches
-mkdir branches
 for testcase in `find $AUTTESTCASE -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
@@ -48,5 +47,4 @@ do
 #break
 done
 
-rm -rf $AUTDIR"/branches"
 mv branches $AUTDIR

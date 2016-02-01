@@ -9,3 +9,5 @@ history*
 *.log
 instrumented/
 coverage.catg
+branches/
+.idea/

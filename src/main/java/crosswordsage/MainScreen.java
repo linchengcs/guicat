@@ -1,5 +1,7 @@
 package crosswordsage;
 
+import catg.CATG;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -275,8 +277,9 @@ public class MainScreen extends JFrame
 
     private void publishCrossword()
     {
-        int response = JOptionPane.showConfirmDialog(null, "A published crossword can be solved but not edited. Are you sure you want to continue?", null,
-                JOptionPane.YES_NO_OPTION);
+//        int response = JOptionPane.showConfirmDialog(null, "A published crossword can be solved but not edited. Are you sure you want to continue?", null,
+//                JOptionPane.YES_NO_OPTION);
+        int response = CATG.readInt(0);
         if (response == JOptionPane.NO_OPTION)
         {
 
@@ -330,9 +333,10 @@ public class MainScreen extends JFrame
         {
             if (cc.getDoSaveCheck())
             {
-                int response = JOptionPane.showConfirmDialog(null,
-                        "You currently have an open crossword you are building. \nWould you like to save before closing?", "Save?",
-                        JOptionPane.YES_NO_CANCEL_OPTION);
+//                int response = JOptionPane.showConfirmDialog(null,
+//                        "You currently have an open crossword you are building. \nWould you like to save before closing?", "Save?",
+//                        JOptionPane.YES_NO_CANCEL_OPTION);
+                int response = CATG.readInt(0);
                 if (response == JOptionPane.YES_OPTION)
                 {
                     saveCrossword();

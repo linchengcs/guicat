@@ -1,6 +1,6 @@
 package examples.ticket;
 
-//import catg.CATG;
+import catg.CATG;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -96,6 +96,7 @@ public class Ticket extends JFrame {
                     //String myAge = ageInput.getText();
 
                     //myName = CATG.readString("");
+                    myName = SingleSym.getSingleSym();
                     System.out.println(myName.length() < 3 ? "wrong name" : "right name");
 
                     /*

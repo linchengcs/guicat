@@ -117,12 +117,12 @@ public class Ticket extends JFrame {
                 }
             });
 
-        cancel.addActionListener( e -> {
+        //        cancel.addActionListener( e -> {
           //      info.setText("");
           //      nameInput.setText("");
           //      ageInput.setText("");
           //
-            });
+          //  });
 
 
         //        EventQueue eq = getToolkit().getSystemEventQueue();

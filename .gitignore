@@ -11,3 +11,6 @@ instrumented/
 coverage.catg
 branches/
 .idea/
+catg_tmp/
+coverage*
+aut/

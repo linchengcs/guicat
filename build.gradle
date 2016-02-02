@@ -26,6 +26,11 @@ task compileTicketAllWidgets(type: JavaCompile) {
 
 }
 
+task delCatg (type: Delete) {
+     delete "inputs*","isRealInput", "coverage*", "formula*", "history*"
+
+}
+
 //def ticketLogDir = "log/examples/ticket"
 def ticketLogDir = "log/TicketAllWidgets"
 def autDir = "aut"
@@ -39,6 +44,18 @@ task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
 //     destinationDir = file(ticketLogDir + "/dist")
      destinationDir = file(autDir)
      archiveName = "TicketAllWidgets.jar"
+     from ("build/classes/main") {
+          include("examples/ticket/")
+     }
+}
+
+task jarTicket(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Main-Class': 'examples.ticket.Ticket'
+     }
+
+     destinationDir = file(autDir)
+     archiveName = "ticket.jar"
      from ("build/classes/main") {
           include("examples/ticket/")
      }

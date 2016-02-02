@@ -25,9 +25,12 @@ do
     fi
 done
 
-rm -rf $AUTDIR branches
-mkdir branches  $AUTDIR
+rm inputs* branches/
+rm -rf $AUTDIR branches/
+mkdir $AUTDIR
+mkdir branches/
 touch inputs
+mkdir $AUTDIR"/testcases"
 
 ripperCmd="java -Dlog4j.configuration=$logFile -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 500 -i 2000 -l $logFile"
 
@@ -43,7 +46,7 @@ eval $testcaseCmd
 for testcase in `find $AUTTESTCASE -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
-    python concolic.py -v 3333 -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $AUTDIR/testcases/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
+    python concolic.py -v 32 -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $AUTDIR/testcases/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
 #break
 done
 

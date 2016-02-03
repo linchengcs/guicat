@@ -12,10 +12,10 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-public class OAgent implements ClassFileTransformer {
+public class SymAgent implements ClassFileTransformer {
 
     public static void premain(String agentArgs, Instrumentation inst) {
-        inst.addTransformer(new OAgent());
+        inst.addTransformer(new SymAgent());
     }
 
     @Override
@@ -62,7 +62,7 @@ public class OAgent implements ClassFileTransformer {
             byte[] ret = cw.toByteArray();
 
             try {
-                File file = new File("instrumented/oagent" + "/" + cname + ".class");
+                File file = new File("instrumented/sym-agent" + "/" + cname + ".class");
                 File parent = new File(file.getParent());
                 parent.mkdirs();
                 FileOutputStream out = new FileOutputStream(file);

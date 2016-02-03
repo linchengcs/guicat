@@ -18,7 +18,7 @@ public class Ticket extends JFrame {
         JPanel contentPane = new JPanel(new GridBagLayout());
 
         JLabel hello = new JLabel("Ticket Seller", JLabel.CENTER);
-        hello.setFont(new Font("Default", Font.BOLD, 24));
+        hello.setFont(new Font("Default", Font.BOLD, 18));
         contentPane.add(hello, new GridBagConstraints(0, 0, 2, 1, 0, 0,
                                                       GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -32,13 +32,13 @@ public class Ticket extends JFrame {
                                                           GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
         name.setLabelFor(nameInput);
-
+        /*
         JLabel nameTip = new JLabel("Please enter more than 3 characters.", JLabel.RIGHT);
         nameTip.setForeground(Color.gray);
         nameTip.setFont(new Font("Default", Font.PLAIN, 12));
         contentPane.add(nameTip, new GridBagConstraints(1, 2, 2, 1, 0, 0,
                                                         GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
-
+        */
 
         JLabel age = new JLabel("Enter your age:", JLabel.RIGHT);
         contentPane.add(age, new GridBagConstraints(0, 3, 1, 1, 0, 0,
@@ -136,7 +136,7 @@ public class Ticket extends JFrame {
         setContentPane(contentPane);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 300));
+        setPreferredSize(new Dimension(300, 200));
         pack();
 
 

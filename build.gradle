@@ -1,5 +1,7 @@
 apply plugin : 'java'
 
+defaultTasks 'clean', 'helloWorld'
+
 repositories {
              jcenter()
 }
@@ -59,13 +61,15 @@ task jarTicket(type: Jar, dependsOn: classes) {
      }
 }
 
-def testLogDir="log/test"
+task Ticket(type: JavaExec, dependsOn: jarTicket) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.ticket.Ticket"
+}
+
 task jarTestme(type: Jar, dependsOn: classes) {
      manifest {
               attributes 'Main-Class': 'examples.test.Testme'
      }
-
-     mkdir(testLogDir)
      destinationDir = file(autDir)
      archiveName = "Testme.jar"
      from (sourceSets.main.output) {
@@ -74,6 +78,16 @@ task jarTestme(type: Jar, dependsOn: classes) {
      from (sourceSets.main.resources) {
           include("log4j.properties")
      }
+}
+
+task helloWorld(type: JavaExec, dependsOn: jarTestme) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.test.HelloWorld"
+}
+
+task Testme(type: JavaExec, dependsOn: jarTestme) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.test.Testme"
 }
 
 def radioLogDir="log/radioButton"
@@ -114,6 +128,17 @@ task jarCatg(type: Jar, dependsOn: classes) {
      }
 }
 
+task jarSymAgent(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Premain-Class': 'instrument.SymAgent'
+     }
+     destinationDir = file('./lib')
+     archiveName = "sym-agent.jar"
+     from (sourceSets.main.output) {
+          include("instrument/")
+     }
+}
+
 task guitarRipperTicketAllWidgets(type: JavaExec, dependsOn: jarTicketAllWidgets) {
 //     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
      classpath = fileTree(autDir) + fileTree("lib")
@@ -150,13 +175,6 @@ task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTick
 }
 
 task guitarTicketAllWidgets(dependsOn: guitarTestCaseTicketAllWidgets) {}
-
-task helloWorld(type: JavaExec, dependsOn: jarTestme) {
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.test.HelloWorld"
-}
-
-defaultTasks 'clean', 'helloWorld'
 
 /*
 task guitarReplayTicketAllWidgets() {

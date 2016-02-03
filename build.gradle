@@ -8,17 +8,13 @@ dependencies {
              compile fileTree("lib")
              compile 'org.choco-solver:choco-solver:3.3.1'
              compile 'dk.brics.automaton:automaton:1.11-8'
+             testCompile group: 'junit', name: 'junit', version: '4.+'
+             compile 'log4j:log4j:1.+'
 }
 
 def a = 1
 task foo{
      a += 1
-}
-
-task repeat{
-//         3.times{id -> tasks.foo.execute()}
-       tasks.foo.execute();
-       tasks.foo.execute();
 }
 
 
@@ -28,13 +24,11 @@ task compileTicketAllWidgets(type: JavaCompile) {
 
 task delCatg (type: Delete) {
      delete "inputs*","isRealInput", "coverage*", "formula*", "history*"
-
 }
 
-//def ticketLogDir = "log/examples/ticket"
-def ticketLogDir = "log/TicketAllWidgets"
 def autDir = "aut"
 
+def ticketLogDir = "log/TicketAllWidgets"
 task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
      manifest {
               attributes 'Main-Class': 'examples.ticket.TicketAllWidgets'
@@ -49,6 +43,7 @@ task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
      }
 }
 
+
 task jarTicket(type: Jar, dependsOn: classes) {
      manifest {
               attributes 'Main-Class': 'examples.ticket.Ticket'
@@ -56,8 +51,11 @@ task jarTicket(type: Jar, dependsOn: classes) {
 
      destinationDir = file(autDir)
      archiveName = "ticket.jar"
-     from ("build/classes/main") {
+     from (sourceSets.main.output) {
           include("examples/ticket/")
+     }
+     from (sourceSets.main.resources) {
+          include("log4j.properties")
      }
 }
 
@@ -70,8 +68,11 @@ task jarTestme(type: Jar, dependsOn: classes) {
      mkdir(testLogDir)
      destinationDir = file(autDir)
      archiveName = "Testme.jar"
-     from ("build/classes/main") {
+     from (sourceSets.main.output) {
           include("examples/test/")
+     }
+     from (sourceSets.main.resources) {
+          include("log4j.properties")
      }
 }
 
@@ -150,8 +151,12 @@ task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTick
 
 task guitarTicketAllWidgets(dependsOn: guitarTestCaseTicketAllWidgets) {}
 
+task helloWorld(type: JavaExec, dependsOn: jarTestme) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.test.HelloWorld"
+}
 
-defaultTasks 'clean', 'guitarTicketAllWidgets'
+defaultTasks 'clean', 'helloWorld'
 
 /*
 task guitarReplayTicketAllWidgets() {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Configuration>
+  
+  <TerminalComponents>
+    
+    <!-- Declare Create Shape as a terminal component -->
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Buy</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+        
+  </TerminalComponents>
+  
+</Configuration>

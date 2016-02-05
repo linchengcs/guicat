@@ -62,8 +62,10 @@ task jarTicket(type: Jar, dependsOn: classes) {
 }
 
 task Ticket(type: JavaExec, dependsOn: jarTicket) {
+//     jvmArgs = ['-javaagent:"/home/oliver/workspace/java/project/catgui2/lib/sym-agent.jar"']
      classpath = fileTree(autDir) + fileTree("lib")
      main = "examples.ticket.Ticket"
+     println commandLine
 }
 
 task jarTestme(type: Jar, dependsOn: classes) {

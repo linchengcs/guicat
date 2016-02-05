@@ -16,6 +16,7 @@ def getArguments ():
     parser.add_argument("-D", help="JVM options", action="append")
     parser.add_argument("maxIterations", help="Maximum number of times the program under test can be executed.", type=int)
     parser.add_argument("-t", help="branch id")
+    parser.add_argument("--autosym", help="Auto add symbolic variables via conf file", action="store_true")
     parser.add_argument("className", help="Java class to be tested.")
     parser.add_argument("arguments", nargs='*', help="Arguments passed to the program under test.")
     args = parser.parse_args()
@@ -25,7 +26,15 @@ def getArguments ():
 catg_tmp_dir = "catg_tmp"
 
 def concolic ():
-    cmd1 = ("java -Xmx4096M -Xms2048M -Djanala.loggerClass=" + loggerClass
+    if args.autosym:
+        cmd1 =  ("java -Xmx4096M -Xms2048M -Djanala.loggerClass=" + loggerClass
+            + " -Djanala.conf=" + catg_home + "catg.conf "
+            + jvmOpts + " -javaagent:\""
+            + catg_home + "lib/sym-agent.jar\"" + " -javaagent:\""
+            + catg_home + "lib/catg-dev.jar\" -cp "
+            + classpath+" -ea "+yourpgm+" "+arguments)
+    else:
+        cmd1 = ("java -Xmx4096M -Xms2048M -Djanala.loggerClass=" + loggerClass
             + " -Djanala.conf=" + catg_home + "catg.conf "
             + jvmOpts + " -javaagent:\""
             + catg_home + "lib/catg-dev.jar\" -cp "
@@ -139,6 +148,7 @@ for i in os.listdir("./lib"):
 #classpath += "./lib/catg-dev.jar:./lib/asm-all-5.0.4.jar"
 
 args = getArguments()
+print args
 iters = args.maxIterations
 yourpgm = args.className
 isOffline = args.offline

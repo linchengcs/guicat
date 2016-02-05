@@ -16,6 +16,8 @@ public class SymAgent implements ClassFileTransformer {
 
     public static void premain(String agentArgs, Instrumentation inst) {
         inst.addTransformer(new SymAgent());
+        String value = System.getProperty("conf");
+        System.out.println(value);
     }
 
     @Override
@@ -36,19 +38,26 @@ public class SymAgent implements ClassFileTransformer {
                 Iterator<AbstractInsnNode> j = insns.iterator();
                 while (j.hasNext()) {
                     AbstractInsnNode in = j.next();
-                    if (in.getOpcode() == Opcodes.ALOAD)
-                        if(in.getNext().getOpcode() == Opcodes.GETFIELD)
-                            if(in.getNext().getNext().getOpcode() == Opcodes.INVOKEVIRTUAL)
-                                {
+                    if (in.getOpcode() == Opcodes.ALOAD) {
+                        AbstractInsnNode in1 = in.getNext();
+                        if(in1.getOpcode() == Opcodes.GETFIELD) {
+                            FieldInsnNode in11 = (FieldInsnNode) in1;
+                            System.out.println("GETFIELD desc: " + in11.desc);
+                            System.out.println("GETFIELD owner: " + in11.owner);
+                            System.out.println("GETFIELD name: " + in11.name);
+                            AbstractInsnNode in2 = in1.getNext();
+                            if(in2.getOpcode() == Opcodes.INVOKEVIRTUAL) {
                                     //insns.insert(in.getNext(), new InsnNode(0));
-
-                                    InsnList il = new InsnList();
-                                    il.add(new InsnNode(Opcodes.POP));
-                                    il.add(new LdcInsnNode(new String("11")));
-                                    il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "catg/CATG", "readString", "(Ljava/lang/String;)Ljava/lang/String;"));
-                                    insns.insert(in.getNext().getNext(), il);
+                                MethodInsnNode in22 = (MethodInsnNode) in2;
+                                InsnList il = new InsnList();
+                                il.add(new InsnNode(Opcodes.POP));
+                                il.add(new LdcInsnNode(new String("11")));
+                                il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "catg/CATG", "readString", "(Ljava/lang/String;)Ljava/lang/String;"));
+                                insns.insert(in.getNext().getNext(), il);
 
                                 }
+                        }
+                    }
                 }
             }
 

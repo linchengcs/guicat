@@ -92,11 +92,12 @@ public class Ticket extends JFrame {
 
         buy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    String myName = nameInput.getText();
+                    //String myName = nameInput.getText();
+                    String myName = "Enter your name:".equals(nameInput.getName()) ? CATG.readString("") : nameInput.getText();
                     //String myAge = ageInput.getText();
 
                     //myName = CATG.readString("");
-                    myName = SingleSym.getSingleSym();
+                    //myName = SingleSym.getSingleSym();
                     System.out.println(myName.length() < 3 ? "wrong name" : "right name");
 
                     /*
@@ -165,6 +166,7 @@ public class Ticket extends JFrame {
           e.printStackTrace();
           }
         */
+        SingleSym ss = SingleSym.singleSym;
         Ticket t = new Ticket();
         t.showTicket();
     }

@@ -1,6 +1,5 @@
 package examples.ticket;
 
-import catg.CATG;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -92,14 +91,18 @@ public class Ticket extends JFrame {
 
         buy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    //String myName = nameInput.getText();
-                    String myName = "Enter your name:".equals(nameInput.getName()) ? CATG.readString("") : nameInput.getText();
+                    String myName = nameInput.getText();
+                    //System.out.println(nameInput.getAccessibleContext().getAccessibleName());
+                    //System.out.println(ageInput.getAccessibleContext().getAccessibleName());
+
+                    //String myName = "Enter your name:".equals(nameInput.getName()) ? CATG.readString("") : nameInput.getText();
                     //String myAge = ageInput.getText();
 
                     //myName = CATG.readString("");
                     //myName = SingleSym.getSingleSym();
                     System.out.println(myName.length() < 3 ? "wrong name" : "right name");
-
+                    String myAge = ageInput.getText();
+                    System.out.println(myAge.length() == 10 ? "wrong name" : "right name");
                     /*
                     int myAge = CATG.readInt(0);
                     if ( myAge < 12){
@@ -166,7 +169,7 @@ public class Ticket extends JFrame {
           e.printStackTrace();
           }
         */
-        SingleSym ss = SingleSym.singleSym;
+        //        SingleSym ss = SingleSym.singleSym;
         Ticket t = new Ticket();
         t.showTicket();
     }

@@ -15,12 +15,14 @@ public class SingleSym {
     public SingleSym() {
         String conffile = "./conf/ticket/symagent/ticket.properties";
         try {
-            InputStream is = getClass().getResourceAsStream(conffile);
+            FileInputStream is = new FileInputStream(conffile);
             conf = new Properties();
             conf.load(is);
             is.close();
             String myconf = conf.getProperty("sym");
-            System.out.println(myconf);
+            System.out.println(conf.toString());
+            System.out.println(conf.getProperty("Enter your name:"));
+            System.out.println(conf.getProperty("Enter your age:"));
         }
         catch(IOException ioe) {
             logger.error("IOException in loadProps");

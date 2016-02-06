@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Hashtable;
 
 public class SymbolicMirror {
-    //private static Logger logger = Logger.getLogger(SymbolicMirror.class);
+    private static Logger logger = Logger.getLogger(SymbolicMirror.class);
     private static String sym = null;
     public static  SymbolicMirror symbolicMirror = new SymbolicMirror();
     private Properties conf;
@@ -29,7 +29,7 @@ public class SymbolicMirror {
             for(String key : conf.stringPropertyNames()){
                 symbolicVariables.put((String)key, CATG.readString(""));
             }
-
+            logger.info("read auto sym properties, create sym variables");
         }
         catch(IOException ioe) {
             for(StackTraceElement ste : ioe.getStackTrace())
@@ -38,6 +38,7 @@ public class SymbolicMirror {
     }
 
     public static String sgetText(Object o) {
+        logger.info("call get sgetText by:  " + o.toString());
         if (o instanceof JTextField) {
             JTextField jTextField = (JTextField) o;
             String key = jTextField.getAccessibleContext().getAccessibleName();

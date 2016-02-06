@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import org.apache.log4j.Logger;
 /**
  * Created by rick on 9/21/15.
  */
@@ -12,6 +12,7 @@ public class Ticket extends JFrame {
     private JButton buy;
     //    private String myName;
     //    private String myAge;
+    public Logger logger = Logger.getLogger(Ticket.class);
 
     public void showTicket () {
         JPanel contentPane = new JPanel(new GridBagLayout());
@@ -119,6 +120,7 @@ public class Ticket extends JFrame {
                     if (ticketTypeString[index] == "flight" )
                         System.out.println("your are taking flight");
                     */
+                    logger.info("Ticket.buy is clicked~~");
                 }
             });
 

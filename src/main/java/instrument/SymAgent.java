@@ -11,8 +11,12 @@ import org.objectweb.asm.tree.*;
 import java.io.*;
 import java.lang.*;
 import java.util.*;
+import org.apache.log4j.Logger;
 
 public class SymAgent implements ClassFileTransformer {
+
+    private  Logger logger = Logger.getLogger(SymbolicMirror.class);
+
 
     public static void premain(String agentArgs, Instrumentation inst) {
         inst.addTransformer(new SymAgent());
@@ -23,7 +27,7 @@ public class SymAgent implements ClassFileTransformer {
     @Override
     public byte[] transform(ClassLoader loader, String cname, Class<?> cclass, ProtectionDomain d, byte[] cbuf) throws IllegalClassFormatException {
         if (!cname.startsWith("examples")) return cbuf;
-        System.out.println("transforming: " + cname);
+        logger.info("transforming: " + cname);
 
         try {
             ClassReader cr = new ClassReader(cbuf);

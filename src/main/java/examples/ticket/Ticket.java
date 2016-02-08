@@ -101,9 +101,31 @@ public class Ticket extends JFrame {
 
                     //myName = CATG.readString("");
                     //myName = SingleSym.getSingleSym();
-                    System.out.println(myName.length() < 3 ? "wrong name" : "right name");
                     String myAge = ageInput.getText();
-                    System.out.println(myAge.length() == 10 ? "wrong name" : "right name");
+
+                    String display1 = "-----> Your name: " + myName + " -----> Your age: " + myAge;
+                    String display = "";
+                    if (myName.equals("oliver") ) {
+                        display = "Wrong name; " + display1;
+                        System.out.println(display);
+                        info.setText(display);
+                    } else {
+                        display = "Righ name; " + display1;
+                        System.out.println(display);
+                        info.setText(display);
+                    }
+                    if (myAge.equals("12")) {
+                        display = "Child; " + display1;
+                        System.out.println(display);
+                        info.setText(display);
+                    } else {
+                        display = "Adult; " + display1;
+                        System.out.println(display);
+                        info.setText(display);
+                    }
+                    //System.out.println((myName.length() < 3 ? "wrong name" : "right name") + " , Your name/age: " + myName +"/" +myAge );
+                    //System.out.println((myAge.length() >= 12 ? "adult" : "child") + " , Your name/age: " + myName + "/" + myAge);
+
                     /*
                     int myAge = CATG.readInt(0);
                     if ( myAge < 12){
@@ -151,7 +173,6 @@ public class Ticket extends JFrame {
 
 
     }
-
 
 
     public static void main(String[] args) {

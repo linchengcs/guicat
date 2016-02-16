@@ -82,6 +82,16 @@ public final class StaticInvocation {
             return history.ignore();
         } else if (owner.equals("java/lang/Integer") && name.equals("parseInt") && args.length == 1) {
             System.out.println("static parsing int at Lin 84 module StaticInvocation.java");
+            if (args[0] instanceof StringValue) {
+                StringValue sv = (StringValue) args[0];
+                int i = Integer.parseInt(sv.getConcrete());
+                //janala.Main.readInt(i);
+                //janala.Main.MakeSymbolic(i);
+                IntValue iv = new IntValue(i);
+                int symbol = iv.MAKE_SYMBOLIC(history);
+                history.addInput(symbol, iv);
+                return iv;
+            }
         }
 
         return PlaceHolder.instance;

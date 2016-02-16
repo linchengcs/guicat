@@ -101,7 +101,12 @@ public class Ticket extends JFrame {
 
                     //myName = CATG.readString("");
                     //myName = SingleSym.getSingleSym();
+
+                    int myAgeInt = 0;
                     String myAge = ageInput.getText();
+                    try {
+                        myAgeInt = Integer.parseInt(myAge);
+                    } catch (Exception e1){}
 
                     String display1 = "-----> Your name: " + myName + " -----> Your age: " + myAge;
                     String display = "";
@@ -114,7 +119,7 @@ public class Ticket extends JFrame {
                         System.out.println(display);
                         info.setText(display);
                     }
-                    if (myAge.equals("12")) {
+                    if (myAgeInt < 12) {
                         display = "Child; " + display1;
                         System.out.println(display);
                         info.setText(display);

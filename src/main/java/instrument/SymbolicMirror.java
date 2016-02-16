@@ -29,6 +29,7 @@ public class SymbolicMirror {
             for(String key : conf.stringPropertyNames()){
                 symbolicVariables.put((String)key, CATG.readString(""));
             }
+            //    symbolicVariables.put("parseInt", CATG.readInt(0));
             logger.info("read auto sym properties, create sym variables");
         }
         catch(IOException ioe) {
@@ -50,7 +51,20 @@ public class SymbolicMirror {
         return "";
 
     }
-
+    /*
+    public static int sparseInt(StringValue s) {
+        logger.info("call sparseInt by: " + s);
+        if (o instanceof JTextField) {
+            JTextField jTextField = (JTextField) o;
+            String key = jTextField.getAccessibleContext().getAccessibleName();
+            if (symbolicMirror.conf.getProperty(key) != null)
+                return symbolicMirror.getText(key);
+            else
+                return Integer.parseInt(jTextField.getText());
+        }
+        return 0;
+    }
+    */
     public static String getText(String key) {
         return (String)symbolicMirror.symbolicVariables.get(key);
     }

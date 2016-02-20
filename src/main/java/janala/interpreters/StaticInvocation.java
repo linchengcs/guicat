@@ -4,6 +4,7 @@ import static janala.interpreters.ObjectValue.ADDRESS_UNKNOWN;
 
 import janala.config.Config;
 import janala.solvers.History;
+import instrument.SymbolicMirror;
 
 public final class StaticInvocation {
     private final Config config;
@@ -84,9 +85,11 @@ public final class StaticInvocation {
             System.out.println("static parsing int at Lin 84 module StaticInvocation.java");
             if (args[0] instanceof StringValue) {
                 StringValue sv = (StringValue) args[0];
-                int i = Integer.parseInt(sv.getConcrete());
+                //int i = Integer.parseInt(sv.getConcrete());
                 //janala.Main.readInt(i);
                 //janala.Main.MakeSymbolic(i);
+                int i = SymbolicMirror.itmp;
+                System.out.println(">>>>>>>>><<<<<<<" +i);
                 IntValue iv = new IntValue(i);
                 int symbol = iv.MAKE_SYMBOLIC(history);
                 history.addInput(symbol, iv);

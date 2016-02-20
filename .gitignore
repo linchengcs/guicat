@@ -15,3 +15,4 @@ catg_tmp/
 coverage*
 aut/
 backtrackFlag
+*\#*

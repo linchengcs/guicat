@@ -1,6 +1,7 @@
 package examples.test;
 
 import catg.CATG;
+import janala.Main;
 
 public class Testme {
     String name;

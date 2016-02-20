@@ -294,6 +294,8 @@ public class CVC4Solver implements Solver {
 
   public List<String> getSolution(Map<String, Long> soln) {
     List<String> result = new ArrayList<String>();
+    System.out.println("|||||||||||||||||||||||||||||");
+    System.out.println(soln.toString());
     for (InputElement ielem : inputs) {
       Integer sym = ielem.symbol;
       Value val = ielem.value;
@@ -302,15 +304,17 @@ public class CVC4Solver implements Solver {
       } else if (sym.intValue() == config.scopeEndSymbol) {
         result.add(config.scopeEndMarker);
       } else {
-          //System.out.println("sym "+sym);
+          System.out.println("sym "+sym);
         Long l = soln.get("x" + sym);
         if (l != null) {
           result.add(l.toString());
-            //System.out.println("l = " + l);
+           System.out.println("l = " + l);
         } else {
           if (val instanceof StringValue) {
             StringValue sval = (StringValue) val;
             String old = sval.getConcrete();
+            System.out.println("~~~~~~~~~~~string sol null, string = >" + old +"<");
+            System.out.println("~~~~~~~~~~~string sol null, parseIntSym = >" + sval.parseIntSym +"<");
 
             assert sval.getSymbolicExp() != null;
             
@@ -330,7 +334,18 @@ public class CVC4Solver implements Solver {
               }
               ret.append(c);
             }
-            result.add(ret.toString());
+
+            /* add by Lin Cheng, 02-20-2016 */
+            String retts = ret.toString();
+            if (retts.length() > 0) {
+                System.out.println("@@@@@@ops, retts = " + retts);
+                result.add(ret.toString());
+            } else {
+                int pis = sval.parseIntSym;
+                long reti = soln.get("x" + pis);
+                System.out.println("@@@@@@ops, reti = " + reti);
+                result.add(Long.toString(reti));
+            }
           } else {
             result.add(val.getConcrete().toString());
           }

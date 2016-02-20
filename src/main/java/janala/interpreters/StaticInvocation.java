@@ -85,14 +85,17 @@ public final class StaticInvocation {
             System.out.println("static parsing int at Lin 84 module StaticInvocation.java");
             if (args[0] instanceof StringValue) {
                 StringValue sv = (StringValue) args[0];
-                //int i = Integer.parseInt(sv.getConcrete());
+                int i = Integer.parseInt(sv.getConcrete());
                 //janala.Main.readInt(i);
                 //janala.Main.MakeSymbolic(i);
-                int i = SymbolicMirror.itmp;
-                System.out.println(">>>>>>>>><<<<<<<" +i);
+                // int i = SymbolicMirror.itmp;
                 IntValue iv = new IntValue(i);
                 int symbol = iv.MAKE_SYMBOLIC(history);
-                history.addInput(symbol, iv);
+                System.out.println(">>>>>>>>><<<<<<<" +i);
+                System.out.println("symbol of stringvalue: " + sv.symbol);
+                System.out.println("symbol of intvalue: " + iv.getSymbol());
+                //history.addInput(symbol, iv);
+                sv.parseIntSym = symbol;
                 return iv;
             }
         }

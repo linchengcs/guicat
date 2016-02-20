@@ -14,13 +14,21 @@ public class Testme {
     public static void main(String[] args) {
 
         String myName;
-                myName = CATG.readString("0");
-                int i = Integer.parseInt(myName);
+        myName = CATG.readString("0");
+        int i = Integer.parseInt(myName);
+        //int i = myName.length();
         //int i = CATG.readInt(1);
-        if (i > 12) {
-            print(">>>>>>adult: " + i);
+        if (i > 3) {
+            print("----------->>>>>>>>>>  adult: " + i);
         } else {
-            print(">>>>>>child: " + i);
+            print("----------->>>>>>>>>>child: " + i);
         }
+
+        /*
+        String o = CATG.readString("o");
+        if (o.startsWith("o"))
+            //                        if(o.length() == 3)
+                {;}
+        */
     }
 }

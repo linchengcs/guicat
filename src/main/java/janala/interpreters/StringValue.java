@@ -7,6 +7,8 @@ public final class StringValue extends ObjectValue {
   private final String string;
   private SymbolicStringExpression symbolicExp;
 
+    public int parseIntSym = -1;
+    
   public StringValue(String string, int address) {
     super(100, address);
     this.string = string;

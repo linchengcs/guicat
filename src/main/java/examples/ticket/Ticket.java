@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.apache.log4j.Logger;
+import catg.CATG;
 /**
  * Created by rick on 9/21/15.
  */
@@ -33,11 +34,11 @@ public class Ticket extends JFrame {
 
         name.setLabelFor(nameInput);
         /*
-        JLabel nameTip = new JLabel("Please enter more than 3 characters.", JLabel.RIGHT);
-        nameTip.setForeground(Color.gray);
-        nameTip.setFont(new Font("Default", Font.PLAIN, 12));
-        contentPane.add(nameTip, new GridBagConstraints(1, 2, 2, 1, 0, 0,
-                                                        GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
+          JLabel nameTip = new JLabel("Please enter more than 3 characters.", JLabel.RIGHT);
+          nameTip.setForeground(Color.gray);
+          nameTip.setFont(new Font("Default", Font.PLAIN, 12));
+          contentPane.add(nameTip, new GridBagConstraints(1, 2, 2, 1, 0, 0,
+          GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
         */
 
         JLabel age = new JLabel("Enter your age:", JLabel.RIGHT);
@@ -50,33 +51,33 @@ public class Ticket extends JFrame {
 
         age.setLabelFor(ageInput);
         /*
-        JLabel ageTip = new JLabel("Please enter a number.", JLabel.RIGHT);
-        ageTip.setForeground(Color.gray);
-        ageTip.setFont(new Font("Default", Font.PLAIN, 12));
-        contentPane.add(ageTip, new GridBagConstraints(1, 4, 2, 1, 0, 0,
-                                                       GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
+          JLabel ageTip = new JLabel("Please enter a number.", JLabel.RIGHT);
+          ageTip.setForeground(Color.gray);
+          ageTip.setFont(new Font("Default", Font.PLAIN, 12));
+          contentPane.add(ageTip, new GridBagConstraints(1, 4, 2, 1, 0, 0,
+          GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
 
-        JLabel genderLabel = new JLabel("gender:", JLabel.RIGHT);
-        contentPane.add(genderLabel, new GridBagConstraints(0, 5, 1, 1, 0, 0,
-                                                       GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+          JLabel genderLabel = new JLabel("gender:", JLabel.RIGHT);
+          contentPane.add(genderLabel, new GridBagConstraints(0, 5, 1, 1, 0, 0,
+          GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        String[] genderString = {"male", "female"};
-        JComboBox gender = new JComboBox(genderString);
-        gender.setSelectedIndex(0);
-        contentPane.add(gender, new GridBagConstraints(1, 5, 1, 1, 0, 0,
-                                                       GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-        genderLabel.setLabelFor(gender);
+          String[] genderString = {"male", "female"};
+          JComboBox gender = new JComboBox(genderString);
+          gender.setSelectedIndex(0);
+          contentPane.add(gender, new GridBagConstraints(1, 5, 1, 1, 0, 0,
+          GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+          genderLabel.setLabelFor(gender);
 
-        JLabel typeLabel = new JLabel("type:", JLabel.RIGHT);
-        contentPane.add(typeLabel, new GridBagConstraints(0, 6, 1, 1, 0, 0,
-                                                       GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+          JLabel typeLabel = new JLabel("type:", JLabel.RIGHT);
+          contentPane.add(typeLabel, new GridBagConstraints(0, 6, 1, 1, 0, 0,
+          GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        String[] ticketTypeString = {"bus", "train", "flight"};
-        JList ticketType = new JList(ticketTypeString);
-        ticketType.setSelectedIndices(new int[]{0,2});
-        contentPane.add(ticketType, new GridBagConstraints(1, 6, 1, 1, 0, 0,
-                                                               GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-        typeLabel.setLabelFor(ticketType);
+          String[] ticketTypeString = {"bus", "train", "flight"};
+          JList ticketType = new JList(ticketTypeString);
+          ticketType.setSelectedIndices(new int[]{0,2});
+          contentPane.add(ticketType, new GridBagConstraints(1, 6, 1, 1, 0, 0,
+          GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+          typeLabel.setLabelFor(ticketType);
         */
         buy = new JButton("Buy");
         contentPane.add(buy, new GridBagConstraints(0, 7, 1, 1, 0, 0,
@@ -93,6 +94,8 @@ public class Ticket extends JFrame {
         buy.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String myName = nameInput.getText();
+                    //String myName = CATG.readString("oliver");
+                    //  String myName = "oliver";
                     //System.out.println(nameInput.getAccessibleContext().getAccessibleName());
                     //System.out.println(ageInput.getAccessibleContext().getAccessibleName());
 
@@ -103,6 +106,7 @@ public class Ticket extends JFrame {
                     //myName = SingleSym.getSingleSym();
 
                     int myAgeInt = 0;
+                    // String myAge = CATG.readString("11");
                     String myAge = ageInput.getText();
                     try {
                         myAgeInt = Integer.parseInt(myAge);
@@ -132,31 +136,31 @@ public class Ticket extends JFrame {
                     //System.out.println((myAge.length() >= 12 ? "adult" : "child") + " , Your name/age: " + myName + "/" + myAge);
 
                     /*
-                    int myAge = CATG.readInt(0);
-                    if ( myAge < 12){
-                        info.setText("Hi, child");
-                        info.setText("Hi, people");
-                    }
-                    System.out.println(myAge < 12 ? "child" : "people");
+                      int myAge = CATG.readInt(0);
+                      if ( myAge < 12){
+                      info.setText("Hi, child");
+                      info.setText("Hi, people");
+                      }
+                      System.out.println(myAge < 12 ? "child" : "people");
 
-                    String gender = CATG.readString("");
-                    System.out.println(gender.equals("male") ? "male" : "female");
+                      String gender = CATG.readString("");
+                      System.out.println(gender.equals("male") ? "male" : "female");
 
-                    int[] myTicketType = ticketType.getSelectedIndices();
-                    int index = CATG.readInt(0);
-                    if (ticketTypeString[index] == "flight" )
-                        System.out.println("your are taking flight");
+                      int[] myTicketType = ticketType.getSelectedIndices();
+                      int index = CATG.readInt(0);
+                      if (ticketTypeString[index] == "flight" )
+                      System.out.println("your are taking flight");
                     */
                     logger.info("Ticket.buy is clicked~~");
                 }
             });
 
         //        cancel.addActionListener( e -> {
-          //      info.setText("");
-          //      nameInput.setText("");
-          //      ageInput.setText("");
-          //
-          //  });
+        //      info.setText("");
+        //      nameInput.setText("");
+        //      ageInput.setText("");
+        //
+        //  });
 
 
         //        EventQueue eq = getToolkit().getSystemEventQueue();

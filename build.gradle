@@ -85,6 +85,11 @@ task helloWorld(type: JavaExec, dependsOn: jarTestme) {
      main = "examples.test.HelloWorld"
 }
 
+task GetTicket(type: JavaExec, dependsOn: jarTestme) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.test.GetTicket"
+}
+
 task Testme(type: JavaExec, dependsOn: jarTestme) {
      classpath = fileTree(autDir) + fileTree("lib")
      main = "examples.test.Testme"

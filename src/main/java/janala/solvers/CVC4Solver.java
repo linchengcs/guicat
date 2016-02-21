@@ -316,6 +316,20 @@ public class CVC4Solver implements Solver {
             System.out.println("~~~~~~~~~~~string sol null, string = >" + old +"<");
             System.out.println("~~~~~~~~~~~string sol null, parseIntSym = >" + sval.parseIntSym +"<");
 
+            
+            /* add by Lin Cheng, 02-20-2016 */
+            int pis = sval.parseIntSym;
+            if (pis > 0) {
+                Long reti = soln.get("x" + pis);
+                if (reti != null) {
+                    System.out.println("@@@@@@ops, reti = " + reti);
+                    result.add(reti.toString());
+                } else {
+                    result.add(Long.toString(0));
+                }
+                break;
+            }
+
             assert sval.getSymbolicExp() != null;
             
             IntValue tmp = sval.getSymbolicExp().getField("length");
@@ -335,17 +349,8 @@ public class CVC4Solver implements Solver {
               ret.append(c);
             }
 
-            /* add by Lin Cheng, 02-20-2016 */
-            String retts = ret.toString();
-            if (retts.length() > 0) {
-                System.out.println("@@@@@@ops, retts = " + retts);
-                result.add(ret.toString());
-            } else {
-                int pis = sval.parseIntSym;
-                long reti = soln.get("x" + pis);
-                System.out.println("@@@@@@ops, reti = " + reti);
-                result.add(Long.toString(reti));
-            }
+            result.add(ret.toString());
+      
           } else {
             result.add(val.getConcrete().toString());
           }

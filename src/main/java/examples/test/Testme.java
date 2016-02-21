@@ -13,6 +13,15 @@ public class Testme {
 
     public static void main(String[] args) {
 
+        String o = CATG.readString("o");
+        String  display = o;
+        if (o.equals("oliver") ) {
+            System.out.println(display);
+        } else {
+            System.out.println(display);
+        }
+
+
         String myName;
         myName = CATG.readString("0");
         int i = Integer.parseInt(myName);
@@ -24,11 +33,5 @@ public class Testme {
             print("----------->>>>>>>>>>child: " + i);
         }
 
-        /*
-        String o = CATG.readString("o");
-        if (o.startsWith("o"))
-            //                        if(o.length() == 3)
-                {;}
-        */
     }
 }

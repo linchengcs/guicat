@@ -14,11 +14,11 @@ public class Testme {
     public static void main(String[] args) {
 
         String o = CATG.readString("o");
-        String  display = o;
-        if (o.equals("oliver") ) {
-            System.out.println(display);
+        String  display = "what ever";
+        if (o.startsWith("oliver") ) {
+            System.out.println(display + o);
         } else {
-            System.out.println(display);
+            System.out.println(display + o);
         }
 
 
@@ -27,6 +27,7 @@ public class Testme {
         int i = Integer.parseInt(myName);
         //int i = myName.length();
         //int i = CATG.readInt(1);
+        //if(myName.contains("lin")){
         if (i > 3) {
             print("----------->>>>>>>>>>  adult: " + i);
         } else {

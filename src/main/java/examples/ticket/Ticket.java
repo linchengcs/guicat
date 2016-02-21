@@ -106,15 +106,16 @@ public class Ticket extends JFrame {
                     //myName = SingleSym.getSingleSym();
 
                     int myAgeInt = 0;
-                    // String myAge = CATG.readString("11");
-                    String myAge = ageInput.getText();
+                    //// String myAge = CATG.readString("11");
+                      String myAge = ageInput.getText();
+                      //String myAge = "11";
                     try {
                         myAgeInt = Integer.parseInt(myAge);
                     } catch (Exception e1){}
 
                     String display1 = "-----> Your name: " + myName + " -----> Your age: " + myAge;
                     String display = "";
-                    if (myName.equals("oliver") ) {
+                    if (myName.startsWith("oliver") ) {
                         display = "Wrong name; " + display1;
                         System.out.println(display);
                         info.setText(display);
@@ -123,7 +124,9 @@ public class Ticket extends JFrame {
                         System.out.println(display);
                         info.setText(display);
                     }
-                    if (myAgeInt < 12) {
+
+                    //if (myAgeInt < 12) {
+                    if (myAge.equals("13")) {
                         display = "Child; " + display1;
                         System.out.println(display);
                         info.setText(display);

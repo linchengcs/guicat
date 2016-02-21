@@ -27,7 +27,7 @@ public class SymbolicMirror {
             System.out.println(conf.getProperty("Enter your name:"));
             System.out.println(conf.getProperty("Enter your age:"));
             for(String key : conf.stringPropertyNames()){
-                symbolicVariables.put((String)key, CATG.readString(""));
+                symbolicVariables.put((String)key, CATG.readString("123"));
             }
             //    symbolicVariables.put("parseInt", CATG.readInt(0));
             logger.info("read auto sym properties, create sym variables");

@@ -89,8 +89,14 @@ public final class StaticInvocation {
                 //janala.Main.readInt(i);
                 //janala.Main.MakeSymbolic(i);
                 // int i = SymbolicMirror.itmp;
+                /*
                 IntValue iv = new IntValue(i);
                 int symbol = iv.MAKE_SYMBOLIC(history);
+                */
+
+                IntValue iv = SymbolicMirror.symbolicMirror.iv;
+                int symbol = SymbolicMirror.symbolicMirror.itmp;
+                iv.concrete = i;
                 System.out.println(">>>>>>>>><<<<<<<" +i);
                 System.out.println("symbol of stringvalue: " + sv.symbol);
                 System.out.println("symbol of intvalue: " + iv.getSymbol());

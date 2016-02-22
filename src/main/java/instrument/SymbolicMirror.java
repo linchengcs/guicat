@@ -1,6 +1,7 @@
 package instrument;
 
 import catg.CATG;
+import janala.interpreters.*;
 import org.apache.log4j.Logger;
 import java.util.*;
 import java.io.*;
@@ -15,6 +16,8 @@ public class SymbolicMirror {
     private Properties conf;
     public Hashtable<String, Object> symbolicVariables = new Hashtable<String, Object>();
     public static String stmp = CATG.readString("");
+    public  int itmp = 0;
+    public  IntValue iv = null;
     public SymbolicMirror() {
         String conffile = "./conf/ticket/symagent/ticket.properties";
         try {
@@ -29,7 +32,10 @@ public class SymbolicMirror {
             for(String key : conf.stringPropertyNames()){
                 symbolicVariables.put((String)key, CATG.readString("123"));
             }
-            //    symbolicVariables.put("parseInt", CATG.readInt(0));
+            Object s = symbolicVariables.get("Enter your age:");
+            iv = new IntValue(Integer.parseInt((String)s));
+            itmp = iv.MAKE_SYMBOLIC(null);
+
             logger.info("read auto sym properties, create sym variables");
         }
         catch(IOException ioe) {

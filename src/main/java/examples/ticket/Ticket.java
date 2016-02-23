@@ -125,8 +125,8 @@ public class Ticket extends JFrame {
                         info.setText(display);
                     }
 
-                    //if (myAgeInt < 12) {
-                    if (myAge.equals("13")) {
+                    if (myAgeInt < 12) {
+                    //   if (myAge.equals("13")) {
                         display = "Child; " + display1;
                         System.out.println(display);
                         info.setText(display);

@@ -1,4 +1,4 @@
-package instrument;
+package guicat;
 
 import catg.CATG;
 import janala.interpreters.*;
@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
-import java.util.Map;
 import java.util.Hashtable;
 
 public class SymbolicMirror {

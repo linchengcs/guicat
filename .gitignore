@@ -16,3 +16,5 @@ coverage*
 aut/
 backtrackFlag
 *\#*
+*.iml
+isRealInput

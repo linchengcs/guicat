@@ -1,5 +1,6 @@
-package instrument;
+package guicat;
 
+import instrument.SymbolicMirror;
 import org.junit.*;
 import static org.junit.Assert.*;
 

@@ -66,6 +66,11 @@ task Ticket(type: JavaExec, dependsOn: jarTicket) {
      main = "examples.ticket.Ticket"
 }
 
+task Barad(type: JavaExec, dependsOn: jarTicket) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.ticket.BaradTicket"
+}
+
 task jarTestme(type: Jar, dependsOn: classes) {
      manifest {
               attributes 'Main-Class': 'examples.test.Testme'
@@ -135,12 +140,12 @@ task jarCatg(type: Jar, dependsOn: classes) {
 
 task jarSymAgent(type: Jar, dependsOn: classes) {
      manifest {
-              attributes 'Premain-Class': 'instrument.SymAgent'
+              attributes 'Premain-Class': 'guicat.SymAgent'
      }
      destinationDir = file('./lib')
      archiveName = "sym-agent.jar"
      from (sourceSets.main.output) {
-          include("instrument/")
+          include("guicat/")
      }
      from (sourceSets.main.resources) {
           include("log4j.properties")

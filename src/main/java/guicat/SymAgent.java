@@ -1,4 +1,4 @@
-package instrument;
+package guicat;
 
 
 import java.lang.instrument.ClassFileTransformer;
@@ -59,7 +59,7 @@ public class SymAgent implements ClassFileTransformer {
                                   il.add(new LdcInsnNode(new String("11")));
                                   il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "catg/CATG", "readString", "(Ljava/lang/String;)Ljava/lang/String;"));
                                 */
-                                il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "instrument/SymbolicMirror", "sgetText", "(Ljava/lang/Object;)Ljava/lang/String;"));
+                                il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "guicat/SymbolicMirror", "sgetText", "(Ljava/lang/Object;)Ljava/lang/String;"));
                                 insns.remove(in22);
                                 insns.insert(in11, il);
                             }

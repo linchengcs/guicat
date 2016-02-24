@@ -4,7 +4,7 @@ import static janala.interpreters.ObjectValue.ADDRESS_UNKNOWN;
 
 import janala.config.Config;
 import janala.solvers.History;
-import instrument.SymbolicMirror;
+import guicat.SymbolicMirror;
 
 public final class StaticInvocation {
     private final Config config;

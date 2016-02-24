@@ -48,16 +48,16 @@ public class SymAgent implements ClassFileTransformer {
                             FieldInsnNode in11 = (FieldInsnNode) in1;
                             AbstractInsnNode in2 = in1.getNext();
                             if(in2.getOpcode() == Opcodes.INVOKEVIRTUAL) {
-                                    //insns.insert(in.getNext(), new InsnNode(0));
-                            System.out.println("GETFIELD desc: " + in11.desc);
-                            System.out.println("GETFIELD owner: " + in11.owner);
-                            System.out.println("GETFIELD name: " + in11.name);
+                                //insns.insert(in.getNext(), new InsnNode(0));
+                                System.out.println("GETFIELD desc: " + in11.desc);
+                                System.out.println("GETFIELD owner: " + in11.owner);
+                                System.out.println("GETFIELD name: " + in11.name);
                                 MethodInsnNode in22 = (MethodInsnNode) in2;
                                 InsnList il = new InsnList();
                                 /*
-                                il.add(new InsnNode(Opcodes.POP));
-                                il.add(new LdcInsnNode(new String("11")));
-                                il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "catg/CATG", "readString", "(Ljava/lang/String;)Ljava/lang/String;"));
+                                  il.add(new InsnNode(Opcodes.POP));
+                                  il.add(new LdcInsnNode(new String("11")));
+                                  il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "catg/CATG", "readString", "(Ljava/lang/String;)Ljava/lang/String;"));
                                 */
                                 il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "instrument/SymbolicMirror", "sgetText", "(Ljava/lang/Object;)Ljava/lang/String;"));
                                 insns.remove(in22);

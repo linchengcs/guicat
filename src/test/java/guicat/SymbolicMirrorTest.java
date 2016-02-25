@@ -8,6 +8,6 @@ public class SymbolicMirrorTest{
 
     @Test
     public void firstTest() {
-        assertNotNull(SymbolicMirror.symbolicMirror);
+        assertNotNull(SymbolicMirror.getInstance());
     }
 }

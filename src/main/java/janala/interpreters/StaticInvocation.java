@@ -2,6 +2,8 @@ package janala.interpreters;
 
 import static janala.interpreters.ObjectValue.ADDRESS_UNKNOWN;
 
+import guicat.SymbolicEntry;
+import guicat.SymbolicTable;
 import janala.config.Config;
 import janala.solvers.History;
 import guicat.SymbolicMirror;
@@ -94,6 +96,25 @@ public final class StaticInvocation {
                 int symbol = iv.MAKE_SYMBOLIC(history);
                 */
 
+
+                SymbolicEntry se = SymbolicMirror.getSymbolicEntryByKey(sv.key);
+                if (se != null) {
+                    IntValue iv = se.intValue;
+                    int symbol = se.intValueSymbol;
+                    iv.concrete = i;
+                    sv.parseIntSym = symbol;
+
+                    System.out.println("no symbol find" + sv.key);
+                    System.out.println(SymbolicTable.getInstance().toString());
+
+                           return iv;
+                } else {
+                    System.out.println("no symbol find" + sv.symbol);
+                    System.out.println(SymbolicTable.getInstance().toString());
+
+                }
+
+/*
                 IntValue iv = SymbolicMirror.symbolicMirror.iv;
                 int symbol = SymbolicMirror.symbolicMirror.itmp;
                 iv.concrete = i;
@@ -102,7 +123,8 @@ public final class StaticInvocation {
                 System.out.println("symbol of intvalue: " + iv.getSymbol());
                 //history.addInput(symbol, iv);
                 sv.parseIntSym = symbol;
-                return iv;
+                             return iv;
+*/
             }
         }
 

@@ -2,6 +2,7 @@ package examples.ticket;
 
 
 
+import guicat.SymbolicMirror;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.apache.log4j.Logger;
@@ -11,13 +12,6 @@ public class SingleSymTest {
     @Test
     public void firstTest() {
         assertEquals(1, 1);
-    }
-
-    @Test
-    public void SameSingle() {
-        Object o1 = SingleSym.getSingleSym();
-        Object o2 = SingleSym.getSingleSym();
-        assertEquals(o1, o2);
     }
 
     @Test

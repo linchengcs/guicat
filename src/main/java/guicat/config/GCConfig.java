@@ -13,12 +13,23 @@ import java.util.Properties;
  * Created by oliver on 24/02/16.
  */
 public class GCConfig {
-    private String path;
-    private Map<String, GCEntry> config;
+    public static String path;
+    public Hashtable<String, GCEntry> config;
 
-    public GCConfig(String path) {
-        this.path = path;
-        config = new Hashtable<>();
+    private static GCConfig gcConfig = null;
+
+    private GCConfig() {
+        System.setProperty("guicat.conf", "conf/barad-ticket/guicat.properties");
+        this.path = System.getProperty("guicat.conf");
+        System.out.println(this.path);
+        config = new Hashtable<String, GCEntry>();
+        loadConfig();
+    }
+
+    public static GCConfig getInstance() {
+        if (gcConfig == null)
+            gcConfig = new GCConfig();
+        return gcConfig;
     }
 
     private void loadConfig() {
@@ -39,11 +50,21 @@ public class GCConfig {
     }
 
     private GCEntry convertEntry(String key, String value) {
-        String delims = "|";
+        String delims = ",";
         String[] tokens = value.split(delims);
-        GCEntry gcEntry = new GCEntry(key, tokens[0], tokens[1]);
+        assert tokens.length == 3 : "guicat file format error.";
+        System.out.println(tokens[2]);
+        GCEntry gcEntry = new GCEntry(key, tokens[0].trim(), tokens[1].trim(), tokens[2].trim());
         return gcEntry;
     }
+
+    public static void main(String[] args) {
+        //String s= "/home/oliver/workspace/java/project/catgui2/conf/barad-ticket/guicat.properties";
+        GCConfig gcc =  GCConfig.getInstance();
+        GCEntry gce = gcc.config.get("Name");
+        System.out.println(gce.methodName);
+    }
+
 
 
 }

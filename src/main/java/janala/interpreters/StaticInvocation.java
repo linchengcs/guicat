@@ -1,12 +1,11 @@
 package janala.interpreters;
 
-import static janala.interpreters.ObjectValue.ADDRESS_UNKNOWN;
-
 import guicat.SymbolicEntry;
-import guicat.SymbolicTable;
+import guicat.SymbolicMirror;
 import janala.config.Config;
 import janala.solvers.History;
-import guicat.SymbolicMirror;
+
+import static janala.interpreters.ObjectValue.ADDRESS_UNKNOWN;
 
 public final class StaticInvocation {
     private final Config config;
@@ -88,14 +87,6 @@ public final class StaticInvocation {
             if (args[0] instanceof StringValue) {
                 StringValue sv = (StringValue) args[0];
                 int i = Integer.parseInt(sv.getConcrete());
-                //janala.Main.readInt(i);
-                //janala.Main.MakeSymbolic(i);
-                // int i = SymbolicMirror.itmp;
-                /*
-                IntValue iv = new IntValue(i);
-                int symbol = iv.MAKE_SYMBOLIC(history);
-                */
-
 
                 SymbolicEntry se = SymbolicMirror.getSymbolicEntryByKey(sv.key);
                 if (se != null) {
@@ -103,28 +94,8 @@ public final class StaticInvocation {
                     int symbol = se.intValueSymbol;
                     iv.concrete = i;
                     sv.parseIntSym = symbol;
-
-                    System.out.println("no symbol find" + sv.key);
-                    System.out.println(SymbolicTable.getInstance().toString());
-
-                           return iv;
-                } else {
-                    System.out.println("no symbol find" + sv.symbol);
-                    System.out.println(SymbolicTable.getInstance().toString());
-
+                    return iv;
                 }
-
-/*
-                IntValue iv = SymbolicMirror.symbolicMirror.iv;
-                int symbol = SymbolicMirror.symbolicMirror.itmp;
-                iv.concrete = i;
-                System.out.println(">>>>>>>>><<<<<<<" +i);
-                System.out.println("symbol of stringvalue: " + sv.symbol);
-                System.out.println("symbol of intvalue: " + iv.getSymbol());
-                //history.addInput(symbol, iv);
-                sv.parseIntSym = symbol;
-                             return iv;
-*/
             }
         }
 

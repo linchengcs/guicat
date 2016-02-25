@@ -1,12 +1,8 @@
 package guicat.config;
 
-import catg.CATG;
-import janala.interpreters.IntValue;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
-import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -19,7 +15,7 @@ public class GCConfig {
     private static GCConfig gcConfig = null;
 
     private GCConfig() {
-        System.setProperty("guicat.conf", "conf/barad-ticket/guicat.properties");
+    //    System.setProperty("guicat.conf", "conf/barad-ticket/guicat.properties");
         this.path = System.getProperty("guicat.conf");
         System.out.println(this.path);
         config = new Hashtable<String, GCEntry>();
@@ -59,7 +55,6 @@ public class GCConfig {
     }
 
     public static void main(String[] args) {
-        //String s= "/home/oliver/workspace/java/project/catgui2/conf/barad-ticket/guicat.properties";
         GCConfig gcc =  GCConfig.getInstance();
         GCEntry gce = gcc.config.get("Name");
         System.out.println(gce.methodName);

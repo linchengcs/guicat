@@ -26,7 +26,6 @@ public class SymbolicEntry {
     }
 
     public void makeSymbolic() {
-     //   assert SymbolicTable.currentKeyForMakeSymbolicString == null : "strange, why symbolicTable.currentKeyForMakeSymbolicString not null?";
         SymbolicTable.currentKeyForMakeSymbolicString = accessibleName;
         System.out.println(SymbolicTable.currentKeyForMakeSymbolicString);
         String s = gcEntry.initString;

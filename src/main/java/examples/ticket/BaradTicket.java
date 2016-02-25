@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.apache.log4j.Logger;
-import catg.CATG;
 
 
 public class BaradTicket {
@@ -208,11 +206,11 @@ public class BaradTicket {
     }
 
     public static void main(String[] args){
-        //        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-        //                public void run() {
-                    new BaradTicket().createAndShowGUI();
-                    //                }
-                    //            });
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new BaradTicket().createAndShowGUI();
+            }
+        });
     }
 
 }

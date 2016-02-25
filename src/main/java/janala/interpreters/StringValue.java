@@ -1,6 +1,5 @@
 package janala.interpreters;
 
-import guicat.SymbolicMirror;
 import guicat.SymbolicTable;
 import janala.config.Config;
 import janala.solvers.History;
@@ -240,16 +239,9 @@ public final class StringValue extends ObjectValue {
       history.setLastBranchDone();
     }
 
-    //  System.out.println(SymbolicTable.getInstance().toString());
+    // set key to mark by gui widiget accessibleName
     key = (SymbolicTable.currentKeyForMakeSymbolicString);
-      System.out.println(key);
-  //  assert key != null : "fail create StringValue key";
-  //  try {
-      System.out.println("in string value" + SymbolicTable.currentKeyForMakeSymbolicString);
-  //    Thread.sleep(4000);
-  //  } catch (InterruptedException e) {
-  //    e.printStackTrace();
- //   }
+
     return ret;
   }
 }

@@ -51,7 +51,7 @@ public class SymAgent implements ClassFileTransformer {
                     if (in1a.getOpcode() == Opcodes.GETFIELD) {
                         FieldInsnNode in1b = (FieldInsnNode) in1a;
                         if (in1b.desc.startsWith("Ljavax/swing/JTextField")) {
-
+//todo, check accessibleName
                             AbstractInsnNode in2a = in1a.getNext();if(in2a==null)break;
                             if (in2a.getOpcode() == Opcodes.INVOKEVIRTUAL) {
 

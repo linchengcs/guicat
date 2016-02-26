@@ -4,7 +4,7 @@ import guicat.config.GCConfig;
 import guicat.config.GCEntry;
 
 import javax.swing.*;
-import java.util.Hashtable;
+import java.util.Map;
 
 public class SymbolicMirror {
 
@@ -36,11 +36,11 @@ public class SymbolicMirror {
         return null;
     }
 
-    public static Hashtable<String, GCEntry> getConfig() {
+    public static Map<String, GCEntry> getConfig() {
         return GCConfig.getInstance().config;
     }
 
-    public static Hashtable<String, SymbolicEntry> getSymbolicTable() {
+    public static Map<String, SymbolicEntry> getSymbolicTable() {
         return SymbolicTable.getInstance().symbolicTable;
     }
 

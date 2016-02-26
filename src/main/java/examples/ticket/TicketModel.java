@@ -28,11 +28,17 @@ public class TicketModel {
 
     public boolean checkModel() {
         if (name.length() < 3) {
-            msg += "wrong name; ";
+            msg += "too short name; ";
+        } else if (name.length() > 20) {
+            msg += "too long name";
+        } else if (!name.matches("\\w+")) {
+            msg += "your name contains inproper characters";
         }
 
-        if (ID.equals("123456")) {
-            msg += "wrong id; ";
+        if (ID.matches("[0-9]+")) {
+            msg += "right id; ";
+        } else {
+            msg += "wrong id format";
         }
 
         if (msg.length() > 0)

@@ -2,7 +2,10 @@ package guicat;
 
 import guicat.config.GCConfig;
 
-import java.util.Hashtable;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -10,7 +13,7 @@ import java.util.Set;
  */
 public class SymbolicTable {
     private static SymbolicTable instance = null;
-    public Hashtable<String, SymbolicEntry> symbolicTable;
+    public LinkedHashMap<String, SymbolicEntry> symbolicTable;
 
 
     public static String currentKeyForMakeSymbolicString = "blabla";
@@ -22,15 +25,27 @@ public class SymbolicTable {
     }
 
     private SymbolicTable(){
-        symbolicTable = new Hashtable<>();
-        Hashtable config = GCConfig.getInstance().config;
+        symbolicTable = new LinkedHashMap<>();
+        LinkedHashMap config = GCConfig.getInstance().config;
         for (String key : (Set<String>)config.keySet()) {
             SymbolicEntry symbolicEntry = new SymbolicEntry(key);
             symbolicEntry.makeSymbolic();
             symbolicTable.put(key, symbolicEntry);
         }
-
         System.out.println(toString());
+    }
+
+    private void writeInitInputsFile() {
+        try {
+            FileWriter fw = new FileWriter("./inputs1");
+            for (Map.Entry<String, SymbolicEntry> entry : symbolicTable.entrySet()) {
+                fw.write(entry.getValue().getGcEntry().initString);
+                fw.write(System.getProperty( "line.separator" ));
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String findKeyByStringSymbol(int symbol) {

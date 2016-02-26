@@ -37,4 +37,5 @@ public class SymbolicEntry {
         }
     }
 
+    public GCEntry getGcEntry() {return gcEntry;}
 }

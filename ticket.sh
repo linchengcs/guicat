@@ -26,11 +26,9 @@ do
     fi
 done
 
-rm inputs* branches/
 rm -rf $AUTDIR branches/
 mkdir $AUTDIR
 mkdir branches/
-touch inputs
 mkdir $AUTDIR"/testcases"
 
 ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 500 -i 2000 -l $logFile"

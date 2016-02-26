@@ -1,21 +1,24 @@
 package guicat;
 
 
+import org.apache.log4j.Logger;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.*;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
-
-import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
-import java.io.*;
-import java.lang.*;
-import java.util.*;
-import org.apache.log4j.Logger;
+import java.util.Iterator;
+import java.util.List;
 
 public class SymAgent implements ClassFileTransformer {
 
-    private  Logger logger = Logger.getLogger(SymbolicMirror.class);
+    private Logger logger = Logger.getLogger(SymbolicMirror.class);
 
 
     public static void premain(String agentArgs, Instrumentation inst) {
@@ -40,37 +43,44 @@ public class SymAgent implements ClassFileTransformer {
                     continue;
                 }
                 Iterator<AbstractInsnNode> j = insns.iterator();
+
                 while (j.hasNext()) {
-                    AbstractInsnNode in = j.next();
-                    if (in.getOpcode() == Opcodes.ALOAD) {
-                        AbstractInsnNode in1 = in.getNext();
-                        if(in1.getOpcode() == Opcodes.GETFIELD) {
-                            FieldInsnNode in11 = (FieldInsnNode) in1;
-                            AbstractInsnNode in2 = in1.getNext();
-                            if(in2.getOpcode() == Opcodes.INVOKEVIRTUAL) {
-                                //insns.insert(in.getNext(), new InsnNode(0));
-                                System.out.println("GETFIELD desc: " + in11.desc);
-                                System.out.println("GETFIELD owner: " + in11.owner);
-                                System.out.println("GETFIELD name: " + in11.name);
-                                MethodInsnNode in22 = (MethodInsnNode) in2;
-                                InsnList il = new InsnList();
+                    AbstractInsnNode whyShouldIExist = j.next();
+                    AbstractInsnNode in1a = whyShouldIExist.getNext();
+                    if(in1a==null)break;
+                    if (in1a.getOpcode() == Opcodes.GETFIELD) {
+                        FieldInsnNode in1b = (FieldInsnNode) in1a;
+                        if (in1b.desc.startsWith("Ljavax/swing/JTextField")) {
+
+                            AbstractInsnNode in2a = in1a.getNext();if(in2a==null)break;
+                            if (in2a.getOpcode() == Opcodes.INVOKEVIRTUAL) {
+
+                                MethodInsnNode in2b = (MethodInsnNode) in2a;
                                 /*
-                                  il.add(new InsnNode(Opcodes.POP));
-                                  il.add(new LdcInsnNode(new String("11")));
-                                  il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "catg/CATG", "readString", "(Ljava/lang/String;)Ljava/lang/String;"));
-                                */
-                                il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "guicat/SymbolicMirror", "sgetText", "(Ljava/lang/Object;)Ljava/lang/String;"));
-                                insns.remove(in22);
-                                insns.insert(in11, il);
+                                System.out.println("GETFIELD desc: " + in1b.desc);
+                                System.out.println("GETFIELD owner: " + in1b.owner);
+                                System.out.println("GETFIELD name: " + in1b.name);
+                                System.out.println("INVOKEVIRTUAL desc: " + in2b.desc);
+                                System.out.println("INVOKEVIRTUAL owner: " + in2b.owner);
+                                System.out.println("INVOKEVIRTUAL name: " + in2b.name);*/
+                                if (in2b.name.equals("getText")) {
+                                    InsnList il = new InsnList();
+                                    il.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "guicat/SymbolicMirror", "sgetText", "(Ljava/lang/Object;)Ljava/lang/String;"));
+                                    insns.remove(in2b);
+                                    insns.insert(in1b, il);
+                                }
                             }
                         }
+
                     }
                 }
+
+
             }
 
             ((List<MethodNode>) cn.methods).stream().forEach(f -> {
-                    //                    f.instructions.toArray().stream().forEach(i -> System.out.println("goo"));
-                });
+                //                    f.instructions.toArray().stream().forEach(i -> System.out.println("goo"));
+            });
 
             ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
             cn.accept(cw);

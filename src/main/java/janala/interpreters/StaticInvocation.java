@@ -92,7 +92,8 @@ public final class StaticInvocation {
                 if (se != null) {
                     IntValue iv = se.intValue;
                     int symbol = se.intValueSymbol;
-                    iv.concrete = i;
+                    System.out.println("add parseInt intValue, intValuesymbol="+symbol+ " string concrete="+i + " int concrete="+iv.concrete);
+                 //   iv.concrete = i;
                     sv.parseIntSym = symbol;
                     return iv;
                 }

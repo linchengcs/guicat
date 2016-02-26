@@ -25,11 +25,12 @@ public class SymbolicTable {
         symbolicTable = new Hashtable<>();
         Hashtable config = GCConfig.getInstance().config;
         for (String key : (Set<String>)config.keySet()) {
-            System.out.println("checking key " + key);
             SymbolicEntry symbolicEntry = new SymbolicEntry(key);
             symbolicEntry.makeSymbolic();
             symbolicTable.put(key, symbolicEntry);
         }
+
+        System.out.println(toString());
     }
 
     public String findKeyByStringSymbol(int symbol) {

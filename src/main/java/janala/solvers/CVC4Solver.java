@@ -1,19 +1,13 @@
 package janala.solvers;
 
+import guicat.SymbolicTable;
 import janala.config.Config;
 import janala.interpreters.*;
-import janala.interpreters.StringValue;
-import janala.utils.MyLogger;
 import janala.utils.FileUtil;
+import janala.utils.MyLogger;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.TreeMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -296,9 +290,12 @@ public class CVC4Solver implements Solver {
     List<String> result = new ArrayList<String>();
     System.out.println("|||||||||||||||||||||||||||||");
     System.out.println(soln.toString());
+    System.out.println(inputs.toString());
+    System.out.println(SymbolicTable.getInstance().toString());
     for (InputElement ielem : inputs) {
       Integer sym = ielem.symbol;
       Value val = ielem.value;
+      System.out.println("inputs: sym=" + sym + " value="+val.getConcrete());
       if (sym.intValue() == config.scopeBeginSymbol) {
         result.add(config.scopeBeginMarker);
       } else if (sym.intValue() == config.scopeEndSymbol) {
@@ -327,7 +324,7 @@ public class CVC4Solver implements Solver {
                 } else {
                     result.add(Long.toString(0));
                 }
-                break;
+                continue;
             }
 
             assert sval.getSymbolicExp() != null;

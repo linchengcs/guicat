@@ -17,9 +17,9 @@ public class GCConfig {
     private GCConfig() {
     //    System.setProperty("guicat.conf", "conf/barad-ticket/guicat.properties");
         this.path = System.getProperty("guicat.conf");
-        System.out.println(this.path);
         config = new Hashtable<String, GCEntry>();
         loadConfig();
+
     }
 
     public static GCConfig getInstance() {

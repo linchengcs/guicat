@@ -27,12 +27,12 @@ public class SymbolicEntry {
 
     public void makeSymbolic() {
         SymbolicTable.currentKeyForMakeSymbolicString = accessibleName;
-        System.out.println(SymbolicTable.currentKeyForMakeSymbolicString);
         String s = gcEntry.initString;
         symbolicString = CATG.readString(s);
 
         if (gcEntry.symbolicType.equals("int")) {
-            intValue = new IntValue(0);
+            int concrete = Integer.parseInt(symbolicString);
+            intValue = new IntValue(concrete);
             intValueSymbol = intValue.MAKE_SYMBOLIC(null);
         }
     }

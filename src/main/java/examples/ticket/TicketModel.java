@@ -25,13 +25,13 @@ public class TicketModel {
         price = 0.0;
     }
 
-/*
+
     public boolean checkModel() {
         if (name.length() < 3) {
             msg += "wrong name; ";
         }
 
-        if (ID.startsWith("o")) {
+        if (ID.equals("123456")) {
             msg += "wrong id; ";
         }
 
@@ -39,17 +39,16 @@ public class TicketModel {
             return false;
         return true;
     }
-*/
+
     public void computePrice() {
-   /*
+
         if (!checkModel()) {
             price = 1000000;
             return;
         }
-*/
+
         int coeficient = (classLevel == TicketModel.FIRSTCLASS) ? 1 : 2;
         int dist = to - from;
-
         if (ageLevel == 1) {
             if (dist < 40) {
                 price = 100 * coeficient;

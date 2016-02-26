@@ -167,6 +167,12 @@ public class BaradTicket {
                     if (tmpAgeString.equals("Adult"))
                         ticketModel.ageLevel = 2;
 
+                    /*
+                    System.out.println( ticketModel.name.equals("oliver")  ? "" : "");
+                    System.out.println( ticketModel.to  >= 5 ? "" : "");
+                    System.out.println( ticketModel.from  < 1 ? "" : "");
+                    */
+                 //   ticketModel.checkModel();
                     ticketModel.computePrice();
 
                     infoField.setText(String.valueOf(ticketModel.price));
@@ -204,6 +210,8 @@ public class BaradTicket {
         frame.setVisible(true);
 
     }
+
+    public static void a(){}
 
     public static void main(String[] args){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

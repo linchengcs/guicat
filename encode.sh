@@ -1,0 +1,1 @@
+java -Dguicat.conf=conf/ticket/guicat.properties -javaagent:./lib/sym-agent.jar -cp ./aut/Testme.jar:./aut/ticket.jar:./lib/asm-all-5.0.4.jar:./lib/log4j-1.2.15.jar:./lib/catg-dev.jar examples.test.GetTicket

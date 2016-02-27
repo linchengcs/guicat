@@ -1,7 +1,6 @@
 package examples.test;
 
 import catg.CATG;
-import janala.Main;
 
 public class Testme {
     String name;
@@ -13,6 +12,12 @@ public class Testme {
 
     public static void main(String[] args) {
 
+        String s = CATG.readString("oliver");
+        int i = CATG.readInt(1);
+        MyModel mm = new MyModel(s, i);
+        if (mm.check())
+            mm.compute();
+        /*
         String o = CATG.readString("o");
         String  display = "what ever";
         if (o.startsWith("oliver") ) {
@@ -33,6 +38,32 @@ public class Testme {
         } else {
             print("----------->>>>>>>>>>child: " + i);
         }
+        */
 
+    }
+}
+
+class MyModel {
+    String s;
+    int i;
+    public MyModel(String s, int i) {
+        this.s = s;
+        this.i = i;
+    }
+
+    public boolean check() {
+        if (s.equals("oliver")) {
+            return true;
+        }
+        return false;
+    }
+
+    public int compute() {
+        int x = 0;
+        if (i > 10)
+            x = 10;
+        else
+            x = 0;
+        return x;
     }
 }

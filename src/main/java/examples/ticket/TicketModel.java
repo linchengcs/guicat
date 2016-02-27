@@ -27,31 +27,23 @@ public class TicketModel {
 
 
     public boolean checkModel() {
+        msg = "";
+
+
         if (name.length() < 3) {
             msg += "too short name; ";
         } else if (name.length() > 20) {
             msg += "too long name";
-        } else if (!name.matches("\\w+")) {
-            msg += "your name contains inproper characters";
         }
 
-        if (ID.matches("[0-9]+")) {
-            msg += "right id; ";
-        } else {
+        if (ID.equals("oliver")) {
             msg += "wrong id format";
         }
 
-        if (msg.length() > 0)
-            return false;
-        return true;
+        return msg.isEmpty();
     }
 
     public void computePrice() {
-
-        if (!checkModel()) {
-            price = 1000000;
-            return;
-        }
 
         int coeficient = (classLevel == TicketModel.FIRSTCLASS) ? 1 : 2;
         int dist = to - from;

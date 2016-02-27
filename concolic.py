@@ -166,7 +166,7 @@ else:
 arguments = ' '.join(args.arguments)
 
 concolic()
-shutil.copy("inputs1", "branches/" + args.t + "_{}.tst".format(1))
+#shutil.copy("inputs1", "branches/" + args.t + "_{}.tst".format(1))
 #
 #if args.coverage:
 #    rerunTests()

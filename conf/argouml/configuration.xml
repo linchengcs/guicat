@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<Configuration>  
+  
+  <TerminalComponents>
+    
+    <!-- Declare Create Shape as a terminal component -->
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Save Project</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+        
+  </TerminalComponents>
+
+
+
+  <IgnoredComponents>
+    <!-- Ignore the gray menu item -->
+    <FullComponent>
+      <Window>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Print</Value>
+	  </Property> 
+	</Attributes>
+      </Window>
+
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Help</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    
+  </IgnoredComponents>
+  
+
+  <TerminalComponents>
+    
+    <!-- Declare Create Shape as a terminal component -->
+
+
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>close</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>open</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>save</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>ok</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>cancel</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>quit</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>yes</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>no</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>exit</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>save</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>name</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+
+    <!--
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Name</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>save</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+        <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Save</Value>
+	  </Property>
+	</Attributes>
+      </Component>
+    </FullComponent>
+-->
+  </TerminalComponents>
+
+  
+  
+</Configuration>

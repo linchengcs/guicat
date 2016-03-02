@@ -17,6 +17,7 @@ def getArguments ():
     parser.add_argument("maxIterations", help="Maximum number of times the program under test can be executed.", type=int)
     parser.add_argument("-t", help="branch id")
     parser.add_argument("--autosym", help="Auto add symbolic variables via conf file", action="store_true")
+    parser.add_argument("-cp", help="classpath")
     parser.add_argument("className", help="Java class to be tested.")
     parser.add_argument("arguments", nargs='*', help="Arguments passed to the program under test.")
     args = parser.parse_args()
@@ -145,10 +146,12 @@ for i in os.listdir("./lib"):
     if i.endswith(".jar"):
          classpath += "./lib/" + i + ":"
 
-#classpath += "./lib/catg-dev.jar:./lib/asm-all-5.0.4.jar"
 
 args = getArguments()
 print args
+if args.cp != None:
+    classpath += args.cp
+
 iters = args.maxIterations
 yourpgm = args.className
 isOffline = args.offline

@@ -30,7 +30,7 @@ for jar in `ls ~/study/soft/aut/argouml/argouml-0.34/`
 do
     if [[ $jar == *.jar ]]
     then
-        classpath=$classpath":/home/oliver/study/soft/aut/argouml/argouml-0.34/"$jar
+        classpath=$classpath":/home/rick/study/soft/aut/argouml/argouml-0.34/"$jar
     fi
 done
 

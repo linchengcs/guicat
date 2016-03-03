@@ -55,7 +55,7 @@ public class BaradTicket {
             gbc.gridx = 1;
             gbc.gridy = 1;
             contentPane.add(idInput, gbc);
-            idLabel.setLabelFor(idInput);
+            idLabel.setLabelFor(idInput);idInput.getAccessibleContext().getAccessibleName();
         }
 
         {

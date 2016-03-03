@@ -1,11 +1,11 @@
 package examples.ticket;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.apache.log4j.Logger;
-import catg.CATG;
 /**
  * Created by rick on 9/21/15.
  */
@@ -28,7 +28,7 @@ public class Ticket extends JFrame {
         contentPane.add(name, new GridBagConstraints(0, 1, 1, 1, 0, 0,
                                                      GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        final JTextField nameInput = new JTextField(10);
+        final JTextField nameInput = new TestTextField();
         contentPane.add(nameInput, new GridBagConstraints(1, 1, 1, 1, 0, 0,
                                                           GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -45,7 +45,7 @@ public class Ticket extends JFrame {
         contentPane.add(age, new GridBagConstraints(0, 3, 1, 1, 0, 0,
                                                     GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        final JTextField ageInput = new JTextField(10);
+        final JTextField ageInput = new TestTextField();
         contentPane.add(ageInput, new GridBagConstraints(1, 3, 1, 1, 0, 0,
                                                          GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -212,3 +212,5 @@ public class Ticket extends JFrame {
 
 
 }
+
+class TestTextField extends JTextField {}

@@ -24,3 +24,28 @@ aut
 + jnotepad
 + capivara
 + jeditor
+
+
+paper
++ modified files
+        modified:   instrument/SnoopInstructionMethodAdapter.java  -- fix catg bug
+        modified:   instrument/SnoopInstructionTransformer.java  -- modify which pachage should be instrumented
+        modified:   interpreters/StaticInvocation.java  -- add parseInt support, add symbolic int to symbolic stack
+        modified:   interpreters/StringValue.java    -- add two flags, one for IntValue.symbol, the other for binding accessibleName
+        modified:   solvers/CVC4Solver.java  -- write back int concrete value to string input
+
+
+src/main/java/guicat/
+├── config
+│   ├── GCConfig.java
+│   └── GCEntry.java
+├── SymAgent.java    -- agent to instrument gui
+├── SymbolicEntry.java  -- symboli tables, singletons
+├── SymbolicMirror.java
+└── SymbolicTable.java
+
+feature
++ instrument gui
++ symbolic table
++ parseInt
++ user conf, format

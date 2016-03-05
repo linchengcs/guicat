@@ -44,14 +44,26 @@
 \end{abstract}
 
 \section{Introduction}\label{section:introduction}
-this is a place holder sentense. \cite{jpf-awt}
+
+Graphic User Interface(GUI) applications are driven by user events.
+
+Manually testing of GUI is labor intensive.
+
+\texttt{Guitar} \cite{guitar} uses an automatical method to test GUI. It automatically generate event sequences for java GUI applications. But it use built-in concrete value for user inputs. Although it also accepts alternative user inputs, however itself doesn't provide any facility to generate user inputs.
+
+\texttt{Barad} \cite{barad} is a novel GUI testing framework based on symbolic execution. It can obtain data inputs through executing symbolically test cases which are chains of event listener method invocations. It manually created symbolic mirror of java GUI library, so its released source code contains a large symbolic java GUI library. however it lacks necessary documentation, it is very hard to deploy the project, and such a heavy code base might be hard to maintain or error proning.
+
+\texttt{jfp-awt} \cite{jpfawt} is an extension of the Java PathFinder for java GUI application model checking. It needs the user to specify sets of interaction sqquences, for a real GUI application, this might be labor instensive task for testers.
+
+In the paper we present a nover tool \texttt{Guicat} which generate concrete userinputs to cover differenct program branch. We build our work on top of \texttt{Guitar} and \texttt{Catg} \cite{catg}.
+
 
 \section{Example}
 
 \begin{figure}
   \centering
+  \includegraphics[width=50mm,scale=0.5]{./res/ticket.png}
   \caption{ticket example}
-  \includegraphics{./res/ticket.png}
 \end{figure}
 
 To demostrate  the importance of branch coverage testing of GUI applications, we will use a  \texttt{Ticket Seller} example application. Note that we borrowed the example from barad. Figure 1 shows the GUI of this \texttt{Ticket Seller} application.
@@ -85,6 +97,27 @@ One can not claim this kind of applications are well tested until all the branch
 
 \section{Inplementation}
 
+\textbf{Architecture}
+
+The architexture is described as Figure ~\ref{figure:architecture}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=100mm,scale=0.5]{./res/archi-hand.jpg}
+  \caption{architecture}
+  \label{figure:architecture}
+\end{figure}
+
+
+
+We set up as our goal generating concrete inputs for code/barnch coverage of java GUI applications.
+
+Built on top of state-of-the-art open source software testing projects \texttt{Guitar} and \texttt{Catg}, our tool has overcome the following problems:
+\begin{itemize}
+  \item {Since GUI application is an event driven open system, how to model user inputs? we use \texttt{Guitar} to generate event sequence.}
+    \item{how to }
+    \item{how to handle java gui library function calls?}
+\end{itemize}
 
 Given an event sequence, our goal is to generate different user inputs for the event sequence to improve the code coverage of the test case.
 
@@ -92,7 +125,7 @@ besides generating user inputs, to make the tool easy to use we also set the fol
 \begin{itemize}
   \item {auto instrument the aut, so the testing doesn't need manually set up symbolic variables in the source code. This is because sometimes the source code is not available, even if the source code is available, modify source code may add extra uncertainy to the product }
     \item{we automatically treat numerical inputs. GUI always treat user inputs as strings, it is the duty of the programmer to parse int from the string. }
-      \end{itemize}
+\end{itemize}
 
 
 

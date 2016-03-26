@@ -1,6 +1,6 @@
 log/
 build/
-.gradle/
+.gradle/*
 inputs*
 formula*
 history*

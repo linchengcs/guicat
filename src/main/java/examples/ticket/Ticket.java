@@ -1,7 +1,5 @@
 package examples.ticket;
 
-import org.apache.log4j.Logger;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +11,6 @@ public class Ticket extends JFrame {
     private JButton buy;
     //    private String myName;
     //    private String myAge;
-    public Logger logger = Logger.getLogger(Ticket.class);
 
     public void showTicket () {
         JPanel contentPane = new JPanel(new GridBagLayout());
@@ -28,7 +25,7 @@ public class Ticket extends JFrame {
         contentPane.add(name, new GridBagConstraints(0, 1, 1, 1, 0, 0,
                                                      GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        final JTextField nameInput = new TestTextField();
+        final JTextField nameInput = new JTextField();
         contentPane.add(nameInput, new GridBagConstraints(1, 1, 1, 1, 0, 0,
                                                           GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -45,7 +42,7 @@ public class Ticket extends JFrame {
         contentPane.add(age, new GridBagConstraints(0, 3, 1, 1, 0, 0,
                                                     GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        final JTextField ageInput = new TestTextField();
+        final JTextField ageInput = new JTextField();
         contentPane.add(ageInput, new GridBagConstraints(1, 3, 1, 1, 0, 0,
                                                          GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -154,7 +151,6 @@ public class Ticket extends JFrame {
                       if (ticketTypeString[index] == "flight" )
                       System.out.println("your are taking flight");
                     */
-                    logger.info("Ticket.buy is clicked~~");
                 }
             });
 
@@ -212,5 +208,3 @@ public class Ticket extends JFrame {
 
 
 }
-
-class TestTextField extends JTextField {}

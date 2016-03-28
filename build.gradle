@@ -53,7 +53,7 @@ task jarTicket(type: Jar, dependsOn: classes) {
      destinationDir = file(autDir)
      archiveName = "ticket.jar"
      from (sourceSets.main.output) {
-          include("examples/ticket/")
+          includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$1.class"]
      }
      from (sourceSets.main.resources) {
           include("log4j.properties")
@@ -66,7 +66,22 @@ task Ticket(type: JavaExec, dependsOn: jarTicket) {
      main = "examples.ticket.Ticket"
 }
 
-task Barad(type: JavaExec, dependsOn: jarTicket) {
+task jarBaradTicket(type: Jar, dependsOn: classes) {
+     manifest {
+              attributes 'Main-Class': 'examples.ticket.BaradTicket'
+     }
+
+     destinationDir = file(autDir)
+     archiveName = "barad-ticket.jar"
+     from (sourceSets.main.output) {
+          includes = ["examples/ticket/BaradTicket*.class", "examples/ticket/TicketModel.class"]
+     }
+     from (sourceSets.main.resources) {
+          include("log4j.properties")
+     }
+}
+
+task Barad(type: JavaExec, dependsOn: jarBaradTicket) {
      classpath = fileTree(autDir) + fileTree("lib")
      main = "examples.ticket.BaradTicket"
 }
@@ -241,3 +256,7 @@ task catg(dependsOn: tasks.matching { Task task -> task.name.startsWith("catg_")
 }
 
 task runTicketAllWidgets {}
+
+task getHomeDir << {
+    println gradle.gradleHomeDir
+}

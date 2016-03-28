@@ -18,3 +18,7 @@ backtrackFlag
 *\#*
 *.iml
 isRealInput
+*.aux
+*.bbl
+*.blg
+*.dvi

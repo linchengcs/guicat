@@ -35,7 +35,7 @@ public class GCConfig {
             while ((line = reader.readLine()) != null) {
                 line=line.trim();
                 if (line.isEmpty() || line.startsWith("#")) continue;
-                System.out.println(line);
+              //  System.out.println(line);
                 String delims = ",";
                 String[] tokens = line.split(delims);
                 assert tokens.length == 4 : "guicat file format error.";

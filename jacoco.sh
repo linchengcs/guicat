@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #check args
 if [ -z $1 ] || [ -z $2 ]; then
     echo "Usage: $0 autId guitar|guicat"

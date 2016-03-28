@@ -142,9 +142,16 @@ public class Main extends JFrame {
                 String gender = (String)genderCombo.getSelectedItem();
                 String metabolism = (String)metabolismCombo.getSelectedItem();
                 String experience = (String)experienceCombo.getSelectedItem();
-                int age = Integer.parseInt(ageTextField.getText().trim());
-                float height = Float.parseFloat(heightTextField.getText().trim());
-                float weight = Float.parseFloat(weightTextField.getText().trim());
+                int age = 1;
+                float height = 100;
+                float weight = 100;
+                try {
+                     age = Integer.parseInt(ageTextField.getText().trim());
+                     height = Float.parseFloat(heightTextField.getText().trim());
+                     weight = Float.parseFloat(weightTextField.getText().trim());
+                } catch (Exception ex) {
+                    ;
+                }
                 //Auiliary variables for coeficients
                 int repCoeficient = 0;
                 int setCoeficient = 0;

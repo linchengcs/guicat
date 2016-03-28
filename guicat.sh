@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+if [ -z $1 ]; then
+    echo "Usage: ./guicat ./conf/ticket/ticket.conf"
+    exit
+fi
 
-. ./conf/ticket/ticket.conf
+#. ./conf/ticket/ticket.conf
+. $1
 
 classpath="."
 for jar in `ls lib`

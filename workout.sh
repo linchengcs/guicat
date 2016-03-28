@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. ./conf/ticket/ticket.conf
+. ./conf/workout/workout.conf
 
 classpath="."
 for jar in `ls lib`
@@ -40,16 +40,8 @@ eval $testcaseCmd
 for testcase in `find $AUTTESTCASE -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
-    python concolic.py -Dguicat.conf=$guicatConfigFile -v 32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $AUTDIR/testcases/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
+    python concolic.py -Dguicat.conf=conf/ticket/guicat.properties -v 32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $AUTDIR/testcases/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
 #break
 done
 
 mv branches $AUTDIR
-
-#create guicat testcases
-cmd="java -Dguicat.conf=$guicatConfigFile -cp $classpath guicat.testcase.Generator $guiFile $AUTTESTCASE $branchDir $autGuicatTestcase"
-echo $cmd
-eval $cmd
-
-./jacoco.sh $AUT guitar
-./jacoco.sh $AUT guicat

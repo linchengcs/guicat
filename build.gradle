@@ -86,6 +86,29 @@ task Barad(type: JavaExec, dependsOn: jarBaradTicket) {
      main = "examples.ticket.BaradTicket"
 }
 
+
+task jarWorkoutGenerator(type:Jar, dependsOn: classes) {
+     manifest {
+          attributes 'Main-Class': 'examples.workout.Main'
+     }
+
+     destinationDir = file(autDir)
+     archiveName = "workout.jar"
+     from (sourceSets.main.output) {
+          includes = ["examples/workout/Main*.class"]
+     }
+     from (sourceSets.main.resources) {
+          include("log4j.properties")
+     }
+}
+
+
+task workout(type: JavaExec, dependsOn: jarWorkoutGenerator) {
+     classpath = fileTree(autDir) + fileTree("lib")
+     main = "examples.workout.Main"
+}
+
+
 task jarTestme(type: Jar, dependsOn: classes) {
      manifest {
               attributes 'Main-Class': 'examples.test.Testme'

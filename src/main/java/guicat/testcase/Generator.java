@@ -56,7 +56,7 @@ public class Generator {
                      Node eNode = elements.item(j);
                      if (eNode.getNodeType() == Node.ELEMENT_NODE) {
                          Element element = (Element) eNode;
-                         System.out.println("\n----" + element.getNodeName() + " : " + element.getTextContent().trim());
+                      //   System.out.println("\n----" + element.getNodeName() + " : " + element.getTextContent().trim());
                          if (element.getNodeName().trim().equals("Name") ) {
                              key = element.getTextContent();
                          }
@@ -77,7 +77,7 @@ public class Generator {
                      key = "";
                      title = "";
                      ID = "";
-             }
+                }
              }
          }
       } catch (Exception e) {
@@ -95,8 +95,8 @@ public class Generator {
         String branchDir = "./log/ticket/branches";
         String guicatTestcaseDir = "./log/ticket/gctestcases";
 
-   //    String guiFile = "./log/ticket/ticket.GUI";
-        String guiFile = "./log/argouml/argouml.GUI";
+       String guiFile = "./log/ticket/ticket.GUI";
+    //    String guiFile = "./log/argouml/argouml.GUI";
         Map map = Generator.getNameIDMap(guiFile);
         System.out.println(map.toString());
 

@@ -88,24 +88,51 @@ task Barad(type: JavaExec, dependsOn: jarBaradTicket) {
 
 
 task jarWorkoutGenerator(type:Jar, dependsOn: classes) {
-     manifest {
-          attributes 'Main-Class': 'examples.workout.Main'
-     }
+    manifest {
+        attributes 'Main-Class': 'examples.workout.Main'
+    }
 
-     destinationDir = file(autDir)
-     archiveName = "workout.jar"
-     from (sourceSets.main.output) {
-          includes = ["examples/workout/Main*.class"]
-     }
-     from (sourceSets.main.resources) {
-          include("log4j.properties")
-     }
+    destinationDir = file(autDir)
+    archiveName = "workout.jar"
+    from (sourceSets.main.output) {
+        includes = ["examples/workout/Main*.class"]
+    }
+    from (sourceSets.main.resources) {
+        include("log4j.properties")
+    }
 }
 
 
 task workout(type: JavaExec, dependsOn: jarWorkoutGenerator) {
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.workout.Main"
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.workout.Main"
+}
+
+
+task jarJNotepad(type:Jar, dependsOn: classes) {
+    manifest {
+        attributes 'Main-Class': 'examples.jnotepad.Notepad'
+    }
+
+    destinationDir = file(autDir)
+    archiveName = "jnotepad.jar"
+    from (sourceSets.main.output) {
+        includes = ["examples/jnotepad/"]
+    }
+    from (sourceSets.main.resources) {
+        include("log4j.properties")
+    }
+    from ('src/main/java') {
+        includes = ["examples/jnotepad/images/*"]
+        into("/images")
+    }
+
+}
+
+
+task jnotepad(type: JavaExec, dependsOn: jarJNotepad) {
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.jnotepad.Notepad"
 }
 
 

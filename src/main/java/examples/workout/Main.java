@@ -143,12 +143,12 @@ public class Main extends JFrame {
                 String metabolism = (String)metabolismCombo.getSelectedItem();
                 String experience = (String)experienceCombo.getSelectedItem();
                 int age = 1;
-                float height = 100;
-                float weight = 100;
+                int height = 100;
+                int weight = 100;
                 try {
-                     age = Integer.parseInt(ageTextField.getText().trim());
-                     height = Float.parseFloat(heightTextField.getText().trim());
-                     weight = Float.parseFloat(weightTextField.getText().trim());
+                     age = Integer.parseInt(ageTextField.getText());
+                     height = Integer.parseInt(heightTextField.getText());
+                     weight = Integer.parseInt(weightTextField.getText());
                 } catch (Exception ex) {
                     ;
                 }

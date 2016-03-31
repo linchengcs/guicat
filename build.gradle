@@ -53,7 +53,7 @@ task jarTicket(type: Jar, dependsOn: classes) {
      destinationDir = file(autDir)
      archiveName = "ticket.jar"
      from (sourceSets.main.output) {
-          includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$1.class"]
+          includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$*.class"]
      }
      from (sourceSets.main.resources) {
           include("log4j.properties")

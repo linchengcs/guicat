@@ -27,6 +27,7 @@ public class Generator {
     synchronized public static Map<String, String> getGUINameIDBindMap(String guiFile) {
         if (bind == null)
             bind = getNameIDMap(guiFile);
+        System.out.println("_____" + bind.toString());
         return bind;
     }
 
@@ -43,19 +44,19 @@ public class Generator {
         String title = "";
         String ID = "";
         String key = "";
+        String value = "";
+        Map<String, String> tmp = new HashMap<>();
         Map<String, String> ret = new HashMap<String, String>();
         try {
             File inputFile = new File(guiFile);
-            DocumentBuilderFactory dbFactory
-                    = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
-            System.out.println("Root element :"
-                    + doc.getDocumentElement().getNodeName());
             NodeList aList = doc.getElementsByTagName("Attributes");
             System.out.println("----------------------------");
             for (int temp = 0; temp < aList.getLength(); temp++) {
+                tmp.clear();
                 Node aNode = aList.item(temp);  //Attributes
                 //   System.out.println("\nCurrent Element :" + nNode.getNodeName());
                 NodeList pList = aNode.getChildNodes();
@@ -71,22 +72,15 @@ public class Generator {
                                 key = element.getTextContent();
                             }
                             if (element.getNodeName().trim().equals("Value")) {
-                                if (key.equals("ID")) {
-                                    ID = element.getTextContent();
-                                }
-                                if (key.equals("Title")) {
-                                    title = element.getTextContent();
-                                }
+                                value = element.getTextContent();
                             }
-                        } else {
-                            //  throw new Exception("parse gui fail!");
                         }
                     }
-                    if (!title.isEmpty() && ID.startsWith("w")) {
-                        ret.put(title, ID);
-                        key = "";
-                        title = "";
-                        ID = "";
+                    tmp.put(key, value);
+                }
+                if (tmp.containsKey("ID") && tmp.containsKey("Title") && tmp.containsKey("Class")  ){
+                    if ( ! tmp.get("Class").equals("javax.swing.JLabel")) {
+                        ret.put(tmp.get("Title"), tmp.get("ID"));
                     }
                 }
             }
@@ -260,6 +254,7 @@ public class Generator {
 
 //        System.out.println(args[0]);
 
+
         assert args.length == 4;
         String guiFile = args[0];
         String guitarTestCaseDir = args[1];
@@ -267,6 +262,7 @@ public class Generator {
         String guicatTestcaseDir = args[3];
 
         Generator gen = new Generator(guiFile, guitarTestCaseDir, branchDir, guicatTestcaseDir);
+        Generator.getGUINameIDBindMap(guiFile);
         gen.processTestcases();
     }
 }

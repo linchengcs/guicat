@@ -173,12 +173,26 @@ public class BaradTicket {
                     System.out.println( ticketModel.from  < 1 ? "" : "");
                     */
 
+
+                    //ticketModel.computePrice();
+                   // infoField.setText(String.valueOf(ticketModel.price));
+                    /*
+                    if (ticketModel.to - ticketModel.from  < 40 ) {
+                        System.out.println("less");
+
+                    }else {
+                        System.out.println("more");
+                    }
+                    */
+
+
                     if(ticketModel.checkModel()) {
                         ticketModel.computePrice();
                         infoField.setText(String.valueOf(ticketModel.price));
                     } else {
                         infoField.setText(ticketModel.msg);
                     }
+
                 }
             });
 

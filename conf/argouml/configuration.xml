@@ -2,199 +2,293 @@
 
 <Configuration>
 
-	<TerminalComponents>
-
-		<!-- Declare Create Shape as a terminal component -->
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>Save Project</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-
-	</TerminalComponents>
+<IgnoredComponents>
+	<!-- Ignore the gray menu item -->
+	<FullComponent>
+		<Window>
+			<Attributes>
+				<Property>
+					<Name>Title</Name>
+					<Value>Print...</Value>
+				</Property>
+			</Attributes>
+		</Window>
+	</FullComponent>
 
 
-
-	<IgnoredComponents>
-		<!-- Ignore the gray menu item -->
-		<FullComponent>
-			<Window>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>Print</Value>
-					</Property>
-				</Attributes>
-			</Window>
-
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>Help</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-
-	</IgnoredComponents>
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Print...</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
 
 
-	<TerminalComponents>
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
 
-		<!-- Declare Create Shape as a terminal component -->
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
 
 
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>close</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>open</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>save</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>ok</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>cancel</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>quit</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>yes</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>no</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>exit</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>save</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
 
-		<FullComponent>
-			<Component>
-				<Attributes>
-					<Property>
-						<Name>Title</Name>
-						<Value>name</Value>
-					</Property>
-				</Attributes>
-			</Component>
-		</FullComponent>
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open*</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
 
-		<!--
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open*</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open Project...</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open Project...</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
+
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Save Project</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Save Project</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
+
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Save Project As</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Open Project As</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Import XMI...</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Import XMI...</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Export XMI...</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Export XMI...</Value>
+			</Property>
+		</Attributes>
+	</Component></FullComponent>
+
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Export Graphics...</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+	<Attributes>
+		<Property>
+			<Name>Title</Name>
+			<Value>Export Graphics...</Value>
+		</Property>
+	</Attributes>
+</Component>
+	</FullComponent>
+
+	<FullComponent><Window>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Export All Graphics...</Value>
+			</Property>
+		</Attributes>
+	</Window></FullComponent>
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Export All Graphics...</Value>
+			</Property>
+		</Attributes>
+	</Component>
+	</FullComponent>
+
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Import Sources...</Value>
+			</Property>
+		</Attributes>
+	</Component>
+	</FullComponent>
+
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Page Setup...</Value>
+			</Property>
+		</Attributes>
+	</Component>
+	</FullComponent>
+
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Save Project As...</Value>
+			</Property>
+		</Attributes>
+	</Component>
+	</FullComponent>
+
+
+	<FullComponent><Component>
+		<Attributes>
+			<Property>
+				<Name>Title</Name>
+				<Value>Load profile from file...</Value>
+			</Property>
+		</Attributes>
+	</Component>
+	</FullComponent>
+</IgnoredComponents>
+
+
+<TerminalComponents>
+
+
+
+	<FullComponent>
+		<Component>
+			<Attributes>
+				<Property>
+					<Name>Title</Name>
+					<Value>name</Value>
+				</Property>
+			</Attributes>
+		</Component>
+	</FullComponent>
+
+	<!--
         <FullComponent>
-          <Component>
+        <Component>
         <Attributes>
-          <Property>
-            <Name>Title</Name>
-            <Value>Name</Value>
-          </Property>
+        <Property>
+        <Name>Title</Name>
+        <Value>Name</Value>
+        </Property>
         </Attributes>
-          </Component>
+        </Component>
         </FullComponent>
         <FullComponent>
-          <Component>
+        <Component>
         <Attributes>
-          <Property>
-            <Name>Title</Name>
-            <Value>save</Value>
-          </Property>
+        <Property>
+        <Name>Title</Name>
+        <Value>save</Value>
+        </Property>
         </Attributes>
-          </Component>
+        </Component>
         </FullComponent>
-            <FullComponent>
-          <Component>
+        <FullComponent>
+        <Component>
         <Attributes>
-          <Property>
-            <Name>Title</Name>
-            <Value>Save</Value>
-          </Property>
+        <Property>
+        <Name>Title</Name>
+        <Value>Save</Value>
+        </Property>
         </Attributes>
-          </Component>
+        </Component>
         </FullComponent>
     -->
-	</TerminalComponents>
+</TerminalComponents>
 
 
 

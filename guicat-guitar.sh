@@ -36,9 +36,9 @@ echo $libDir
 echo $classpath
 
 rm -rf $AUTDIR branches/
-mkdir $AUTDIR
-mkdir branches/
-mkdir $AUTDIR"/testcases"
+mkdir -p $AUTDIR
+mkdir -p branches/
+mkdir -p $AUTDIR"/testcases"
 
 ./clean.sh
 

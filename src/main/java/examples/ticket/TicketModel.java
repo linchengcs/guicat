@@ -45,7 +45,12 @@ public class TicketModel {
 
     public void computePrice() {
 
-        int coeficient = (classLevel == TicketModel.FIRSTCLASS) ? 1 : 2;
+        int coeficient = 0;
+        if (classLevel == TicketModel.FIRSTCLASS) {
+            coeficient = 1;
+        } else {
+            coeficient = 2;
+        }
         int dist = to - from;
         if (ageLevel == 1) {
             if (dist < 40) {

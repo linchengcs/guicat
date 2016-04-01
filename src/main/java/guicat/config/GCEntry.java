@@ -1,9 +1,11 @@
 package guicat.config;
 
+import java.io.Serializable;
+
 /**
  * Created by oliver on 24/02/16.
  */
-public class GCEntry {
+public class GCEntry  {
     public String accessibleName;
     public String methodName;
     public String symbolicType;
@@ -14,5 +16,10 @@ public class GCEntry {
         this.methodName = mName;
         this.symbolicType = sType;
         this.initString = initString;
+
+    }
+
+    public String toString() {
+        return ">"+accessibleName+":"+methodName+":"+symbolicType+":"+initString+"<";
     }
 }

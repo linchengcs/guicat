@@ -20,6 +20,7 @@ public class BaradTicket {
     JTextField fromInput;
     JTextField toInput;
     JComboBox ageCombo;
+    JCheckBox aCheckBox;
 
 
     private TicketModel ticketModel;
@@ -154,6 +155,21 @@ public class BaradTicket {
         }
 
         {
+            JLabel checkLabel = new JLabel("ACheckBox");
+            gbc.gridx = 0;
+            gbc.gridy = 8;
+            contentPane.add(checkLabel, gbc);
+
+            aCheckBox = new JCheckBox("MyCheckBox");
+            gbc.gridx = 1;
+            gbc.gridy = 8;
+            contentPane.add(aCheckBox, gbc);
+            checkLabel.setLabelFor(aCheckBox);
+            aCheckBox.setSelected(true);
+
+        }
+
+        {
             buyButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     ticketModel.name = nameInput.getText();
@@ -162,11 +178,22 @@ public class BaradTicket {
                     ticketModel.to = Integer.parseInt(toInput.getText());
 
                     String tmpAgeString = (String)ageCombo.getSelectedItem();
-                    if (tmpAgeString.equals("Child"))
+                    if (tmpAgeString.equals("Child")) {
                         ticketModel.ageLevel = 1;
-                    if (tmpAgeString.equals("Adult"))
+                        infoField.setText("Child");
+                    }
+                    if (tmpAgeString.equals("Adult")) {
                         ticketModel.ageLevel = 2;
+                        infoField.setText("Adult");
+                    }
 
+                    /*
+                    if (aCheckBox.isSelected()) {
+                        infoField.setText("checked");
+                    } else {
+                        infoField.setText("unchecked!");
+                    }
+                    */
                     /*
                     System.out.println( ticketModel.name.equals("oliver")  ? "" : "");
                     System.out.println( ticketModel.to  >= 5 ? "" : "");
@@ -185,14 +212,14 @@ public class BaradTicket {
                     }
                     */
 
-
+/*
                     if(ticketModel.checkModel()) {
                         ticketModel.computePrice();
                         infoField.setText(String.valueOf(ticketModel.price));
                     } else {
                         infoField.setText(ticketModel.msg);
                     }
-
+*/
                 }
             });
 

@@ -13,7 +13,6 @@ branches/
 .idea/
 catg_tmp/
 coverage*
-aut/
 backtrackFlag
 *\#*
 *.iml

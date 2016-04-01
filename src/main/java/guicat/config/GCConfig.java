@@ -64,7 +64,10 @@ public class GCConfig {
     }
 
     public static void main(String[] args) {
+        System.setProperty("guicat.conf", "./conf/barad-ticket/guicat.properties");
+        String a = System.getProperty("guicat.conf");
         GCConfig gcc =  GCConfig.getInstance();
+        System.out.println(gcc.config.toString());
         GCEntry gce = gcc.config.get("Name");
         System.out.println(gce.methodName);
     }

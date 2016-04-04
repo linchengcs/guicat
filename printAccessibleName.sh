@@ -11,5 +11,5 @@ done
 classpath=$classpath":./lib/sym-agent.jar"
 
 cmd="java -cp $classpath guicat.util.PrintAccessbileName $1"
-#echo $cmd
+echo $cmd
 eval $cmd

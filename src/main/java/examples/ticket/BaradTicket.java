@@ -176,24 +176,26 @@ public class BaradTicket {
                     ticketModel.ID = idInput.getText();
                     ticketModel.from = Integer.parseInt(fromInput.getText());
                     ticketModel.to = Integer.parseInt(toInput.getText());
+                    String info = "";
 
                     String tmpAgeString = (String)ageCombo.getSelectedItem();
                     if (tmpAgeString.equals("Child")) {
                         ticketModel.ageLevel = 1;
-                        infoField.setText("Child");
+                        info = ("Child");
                     }
                     if (tmpAgeString.equals("Adult")) {
                         ticketModel.ageLevel = 2;
-                        infoField.setText("Adult");
+                        info = ("Adult");
                     }
 
-                    /*
+
                     if (aCheckBox.isSelected()) {
-                        infoField.setText("checked");
+                        info += ("+Y");
                     } else {
-                        infoField.setText("unchecked!");
+                        info += ("+N!");
                     }
-                    */
+
+                    infoField.setText(info);
                     /*
                     System.out.println( ticketModel.name.equals("oliver")  ? "" : "");
                     System.out.println( ticketModel.to  >= 5 ? "" : "");

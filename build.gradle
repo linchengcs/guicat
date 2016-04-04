@@ -3,19 +3,19 @@ apply plugin : 'java'
 defaultTasks 'clean', 'helloWorld'
 
 repositories {
-             jcenter()
+    jcenter()
 }
 
 dependencies {
-             compile fileTree("lib")
-             compile 'org.choco-solver:choco-solver:3.3.1'
-             compile 'dk.brics.automaton:automaton:1.11-8'
-             testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile fileTree("lib")
+    compile 'org.choco-solver:choco-solver:3.3.1'
+    compile 'dk.brics.automaton:automaton:1.11-8'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
 def a = 1
 task foo{
-     a += 1
+    a += 1
 }
 
 
@@ -24,66 +24,66 @@ task compileTicketAllWidgets(type: JavaCompile) {
 }
 
 task delCatg (type: Delete) {
-     delete "inputs*","isRealInput", "coverage*", "formula*", "history*"
+    delete "inputs*","isRealInput", "coverage*", "formula*", "history*"
 }
 
 def autDir = "aut"
 
 def ticketLogDir = "log/TicketAllWidgets"
 task jarTicketAllWidgets(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Main-Class': 'examples.ticket.TicketAllWidgets'
-     }
+    manifest {
+        attributes 'Main-Class': 'examples.ticket.TicketAllWidgets'
+    }
 
-     mkdir(ticketLogDir)
+    mkdir(ticketLogDir)
 //     destinationDir = file(ticketLogDir + "/dist")
-     destinationDir = file(autDir)
-     archiveName = "TicketAllWidgets.jar"
-     from ("build/classes/main") {
-          include("examples/ticket/")
-     }
+    destinationDir = file(autDir)
+    archiveName = "TicketAllWidgets.jar"
+    from ("build/classes/main") {
+        include("examples/ticket/")
+    }
 }
 
 
 task jarTicket(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Main-Class': 'examples.ticket.Ticket'
-     }
+    manifest {
+        attributes 'Main-Class': 'examples.ticket.Ticket'
+    }
 
-     destinationDir = file(autDir)
-     archiveName = "ticket.jar"
-     from (sourceSets.main.output) {
-          includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$*.class"]
-     }
-     from (sourceSets.main.resources) {
-          include("log4j.properties")
-     }
+    destinationDir = file(autDir)
+    archiveName = "ticket.jar"
+    from (sourceSets.main.output) {
+        includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$*.class"]
+    }
+    from (sourceSets.main.resources) {
+        include("log4j.properties")
+    }
 }
 
 task Ticket(type: JavaExec, dependsOn: jarTicket) {
 //     jvmArgs = ['-javaagent:"/home/oliver/workspace/java/project/catgui2/lib/sym-agent.jar"']
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.ticket.Ticket"
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.ticket.Ticket"
 }
 
 task jarBaradTicket(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Main-Class': 'examples.ticket.BaradTicket'
-     }
+    manifest {
+        attributes 'Main-Class': 'examples.ticket.BaradTicket'
+    }
 
-     destinationDir = file(autDir)
-     archiveName = "barad-ticket.jar"
-     from (sourceSets.main.output) {
-          includes = ["examples/ticket/BaradTicket*.class", "examples/ticket/TicketModel.class"]
-     }
-     from (sourceSets.main.resources) {
-          include("log4j.properties")
-     }
+    destinationDir = file(autDir)
+    archiveName = "barad-ticket.jar"
+    from (sourceSets.main.output) {
+        includes = ["examples/ticket/BaradTicket*.class", "examples/ticket/TicketModel.class"]
+    }
+    from (sourceSets.main.resources) {
+        include("log4j.properties")
+    }
 }
 
 task Barad(type: JavaExec, dependsOn: jarBaradTicket) {
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.ticket.BaradTicket"
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.ticket.BaradTicket"
 }
 
 
@@ -137,120 +137,137 @@ task jnotepad(type: JavaExec, dependsOn: jarJNotepad) {
 
 
 task jarTestme(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Main-Class': 'examples.test.Testme'
-     }
-     destinationDir = file(autDir)
-     archiveName = "Testme.jar"
-     from (sourceSets.main.output) {
-          include("examples/test/")
-     }
-     from (sourceSets.main.resources) {
-          include("log4j.properties")
-     }
+    manifest {
+        attributes 'Main-Class': 'examples.test.Testme'
+    }
+    destinationDir = file(autDir)
+    archiveName = "Testme.jar"
+    from (sourceSets.main.output) {
+        include("examples/test/")
+    }
+    from (sourceSets.main.resources) {
+        include("log4j.properties")
+    }
 }
 
 task helloWorld(type: JavaExec, dependsOn: jarTestme) {
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.test.HelloWorld"
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.test.HelloWorld"
 }
 
 task GetTicket(type: JavaExec, dependsOn: jarTestme) {
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.test.GetTicket"
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.test.GetTicket"
 }
 
 task Testme(type: JavaExec, dependsOn: jarTestme) {
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "examples.test.Testme"
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "examples.test.Testme"
 }
 
 def radioLogDir="log/radioButton"
 task jarRadioButton(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Main-Class': 'examples.radioButton.Project'
-     }
+    manifest {
+        attributes 'Main-Class': 'examples.radioButton.Project'
+    }
 
-     mkdir(radioLogDir)
-     destinationDir = file(autDir)
-     archiveName = "radioButton.jar"
-     from ("build/classes/main") {
-          include("examples/radioButton/")
-     }
+    mkdir(radioLogDir)
+    destinationDir = file(autDir)
+    archiveName = "radioButton.jar"
+    from ("build/classes/main") {
+        include("examples/radioButton/")
+    }
 }
 
 task jarWord(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Main-Class': 'crosswordsage.MainScreen'
-     }
+    manifest {
+        attributes 'Main-Class': 'crosswordsage.MainScreen'
+    }
 
-     destinationDir = file(autDir)
-     archiveName = "CrosswordSage.jar"
-     from ("build/classes/main") {
-          include("crosswordsage/")
-     }
+    destinationDir = file(autDir)
+    archiveName = "CrosswordSage.jar"
+    from ("build/classes/main") {
+        include("crosswordsage/")
+    }
 }
 
 
 task jarCatg(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Premain-Class': 'janala.instrument.SnoopInstructionTransformer'
-     }
-     destinationDir = file('./lib')
-     archiveName = "catg-dev.jar"
-     from ("build/classes/main") {
-          include("catg/", "janala/")
-     }
+    manifest {
+        attributes 'Premain-Class': 'janala.instrument.SnoopInstructionTransformer'
+    }
+    destinationDir = file('./lib')
+    archiveName = "catg-dev.jar"
+    from ("build/classes/main") {
+        include("catg/", "janala/")
+    }
 }
 
 task jarSymAgent(type: Jar, dependsOn: classes) {
-     manifest {
-              attributes 'Premain-Class': 'guicat.SymAgent'
-     }
-     destinationDir = file('./lib')
-     archiveName = "sym-agent.jar"
-     from (sourceSets.main.output) {
-          include("guicat/")
-     }
-     from (sourceSets.main.resources) {
-          include("log4j.properties")
-     }
+    manifest {
+        attributes 'Premain-Class': 'guicat.SymAgent'
+    }
+    destinationDir = file('./lib')
+    archiveName = "sym-agent.jar"
+    from (sourceSets.main.output) {
+        include("guicat/")
+    }
+    from (sourceSets.main.resources) {
+        include("log4j.properties")
+    }
 
+}
+
+task jarGuitarGuiModelJfc(type: Jar, dependsOn: classes) {
+    manifest {
+        attributes ('Manifest-Version': '1.0',
+                'Ant-Version': 'Apache Ant 1.8.2',
+                'Created-By': '1.6.0_23-b23 (Sun Microsystems Inc.)')
+    }
+    destinationDir = file('./lib')
+    archiveName = "gui-model-jfc.jar"
+ //   from zipTree("lib/gui-model-jfc.jar.bak")
+    from (sourceSets.main.output) {
+        include("edu/umd/cs/guitar/")
+    }
+//      from(file("edu/umd/cs/guitar/event/*")) {   // add new content
+//      into "edu/umd/cs/guitar/event/"
+    //   }
 }
 
 task guitarRipperTicketAllWidgets(type: JavaExec, dependsOn: jarTicketAllWidgets) {
 //     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "edu.umd.cs.guitar.ripper.JFCRipperMain"
-     jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
-     args = ["-c", "examples.ticket.TicketAllWidgets"
-          , "-g",  ticketLogDir+"/ticket.GUI"
-          , "-cf", "./src/main/java/examples/ticket/configure/guitar.xml"
-          , "-d", "500"
-          , "-i", "2000"
-          , "-l" , ticketLogDir+"/ticket.log"]
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "edu.umd.cs.guitar.ripper.JFCRipperMain"
+    jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
+    args = ["-c", "examples.ticket.TicketAllWidgets"
+            , "-g",  ticketLogDir+"/ticket.GUI"
+            , "-cf", "./src/main/java/examples/ticket/configure/guitar.xml"
+            , "-d", "500"
+            , "-i", "2000"
+            , "-l" , ticketLogDir+"/ticket.log"]
 }
 
 task guitarGui2EfgTicketAllWidgets(type: JavaExec, dependsOn: guitarRipperTicketAllWidgets) {
 //     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "edu.umd.cs.guitar.graph.GUIStructure2GraphConverter"
-     jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
-     args = ["-p", "EFGConverter"
-          , "-g",  ticketLogDir+"/ticket.GUI"
-          , "-e",  ticketLogDir+"/ticket.EFG"]
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "edu.umd.cs.guitar.graph.GUIStructure2GraphConverter"
+    jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
+    args = ["-p", "EFGConverter"
+            , "-g",  ticketLogDir+"/ticket.GUI"
+            , "-e",  ticketLogDir+"/ticket.EFG"]
 }
 
 task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTicketAllWidgets) {
 //     classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
-     classpath = fileTree(autDir) + fileTree("lib")
-     main = "edu.umd.cs.guitar.testcase.TestCaseGenerator"
-     jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
-     args = ["-p", "RandomSequenceLengthCoverage"
-          , "-e",  ticketLogDir+"/ticket.EFG"
-          , "-d",  ticketLogDir+"/testcases"
-          , "-l", "0"
-          , "-m", "200"]
+    classpath = fileTree(autDir) + fileTree("lib")
+    main = "edu.umd.cs.guitar.testcase.TestCaseGenerator"
+    jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
+    args = ["-p", "RandomSequenceLengthCoverage"
+            , "-e",  ticketLogDir+"/ticket.EFG"
+            , "-d",  ticketLogDir+"/testcases"
+            , "-l", "0"
+            , "-m", "200"]
 }
 
 task guitarTicketAllWidgets(dependsOn: guitarTestCaseTicketAllWidgets) {}
@@ -281,24 +298,24 @@ task catgTicketAllWidgets(){
     fileTree(ticketLogDir + "/testcases/" ).each {File file ->
         task "catg_${file.name}" (type: JavaExec, dependsOn: guitarTestCaseTicketAllWidgets)        {
 //        classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
-       classpath = fileTree(autDir) + fileTree("lib")
-      main = "edu.umd.cs.guitar.replayer.JFCReplayerMain"
-        jvmArgs = ["-Djanala.loggerClass=janala.logger.DirectConcolicExecution"
-                , "-Djanala.conf=./catg.conf"
-                , "-javaagent:./lib/catg-dev.jar"
-                , "-Dlog4j.configuration=log/examples/ticket/guitar.log"]
-        args = ["-c", "examples.ticket.TicketAllWidgets"
-        , "-g", ticketLogDir + "/ticket.GUI"
-        , "-e",  ticketLogDir+"/ticket.EFG"
-        , "-t", ticketLogDir + "/testcases/" + file.name
-        , "-i", "2000"
-        , "-d", "200"
-        , "-l", ticketLogDir + "/log/" + file.name + ".log"
-        , "-gs", ticketLogDir + "/states/" + file.name + ".sta"
-        , "-cf", "./src/main/java/examples/ticket/configure/configuration.xml"
-        , "-ts"]
+            classpath = fileTree(autDir) + fileTree("lib")
+            main = "edu.umd.cs.guitar.replayer.JFCReplayerMain"
+            jvmArgs = ["-Djanala.loggerClass=janala.logger.DirectConcolicExecution"
+                       , "-Djanala.conf=./catg.conf"
+                       , "-javaagent:./lib/catg-dev.jar"
+                       , "-Dlog4j.configuration=log/examples/ticket/guitar.log"]
+            args = ["-c", "examples.ticket.TicketAllWidgets"
+                    , "-g", ticketLogDir + "/ticket.GUI"
+                    , "-e",  ticketLogDir+"/ticket.EFG"
+                    , "-t", ticketLogDir + "/testcases/" + file.name
+                    , "-i", "2000"
+                    , "-d", "200"
+                    , "-l", ticketLogDir + "/log/" + file.name + ".log"
+                    , "-gs", ticketLogDir + "/states/" + file.name + ".sta"
+                    , "-cf", "./src/main/java/examples/ticket/configure/configuration.xml"
+                    , "-ts"]
         }
-}
+    }
 }
 
 task catg(dependsOn: tasks.matching { Task task -> task.name.startsWith("catg_")}){

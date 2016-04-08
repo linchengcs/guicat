@@ -51,25 +51,30 @@ ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ri
 eval $ripperCmd
 
 gui2efgCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.graph.GUIStructure2GraphConverter -p EFGConverter -g $guiFile -e $efgFile"
-
 eval $gui2efgCmd
+
 
 testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p RandomSequenceLengthCoverage -e $efgFile -l 1 -m 200 -d $AUTTESTCASE"
 #testcaseCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p BytecodeAnalysis  -e $efgFile -l 2 -m 200 -d $AUTTESTCASE --scope ./aut/radioButton.jar  --method pair --shared 0"
 echo $testcaseCmd
 eval $testcaseCmd
 
-for testcase in `find $AUTTESTCASE -type f -name "*.tst" -printf '%f\n'`
+enumCmd="java  -Dguicat.conf=$guicatConfigFile  -cp $classpath guicat.testcase.EnumGenerator $AUTTESTCASE $enumtGuicatTestcase $guiFile"
+echo $enumCmd
+eval $enumCmd
+
+
+for testcase in `find $enumtGuicatTestcase -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
-    python concolic.py -Dguicat.conf=$guicatConfigFile -v 32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $AUTDIR/testcases/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
+    python concolic.py -Dguicat.conf=$guicatConfigFile -v 32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $enumtGuicatTestcase/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
 #break
 done
 
 mv branches $AUTDIR
 
 #create guicat testcases
-cmd="java -Dguicat.conf=$guicatConfigFile -cp $classpath guicat.testcase.Generator $guiFile $AUTTESTCASE $branchDir $autGuicatTestcase"
+cmd="java -Dguicat.conf=$guicatConfigFile -cp $classpath guicat.testcase.Generator $guiFile $enumtGuicatTestcase $branchDir $autGuicatTestcase"
 echo $cmd
 eval $cmd
 

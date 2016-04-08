@@ -22,6 +22,8 @@ public class BaradTicket {
     JComboBox ageCombo;
     JCheckBox aCheckBox;
 
+    String[] ages = {"Adult", "Child"};
+
 
     private TicketModel ticketModel;
 
@@ -92,7 +94,7 @@ public class BaradTicket {
             gbc.gridy = 4;
             contentPane.add(ageLabel, gbc);
 
-            String[] ages = {"Adult", "Child"};
+
              ageCombo = new JComboBox(ages);
             ageCombo.setSelectedIndex(0);
             gbc.gridx = 1;
@@ -164,8 +166,7 @@ public class BaradTicket {
             gbc.gridx = 1;
             gbc.gridy = 8;
             contentPane.add(aCheckBox, gbc);
-            checkLabel.setLabelFor(aCheckBox);
-            aCheckBox.setSelected(true);
+
 
         }
 
@@ -176,9 +177,17 @@ public class BaradTicket {
                     ticketModel.ID = idInput.getText();
                     ticketModel.from = Integer.parseInt(fromInput.getText());
                     ticketModel.to = Integer.parseInt(toInput.getText());
+
+                    if (ageCombo.getSelectedIndex() == 0 ) {
+                        ticketModel.ageLevel = 1;
+                    } else if (ageCombo.getSelectedIndex() == 1) {
+                        ticketModel.ageLevel = 2;
+                    }
                     String info = "";
 
-                    String tmpAgeString = (String)ageCombo.getSelectedItem();
+                    /*
+              //      String tmpAgeString = (String)ageCombo.getSelectedItem();
+                    String tmpAgeString = (String)ageCombo.getItemAt(ageCombo.getSelectedIndex());
                     if (tmpAgeString.equals("Child")) {
                         ticketModel.ageLevel = 1;
                         info = ("Child");
@@ -196,15 +205,16 @@ public class BaradTicket {
                     }
 
                     infoField.setText(info);
-                    /*
-                    System.out.println( ticketModel.name.equals("oliver")  ? "" : "");
-                    System.out.println( ticketModel.to  >= 5 ? "" : "");
-                    System.out.println( ticketModel.from  < 1 ? "" : "");
                     */
 
+                    System.out.println( ticketModel.name.equals("oliver")  ? "ad" : "b");
+                    System.out.println( ticketModel.to  >= 5 ? "c" : "d");
+                    System.out.println( ticketModel.from  < 1 ? "e" : "f");
 
-                    //ticketModel.computePrice();
-                   // infoField.setText(String.valueOf(ticketModel.price));
+
+
+                    ticketModel.computePrice();
+                    infoField.setText(String.valueOf(ticketModel.price));
                     /*
                     if (ticketModel.to - ticketModel.from  < 40 ) {
                         System.out.println("less");
@@ -218,6 +228,8 @@ public class BaradTicket {
                     if(ticketModel.checkModel()) {
                         ticketModel.computePrice();
                         infoField.setText(String.valueOf(ticketModel.price));
+                        System.out.println(String.valueOf(ticketModel.price));
+                        System.out.println(String.valueOf(ticketModel.price));
                     } else {
                         infoField.setText(ticketModel.msg);
                     }

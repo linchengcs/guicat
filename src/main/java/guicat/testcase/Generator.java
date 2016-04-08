@@ -1,6 +1,7 @@
 package guicat.testcase;
 
 import guicat.config.GCConfig;
+import guicat.config.GCEntry;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -145,7 +146,11 @@ public class Generator {
         for (Map.Entry<String, String> entry : getGUINameIDBindMap(guiFile).entrySet()) {
             String key = entry.getKey();
             if (GCConfig.getInstance().config.keySet().contains(key)) {
-                ret.add(entry.getValue());
+                /* !!!! caution !!! */
+                GCEntry gcEntry = GCConfig.getInstance().config.get(key);
+                if (!gcEntry.methodName.equals("JComboBox") && !gcEntry.methodName.equals("JCheckBox")) {
+                    ret.add(entry.getValue());
+                }
             }
         }
         return ret;

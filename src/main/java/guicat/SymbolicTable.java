@@ -1,6 +1,7 @@
 package guicat;
 
 import guicat.config.GCConfig;
+import guicat.config.GCEntry;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,8 +27,11 @@ public class SymbolicTable {
 
     private SymbolicTable(){
         symbolicTable = new LinkedHashMap<>();
-        LinkedHashMap config = GCConfig.getInstance().config;
+        LinkedHashMap<String, GCEntry> config = GCConfig.getInstance().config;
         for (String key : (Set<String>)config.keySet()) {
+            String methodName = config.get(key).methodName;
+            if (methodName.equals("JComboBox") || methodName.equals("JCheckBox"))
+                continue;
             SymbolicEntry symbolicEntry = new SymbolicEntry(key);
             symbolicEntry.makeSymbolic();
             symbolicTable.put(key, symbolicEntry);

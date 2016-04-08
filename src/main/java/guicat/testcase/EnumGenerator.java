@@ -77,45 +77,68 @@ public class EnumGenerator {
             doc.getDocumentElement().normalize();
 
             ArrayList<String> enumEvents = new ArrayList<>();
-            NodeList eventIds = doc.getElementsByTagName("EventId");
-            for (int i = 0; i < eventIds.getLength(); i++) {
-                Node event = eventIds.item(i);
-                String eventId = event.getTextContent();
-                if (getEnumConfig(guiFile).containsKey(eventId)) {
-                    //        System.out.println("from ptc" + event.getTextContent());
-                    enumEvents.add(eventId);
-                }
-            }
+            NodeList steps = doc.getElementsByTagName("Step");
+            List<Node> myNodeList = new ArrayList<>();
+            for (int i = 0; i < steps.getLength(); i++)
+                myNodeList.add(steps.item(i));
 
             enumCounter = 0;
-            writeParaRecurse(enumEvents, testcase);
+            writeParaRecurse(myNodeList, testcase);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void writeParaRecurse(List<String> enumEvents, String testcase) {
-        if (enumEvents.size() == 0) {
-            String fileName =  enumGuitarTestcaseDir + "/" + new File(testcase).getName() + "_" + enumCounter;
+    public void writeParaRecurse(List<Node> steps, String testcase) {
+        if (steps.size() == 0) {
+            String tmp = new File(testcase).getName();
+            String fileName =  enumGuitarTestcaseDir + "/" + tmp.substring(0,tmp.length()-4) + "_" + enumCounter++ +".tst";
             writeToFile (fileName);
             return;
         }
-        List<String> tail = (List<String>)enumEvents.subList(1,enumEvents.size());
-        for (int i : getEnumConfig(guiFile).get(enumEvents.get(0))) {
-            //  addParam(doc, eventId, intP);
-            addParam(enumEvents.get(0), i);
-            enumCounter++;
 
-            System.out.println(enumCounter);
-            writeParaRecurse(tail, testcase);
+        //devide to head and tail, for recurse
+        Node headStep = steps.get(0);
+        List<Node> tailSteps =  steps.subList(1, steps.size());
+        String eventId = "";
+        NodeList eleNodes = headStep.getChildNodes();
+        for (int j = 0; j < eleNodes.getLength(); j++) {
+            Node ele =  eleNodes.item(j);
+            if (ele.getNodeName().equals("EventId")) {
+                eventId = ele.getTextContent();
+                break;
+            }
         }
+
+        if (getEnumConfig(guiFile).containsKey(eventId)) {
+            for (int i : getEnumConfig(guiFile).get(eventId)) {
+                addParam(headStep, i);
+                writeParaRecurse(tailSteps, testcase);
+            }
+        } else {
+            writeParaRecurse(tailSteps, testcase);
+        }
+
+    }
+
+
+    public  void addParam(Node step, int par) {
+        NodeList elements = step.getChildNodes();
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node element = elements.item(i);
+            if (element instanceof Element && element.getNodeName().equals("Parameter"))
+                step.removeChild(element);
+        }
+        Element parameterElement = doc.createElement("Parameter");
+        parameterElement.appendChild(doc.createTextNode(String.valueOf(par)));
+        step.appendChild(parameterElement);
 
     }
 
     public  void writeToFile(String file) {
         try {
-    //        System.out.println(doc.getDocumentElement().getTextContent());
+            //        System.out.println(doc.getDocumentElement().getTextContent());
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
@@ -127,20 +150,6 @@ public class EnumGenerator {
 
     }
 
-    public  void addParam(String eventId, int par) {
-        NodeList eventIds = doc.getElementsByTagName("EventId");
-        for (int i = 0; i < eventIds.getLength(); i++) {
-            Node eventIdNode = eventIds.item(0);
-            if (eventIdNode.getTextContent().trim().equals(eventId)){
-                Element parameterElement = doc.createElement("Parameter");
-                parameterElement.appendChild(doc.createTextNode(String.valueOf(par+999)));
-                Node stepNode = eventIdNode.getParentNode();
-                stepNode.appendChild(parameterElement);
-                break;
-            }
-        }
-
-    }
 
     public void processTestcases() {
         File gDir = new File(enumGuitarTestcaseDir);
@@ -161,6 +170,7 @@ public class EnumGenerator {
     }
 
     public static void main(String[] args) {
+        /*
         System.setProperty("guicat.conf", "./conf/barad-ticket/guicat.properties");
         String guiFile = "./log/barad-ticket/barad-ticket.GUI";
         String guitarTestcaseDir = "./log/barad-ticket/testcases";
@@ -169,6 +179,12 @@ public class EnumGenerator {
         System.out.println(GCConfig.getInstance().config.toString());
         System.out.println(SymbolicTable.getInstance().toString());
         System.out.println(EnumGenerator.getEnumConfig(guiFile));
+        */
+
+        assert args.length == 3 : "args for enumGenerator error";
+        String guitarTestcaseDir = args[0];
+        String enumGuitarTestcaseDir = args[1];
+        String guiFile = args[2];
         EnumGenerator enumGenerator = new EnumGenerator(guitarTestcaseDir, enumGuitarTestcaseDir, guiFile);
         enumGenerator.processTestcases();
     }

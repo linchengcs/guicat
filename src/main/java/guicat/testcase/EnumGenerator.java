@@ -49,15 +49,21 @@ public class EnumGenerator {
         Map<String, String> nameIdBind = Generator.getGUINameIDBindMap(guiFile);
         for (GCEntry gcEntry : GCConfig.getInstance().config.values()) {
             String methodName = gcEntry.methodName;
-            if (methodName.equals("JComboBox") || methodName.equals("JCheckBox")) {
+            if (GCConfig.isEnumWidget(methodName) || GCConfig.isEnumWidget(methodName)){
                 String vString = gcEntry.initString;
                 String delims = ":";
                 String[] tokens = vString.split(delims);
                 System.out.println(tokens);
                 List<Integer> enumValue = new ArrayList<>();
-                enumValue.add(Integer.valueOf(Integer.parseInt(tokens[0])));
-                enumValue.add(Integer.valueOf(Integer.parseInt(tokens[1])));
+                int min = Integer.parseInt(tokens[0]);
+                int max = Integer.parseInt(tokens[1]);
+                for (int val = min; val <= max; val++) {
+                    enumValue.add(Integer.valueOf(val));
+                }
                 String enumKey = nameIdBind.get(gcEntry.accessibleName);
+                if (enumKey == null) {
+                    System.out.println("config error, no such accessibleName: " + gcEntry.methodName);
+                }
                 String enumKey1 = "e" + enumKey.substring(1, enumKey.length());
                 if (enumKey != null)
                     enumConfig.put(enumKey1, enumValue);
@@ -170,6 +176,16 @@ public class EnumGenerator {
     }
 
     public static void main(String[] args) {
+/*
+        System.setProperty("guicat.conf", "./conf/workout/guicat.properties");
+        String guiFile = "./log/workout/workout.GUI";
+        String guitarTestcaseDir = "./log/workout/testcases";
+        String enumGuitarTestcaseDir = "./log/workout/enumtestcases";
+
+        System.out.println(GCConfig.getInstance().config.toString());
+        System.out.println(SymbolicTable.getInstance().toString());
+        System.out.println(EnumGenerator.getEnumConfig(guiFile));
+*/
         /*
         System.setProperty("guicat.conf", "./conf/barad-ticket/guicat.properties");
         String guiFile = "./log/barad-ticket/barad-ticket.GUI";
@@ -179,12 +195,14 @@ public class EnumGenerator {
         System.out.println(GCConfig.getInstance().config.toString());
         System.out.println(SymbolicTable.getInstance().toString());
         System.out.println(EnumGenerator.getEnumConfig(guiFile));
-        */
 
+*/
         assert args.length == 3 : "args for enumGenerator error";
         String guitarTestcaseDir = args[0];
         String enumGuitarTestcaseDir = args[1];
         String guiFile = args[2];
+
+
         EnumGenerator enumGenerator = new EnumGenerator(guitarTestcaseDir, enumGuitarTestcaseDir, guiFile);
         enumGenerator.processTestcases();
     }

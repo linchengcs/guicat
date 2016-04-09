@@ -7,6 +7,7 @@ public class TicketModel {
     public int to;
     public int ageLevel;
     public int classLevel;
+    public int coupon;
     final public static int CHILD = 1;
     final public static int ADULT = 2;
     final public static int FIRSTCLASS = 1;
@@ -21,6 +22,7 @@ public class TicketModel {
         to = 50;
         ageLevel = TicketModel.CHILD;
         classLevel = TicketModel.FIRSTCLASS;
+        coupon = 0;
         msg = "";
         price = 0.0;
     }
@@ -55,7 +57,7 @@ public class TicketModel {
         if (ageLevel == 1) {
             if (dist < 40) {
                 price = 100 * coeficient;
-            } /* else  if (dist < 45) {
+            }  else  if (dist < 45) {
                 price = 110 * coeficient;
             } else if (dist < 50) {
                 price = 120 * coeficient;
@@ -67,13 +69,13 @@ public class TicketModel {
                 price = 155 * coeficient;
             } else if (dist < 100) {
                 price = 160 * coeficient;
-            } */
+            }
         }
 
         if (ageLevel == 2) {
             if (dist < 40) {
                 price = 120 * coeficient;
-            } /* else if (dist < 45) {
+            }  else if (dist < 45) {
                 price = 130 * coeficient;
             } else if (dist < 50) {
                 price = 140 * coeficient;
@@ -85,7 +87,9 @@ public class TicketModel {
                 price = 175 * coeficient;
             } else if (dist < 100) {
                 price = 180 * coeficient;
-            } */
+            }
         }
+
+        price = price - coupon;
     }
 }

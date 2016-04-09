@@ -148,7 +148,7 @@ public class Generator {
             if (GCConfig.getInstance().config.keySet().contains(key)) {
                 /* !!!! caution !!! */
                 GCEntry gcEntry = GCConfig.getInstance().config.get(key);
-                if (!gcEntry.methodName.equals("JComboBox") && !gcEntry.methodName.equals("JCheckBox")) {
+                if (!GCConfig.isEnumWidget(gcEntry.methodName) && !GCConfig.isEnumWidget(gcEntry.methodName)) {
                     ret.add(entry.getValue());
                 }
             }

@@ -30,7 +30,7 @@ public class SymbolicTable {
         LinkedHashMap<String, GCEntry> config = GCConfig.getInstance().config;
         for (String key : (Set<String>)config.keySet()) {
             String methodName = config.get(key).methodName;
-            if (methodName.equals("JComboBox") || methodName.equals("JCheckBox"))
+            if (GCConfig.isEnumWidget(methodName) || GCConfig.isEnumWidget(methodName))
                 continue;
             SymbolicEntry symbolicEntry = new SymbolicEntry(key);
             symbolicEntry.makeSymbolic();

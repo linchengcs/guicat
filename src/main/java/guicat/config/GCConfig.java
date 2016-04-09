@@ -11,6 +11,10 @@ public class GCConfig {
     public static String path;
     public LinkedHashMap<String, GCEntry> config;
 
+    /*JCheckBox is not supported by Guitar
+    * widgets in this list will not create symbolic variables*/
+    private static String[] supportedEnumWidgets = {"JComboBox", "JRadioButton", "JCheckBox"};
+
     private static GCConfig gcConfig = null;
 
     private GCConfig() {
@@ -63,6 +67,13 @@ public class GCConfig {
         }
     }
 
+    public static boolean isEnumWidget(String widName) {
+        for (String s : supportedEnumWidgets)
+            if (s.equals(widName))
+                return true;
+        return false;
+    }
+
     public static void main(String[] args) {
         System.setProperty("guicat.conf", "./conf/barad-ticket/guicat.properties");
         String a = System.getProperty("guicat.conf");
@@ -71,7 +82,6 @@ public class GCConfig {
         GCEntry gce = gcc.config.get("Name");
         System.out.println(gce.methodName);
     }
-
 
 
 }

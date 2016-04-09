@@ -51,7 +51,7 @@ public class JFCActionHandler extends JFCEventHandler {
 
             try {
 
-                //support JComboBox
+                //support JComboBox, all selectable
                 AccessibleSelection aSelection = aContext.getAccessibleSelection();
                 if(aSelection != null) {
                     aSelection.clearAccessibleSelection();
@@ -63,7 +63,7 @@ public class JFCActionHandler extends JFCEventHandler {
                     }
                 }
 
-                //support JCheckBox
+                //support JCheckBox  all valuable
                 AccessibleValue aValue = aContext.getAccessibleValue();
                 if (aValue != null) {
                     List<String> lParameter = (List<String>)parameters;

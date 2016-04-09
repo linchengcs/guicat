@@ -20,7 +20,7 @@ public class BaradTicket {
     JTextField fromInput;
     JTextField toInput;
     JComboBox ageCombo;
-    JCheckBox aCheckBox;
+    JCheckBox couponCheckBox;
 
     String[] ages = {"Adult", "Child"};
 
@@ -129,46 +129,45 @@ public class BaradTicket {
             contentPane.add(secondClassRadio, gbc);
         }
 
+        {
+            JLabel checkLabel = new JLabel("Coupon");
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            contentPane.add(checkLabel, gbc);
+
+            couponCheckBox = new JCheckBox("$10");
+            gbc.gridx = 1;
+            gbc.gridy = 6;
+            contentPane.add(couponCheckBox, gbc);
+
+        }
 
         {
              buyButton = new JButton("Buy Ticket");
             gbc.gridx = 0;
-            gbc.gridy = 6;
+            gbc.gridy = 16;
             contentPane.add(buyButton, gbc);
 
              clearButton = new JButton("Clear");
             gbc.gridx = 1;
-            gbc.gridy = 6;
+            gbc.gridy = 16;
             contentPane.add(clearButton, gbc);
         }
 
         {
             JLabel priceLabel = new JLabel("Price");
             gbc.gridx = 0;
-            gbc.gridy = 7;
+            gbc.gridy = 17;
             contentPane.add(priceLabel, gbc);
             priceLabel.setForeground(Color.BLUE);
 
              infoField = new JTextField("ticket price");
             gbc.gridx = 1;
-            gbc.gridy = 7;
+            gbc.gridy = 17;
             contentPane.add(infoField, gbc);
             infoField.setEnabled(false);
         }
 
-        {
-            JLabel checkLabel = new JLabel("ACheckBox");
-            gbc.gridx = 0;
-            gbc.gridy = 8;
-            contentPane.add(checkLabel, gbc);
-
-            aCheckBox = new JCheckBox("MyCheckBox");
-            gbc.gridx = 1;
-            gbc.gridy = 8;
-            contentPane.add(aCheckBox, gbc);
-
-
-        }
 
         {
             buyButton.addActionListener(new ActionListener() {
@@ -182,6 +181,12 @@ public class BaradTicket {
                         ticketModel.ageLevel = 1;
                     } else if (ageCombo.getSelectedIndex() == 1) {
                         ticketModel.ageLevel = 2;
+                    }
+
+                    if (couponCheckBox.isSelected()) {
+                        ticketModel.coupon = 10;
+                    } else {
+                        ticketModel.coupon = 0;
                     }
                     String info = "";
 
@@ -207,24 +212,13 @@ public class BaradTicket {
                     infoField.setText(info);
                     */
 
-                    System.out.println( ticketModel.name.equals("oliver")  ? "ad" : "b");
-                    System.out.println( ticketModel.to  >= 5 ? "c" : "d");
-                    System.out.println( ticketModel.from  < 1 ? "e" : "f");
+
+
+               //     ticketModel.computePrice();
+              //      infoField.setText(String.valueOf(ticketModel.price));
 
 
 
-                    ticketModel.computePrice();
-                    infoField.setText(String.valueOf(ticketModel.price));
-                    /*
-                    if (ticketModel.to - ticketModel.from  < 40 ) {
-                        System.out.println("less");
-
-                    }else {
-                        System.out.println("more");
-                    }
-                    */
-
-/*
                     if(ticketModel.checkModel()) {
                         ticketModel.computePrice();
                         infoField.setText(String.valueOf(ticketModel.price));
@@ -233,29 +227,33 @@ public class BaradTicket {
                     } else {
                         infoField.setText(ticketModel.msg);
                     }
-*/
+
                 }
             });
 
             firstClassRadio.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String s = e.getActionCommand();
-                        if (s.equals("1st"))
+                        JRadioButton jrb = (JRadioButton)e.getSource();
+                        if (jrb.isSelected()) {
                             ticketModel.classLevel = 1;
-                        if (s.equals("2nd"))
+                        } else {
                             ticketModel.classLevel = 2;
+                        }
                     }
                 });
 
             secondClassRadio.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String s = e.getActionCommand();
-                        if (s.equals("1st"))
-                            ticketModel.classLevel = 1;
-                        if (s.equals("2nd"))
+                        JRadioButton jrb = (JRadioButton) e.getSource();
+                        if (jrb.isSelected()) {
                             ticketModel.classLevel = 2;
+                        } else {
+                            ticketModel.classLevel = 1;
+                        }
                     }
                 });
+
+
 
             clearButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -269,7 +267,6 @@ public class BaradTicket {
 
     }
 
-    public static void a(){}
 
     public static void main(String[] args){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

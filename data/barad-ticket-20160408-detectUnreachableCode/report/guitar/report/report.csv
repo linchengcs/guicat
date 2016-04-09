@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Hello,examples.ticket,BaradTicket,1,464,0,0,1,104,1,3,1,3
+Hello,examples.ticket,BaradTicket.new ActionListener() {...},11,67,3,1,2,11,2,2,0,2
+Hello,examples.ticket,BaradTicket.new ActionListener() {...},5,20,1,1,1,5,1,2,0,2
+Hello,examples.ticket,TicketModel,71,56,11,5,11,19,8,3,1,2
+Hello,examples.ticket,BaradTicket.new ActionListener() {...},5,20,1,1,1,5,1,2,0,2
+Hello,examples.ticket,BaradTicket.new ActionListener() {...},0,12,0,0,0,3,0,2,0,2
+Hello,examples.ticket,BaradTicket.new Runnable() {...},0,8,0,0,0,3,0,2,0,2

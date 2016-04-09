@@ -14,7 +14,16 @@ conf=$dst/"conf"
 
 #may add zip option
 if [[ "$2" == "--savedata" ]]; then
+    mkdir -p $log $src $conf
     cp -r $AUTDIR $log
     cp -r $AUT_SRC_DIR $src
     cp -r $AUT_CONF_DIR $conf
+fi
+
+if [[ "$2" == "--savezip" ]]; then
+  mkdir -p $log $src $conf
+    cp -r $AUTDIR $log
+    cp -r $AUT_SRC_DIR $src
+    cp -r $AUT_CONF_DIR $conf
+    tar zcf $dst".tar.gz" $dst && rm -rf $dst
 fi

@@ -9,6 +9,7 @@ fi
 timestamp=`data +%s`
 dst="data/"$AUT"-"$timestamp;
 
+#may add zip option
 if [[ "$s" == "--savedata" ]]; then
     cp -r $AUTDIR $dst
     cp -r $AUT_SRC_DIR $dst

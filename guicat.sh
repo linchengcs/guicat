@@ -54,9 +54,9 @@ gui2efgCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.
 eval $gui2efgCmd
 
 
-testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p SequenceLengthCoverage -e $efgFile -l 1 -m 200 -d $AUTTESTCASE"
-#testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p RandomSequenceLengthCoverage -e $efgFile -l 1 -m 200 -d $AUTTESTCASE"
-#testcaseCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p BytecodeAnalysis  -e $efgFile -l 3 -m 200 -d $AUTTESTCASE --scope $CLASSPATH  --method pair --shared 0"
+testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p SequenceLengthCoverage -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE"
+#testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p RandomSequenceLengthCoverage -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE"
+#testcaseCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p BytecodeAnalysis  -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE --scope $CLASSPATH  --method pair --shared 0"
 echo $testcaseCmd
 eval $testcaseCmd
 

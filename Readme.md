@@ -27,6 +27,10 @@ run
 
 + ./guicat.sh ./conf/workout/workout.conf  #test workout generator
 
+Arguments
+----
+
++ guitar test case length : see ./conf/yourAut/yourAut.conf
 
 changes
 ----

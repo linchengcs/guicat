@@ -6,12 +6,15 @@ fi
 #. ./conf/ticket/ticket.conf
 . $1
 
-timestamp=`data +%s`
+timestamp=`date +%s`
 dst="data/"$AUT"-"$timestamp;
+log=$dst"/log"
+src=$dst/"src"
+conf=$dst/"conf"
 
 #may add zip option
-if [[ "$s" == "--savedata" ]]; then
-    cp -r $AUTDIR $dst
-    cp -r $AUT_SRC_DIR $dst
-    cp -r $AUT_CONF_DIR $dst
+if [[ "$2" == "--savedata" ]]; then
+    cp -r $AUTDIR $log
+    cp -r $AUT_SRC_DIR $src
+    cp -r $AUT_CONF_DIR $conf
 fi

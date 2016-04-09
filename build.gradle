@@ -55,9 +55,7 @@ task jarTicket(type: Jar, dependsOn: classes) {
     from (sourceSets.main.output) {
         includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$*.class"]
     }
-    from (sourceSets.main.resources) {
-        include("log4j.properties")
-    }
+
 }
 
 task Ticket(type: JavaExec, dependsOn: jarTicket) {
@@ -75,9 +73,6 @@ task jarBaradTicket(type: Jar, dependsOn: classes) {
     archiveName = "barad-ticket.jar"
     from (sourceSets.main.output) {
         includes = ["examples/ticket/BaradTicket*.class", "examples/ticket/TicketModel.class"]
-    }
-    from (sourceSets.main.resources) {
-        include("log4j.properties")
     }
 }
 
@@ -97,9 +92,6 @@ task jarWorkoutGenerator(type:Jar, dependsOn: classes) {
     from (sourceSets.main.output) {
         includes = ["examples/workout/Main*.class"]
     }
-    from (sourceSets.main.resources) {
-        include("log4j.properties")
-    }
 }
 
 
@@ -118,9 +110,6 @@ task jarJNotepad(type:Jar, dependsOn: classes) {
     archiveName = "jnotepad.jar"
     from (sourceSets.main.output) {
         includes = ["examples/jnotepad/"]
-    }
-    from (sourceSets.main.resources) {
-        include("log4j.properties")
     }
     from ('src/main/java') {
         includes = ["examples/jnotepad/images/*"]
@@ -212,10 +201,6 @@ task jarSymAgent(type: Jar, dependsOn: classes) {
     from (sourceSets.main.output) {
         include("guicat/")
     }
-    from (sourceSets.main.resources) {
-        include("log4j.properties")
-    }
-
 }
 
 task jarGuitarGuiModelJfc(type: Jar, dependsOn: classes) {

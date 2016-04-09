@@ -23,7 +23,7 @@ run
 
 + ./guicat.sh ./conf/barad-ticket/barad-ticket.conf
 + xvfb-run ./guicat.sh ./conf/barad-ticket/barad-ticket.conf #no graphicx
-+ ./guicat.sh ./conf/barad-ticket/barad-ticket.conf --savedata #save result to ./data dir
++ ./guicat.sh ./conf/barad-ticket/barad-ticket.conf --savedata #copy result to ./data dir
 
 + ./guicat.sh ./conf/workout/workout.conf  #test workout generator
 

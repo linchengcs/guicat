@@ -6,7 +6,7 @@ fi
 #. ./conf/ticket/ticket.conf
 . $1
 
-timestamp=`date +%s`
+timestamp=`date +%Y%m%d-%H%M%S`
 dst="data/"$AUT"-"$timestamp;
 log=$dst"/log"
 src=$dst/"src"

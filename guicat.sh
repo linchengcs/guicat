@@ -7,6 +7,10 @@ fi
 #. ./conf/ticket/ticket.conf
 . $1
 
+if [[ -z $3 ]]; then
+    $GUITAR_TC_LEN=$3
+fi
+
 classpath="."
 for jar in `ls lib`
 do
@@ -32,8 +36,8 @@ do
     fi
 done
 
-echo $libDir
-echo $classpath
+#echo $libDir
+#echo $classpath
 
 rm -rf $AUTDIR branches/
 mkdir  -p $AUTDIR

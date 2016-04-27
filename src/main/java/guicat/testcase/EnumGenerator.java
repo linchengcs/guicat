@@ -53,7 +53,7 @@ public class EnumGenerator {
                 String vString = gcEntry.initString;
                 String delims = ":";
                 String[] tokens = vString.split(delims);
-                System.out.println(tokens);
+                //System.out.println(tokens);
                 List<Integer> enumValue = new ArrayList<>();
                 int min = Integer.parseInt(tokens[0]);
                 int max = Integer.parseInt(tokens[1]);
@@ -62,7 +62,7 @@ public class EnumGenerator {
                 }
                 String enumKey = nameIdBind.get(gcEntry.accessibleName);
                 if (enumKey == null) {
-                    System.out.println("config error, no such accessibleName: " + gcEntry.methodName);
+                    //System.out.println("config error, no such accessibleName: " + gcEntry.methodName);
                 }
                 String enumKey1 = "e" + enumKey.substring(1, enumKey.length());
                 if (enumKey != null)

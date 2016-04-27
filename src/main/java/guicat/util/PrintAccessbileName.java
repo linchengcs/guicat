@@ -21,7 +21,7 @@ public class PrintAccessbileName {
         try {
             Class c = Class.forName(autMain);
             Method m = c.getMethod("main", String[].class);
-            m.invoke(null, new Object[]{null});
+            m.invoke(null, (Object)new String[]{});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class PrintAccessbileName {
 
         int i = 1;
         for (Frame frame : frames) {
-            System.out.println("====== accessibleName for frame: " + i++ + "=============");
+            //System.out.println("====== accessibleName for frame: " + i++ + "=============");
             dumpInfo(frame.getAccessibleContext());
         }
 

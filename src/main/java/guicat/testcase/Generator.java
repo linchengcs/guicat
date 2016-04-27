@@ -28,7 +28,7 @@ public class Generator {
     synchronized public static Map<String, String> getGUINameIDBindMap(String guiFile) {
         if (bind == null)
             bind = getNameIDMap(guiFile);
-        System.out.println("_____" + bind.toString());
+        //System.out.println("_____" + bind.toString());
         return bind;
     }
 
@@ -55,7 +55,7 @@ public class Generator {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
             NodeList aList = doc.getElementsByTagName("Attributes");
-            System.out.println("----------------------------");
+            //System.out.println("----------------------------");
             for (int temp = 0; temp < aList.getLength(); temp++) {
                 tmp.clear();
                 Node aNode = aList.item(temp);  //Attributes
@@ -100,7 +100,7 @@ public class Generator {
             String[] parts = tcFile.getName().split("[\\.]");
             assert parts.length == 2;
             String regex = parts[0] + "_\\d+" + ".tst";
-            System.out.println(regex);
+            //System.out.println(regex);
 
             File branchDir = new File(this.branchDir);
             File[] branches = branchDir.listFiles();
@@ -168,7 +168,7 @@ public class Generator {
                 doc.getDocumentElement().normalize();
 
                 List<String> eventsToBeDeleted = getEventIDToBeDeleted(testcase);
-                System.out.println(eventsToBeDeleted.toString());
+                //System.out.println(eventsToBeDeleted.toString());
                 NodeList eventIds = doc.getElementsByTagName("EventId");
                 for (int i = 0; i < eventIds.getLength(); i++) {
                     Node eventNode = eventIds.item(i);
@@ -177,7 +177,7 @@ public class Generator {
                         if (element.getNodeName().trim().equals("EventId")) {
                             String eventId = element.getTextContent().trim();
                             String widgetId = "w" + eventId.substring(1, eventId.length());
-                            System.out.println(eventId);
+                            //System.out.println(eventId);
                             if (eventsToBeDeleted.contains(widgetId)) {
                                 Node stepNode = element.getParentNode();
                                 stepNode.getParentNode().removeChild(stepNode);

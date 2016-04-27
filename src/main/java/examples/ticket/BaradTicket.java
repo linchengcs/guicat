@@ -1,13 +1,16 @@
 package examples.ticket;
 
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 
 public class BaradTicket {
+    private static Logger log = Logger.getLogger("Barad");
 
     private JButton buyButton;
     private JButton clearButton;
@@ -179,7 +182,7 @@ public class BaradTicket {
 
                     if (ageCombo.getSelectedIndex() == 0 ) {
                         ticketModel.ageLevel = 1;
-                    } else if (ageCombo.getSelectedIndex() == 1) {
+                    } else  {
                         ticketModel.ageLevel = 2;
                     }
 
@@ -188,7 +191,17 @@ public class BaradTicket {
                     } else {
                         ticketModel.coupon = 0;
                     }
+
+                    if(firstClassRadio.isSelected()) {
+                        ticketModel.classLevel = 1;
+                    } else {
+                        ticketModel.classLevel = 2;
+                    }
+
+
+
                     String info = "";
+                    log.info(ticketModel.toString());
 
                     /*
               //      String tmpAgeString = (String)ageCombo.getSelectedItem();
@@ -231,6 +244,7 @@ public class BaradTicket {
                 }
             });
 
+            /* remove because it is not necessary to have a listener, just obtain in buy button
             firstClassRadio.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         JRadioButton jrb = (JRadioButton)e.getSource();
@@ -252,7 +266,7 @@ public class BaradTicket {
                         }
                     }
                 });
-
+*/
 
 
             clearButton.addActionListener(new ActionListener() {

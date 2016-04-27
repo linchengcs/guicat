@@ -24,7 +24,7 @@ public class SymAgent implements ClassFileTransformer {
     public static void premain(String agentArgs, Instrumentation inst) {
         inst.addTransformer(new SymAgent());
         String value = System.getProperty("conf");
-        System.out.println(value);
+        //System.out.println(value);
     }
 
     @Override

@@ -288,30 +288,32 @@ public class CVC4Solver implements Solver {
 
   public List<String> getSolution(Map<String, Long> soln) {
     List<String> result = new ArrayList<String>();
+   /*
     System.out.println("|||||||||||||||||||||||||||||");
     System.out.println(soln.toString());
     System.out.println(inputs.toString());
     System.out.println(SymbolicTable.getInstance().toString());
+    */
     for (InputElement ielem : inputs) {
       Integer sym = ielem.symbol;
       Value val = ielem.value;
-      System.out.println("inputs: sym=" + sym + " value="+val.getConcrete());
+   //   System.out.println("inputs: sym=" + sym + " value="+val.getConcrete());
       if (sym.intValue() == config.scopeBeginSymbol) {
         result.add(config.scopeBeginMarker);
       } else if (sym.intValue() == config.scopeEndSymbol) {
         result.add(config.scopeEndMarker);
       } else {
-          System.out.println("sym "+sym);
+     //     System.out.println("sym "+sym);
         Long l = soln.get("x" + sym);
         if (l != null) {
           result.add(l.toString());
-           System.out.println("l = " + l);
+    //       System.out.println("l = " + l);
         } else {
           if (val instanceof StringValue) {
             StringValue sval = (StringValue) val;
             String old = sval.getConcrete();
-            System.out.println("~~~~~~~~~~~string sol null, string = >" + old +"<");
-            System.out.println("~~~~~~~~~~~string sol null, parseIntSym = >" + sval.parseIntSym +"<");
+      //      System.out.println("~~~~~~~~~~~string sol null, string = >" + old +"<");
+      //      System.out.println("~~~~~~~~~~~string sol null, parseIntSym = >" + sval.parseIntSym +"<");
 
             
             /* add by Lin Cheng, 02-20-2016 */
@@ -319,7 +321,7 @@ public class CVC4Solver implements Solver {
             if (pis > 0) {
                 Long reti = soln.get("x" + pis);
                 if (reti != null) {
-                    System.out.println("@@@@@@ops, reti = " + reti);
+         //           System.out.println("@@@@@@ops, reti = " + reti);
                     result.add(reti.toString());
                 } else {
                     result.add(Long.toString(0));

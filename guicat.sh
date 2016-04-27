@@ -7,9 +7,10 @@ fi
 #. ./conf/ticket/ticket.conf
 . $1
 
-if [[ -z $3 ]]; then
-    $GUITAR_TC_LEN=$3
-fi
+
+#if [[ -z $3 ]]; then
+#    GUITAR_TC_LEN=$3
+#fi
 
 classpath="."
 for jar in `ls lib`
@@ -61,18 +62,18 @@ eval $gui2efgCmd
 testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p SequenceLengthCoverage -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE"
 #testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p RandomSequenceLengthCoverage -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE"
 #testcaseCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p BytecodeAnalysis  -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE --scope $CLASSPATH  --method pair --shared 0"
-echo $testcaseCmd
+#echo $testcaseCmd
 eval $testcaseCmd
 
 enumCmd="java  -Dguicat.conf=$guicatConfigFile  -cp $classpath guicat.testcase.EnumGenerator $AUTTESTCASE $enumGuicatTestcase $guiFile"
-echo $enumCmd
+#echo $enumCmd
 eval $enumCmd
 
 
 for testcase in `find $enumGuicatTestcase -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
-    python concolic.py -Dguicat.conf=$guicatConfigFile -v 32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $enumGuicatTestcase/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
+    python concolic.py -Dguicat.conf=$guicatConfigFile  32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $enumGuicatTestcase/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
 #break
 done
 
@@ -80,7 +81,7 @@ mv branches $AUTDIR
 
 #create guicat testcases
 cmd="java -Dguicat.conf=$guicatConfigFile -cp $classpath guicat.testcase.Generator $guiFile $enumGuicatTestcase $branchDir $autGuicatTestcase"
-echo $cmd
+#echo $cmd
 eval $cmd
 
 ./jacoco.sh $AUT guitar

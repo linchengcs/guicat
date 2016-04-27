@@ -177,6 +177,8 @@ public class Ticket extends JFrame {
 
 
     public static void main(String[] args) {
+      //  System.out.println(args.toString());
+        for (int i = 0; i < args.length; i++) ;
 
 //        javax.swing.SwingUtilities.invokeLater(new Runnable() {
 //            public void run() {

@@ -36,7 +36,7 @@ public class SymbolicTable {
             symbolicEntry.makeSymbolic();
             symbolicTable.put(key, symbolicEntry);
         }
-        System.out.println(toString());
+        //System.out.println(toString());
     }
 
     private void writeInitInputsFile() {

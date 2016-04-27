@@ -83,7 +83,7 @@ public final class StaticInvocation {
         } else if (owner.equals("janala/Main") && name.equals("Ignore") && args.length == 0) {
             return history.ignore();
         } else if (owner.equals("java/lang/Integer") && name.equals("parseInt") && args.length == 1) {
-            System.out.println("static parsing int at Lin 84 module StaticInvocation.java");
+         //   System.out.println("static parsing int at Lin 84 module StaticInvocation.java");
             if (args[0] instanceof StringValue) {
                 StringValue sv = (StringValue) args[0];
                 int i = Integer.parseInt(sv.getConcrete());
@@ -92,7 +92,7 @@ public final class StaticInvocation {
                 if (se != null) {
                     IntValue iv = se.intValue;
                     int symbol = se.intValueSymbol;
-                    System.out.println("add parseInt intValue, intValuesymbol="+symbol+ " string concrete="+i + " int concrete="+iv.concrete);
+                  //  System.out.println("add parseInt intValue, intValuesymbol="+symbol+ " string concrete="+i + " int concrete="+iv.concrete);
                  //   iv.concrete = i;
                     sv.parseIntSym = symbol;
                     return iv;

@@ -80,6 +80,18 @@ public class AssertTicket {
 
 
         {
+            buyButton = new JButton("Buy Ticket");
+            gbc.gridx = 0;
+            gbc.gridy = 9;
+            contentPane.add(buyButton, gbc);
+
+            clearButton = new JButton("Clear");
+            gbc.gridx = 1;
+            gbc.gridy = 9;
+            contentPane.add(clearButton, gbc);
+        }
+
+        {
             JLabel priceLabel = new JLabel("Price");
             gbc.gridx = 0;
             gbc.gridy = 10;
@@ -153,11 +165,16 @@ public class AssertTicket {
                     assert price > 0;
 
                     infoField.setText("Price is:" + price);
-                    
+
                 }
             });
 
 
+            clearButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    infoField.setText("");
+                }
+            });
         }
 
         frame.pack();

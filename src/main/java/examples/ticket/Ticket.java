@@ -25,7 +25,7 @@ public class Ticket extends JFrame {
         contentPane.add(name, new GridBagConstraints(0, 1, 1, 1, 0, 0,
                 GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        final JTextField nameInput = new JTextField();
+        final JTextField nameInput = new JTextField(8);
         contentPane.add(nameInput, new GridBagConstraints(1, 1, 1, 1, 0, 0,
                 GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -42,7 +42,7 @@ public class Ticket extends JFrame {
         contentPane.add(age, new GridBagConstraints(0, 3, 1, 1, 0, 0,
                 GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-        final JTextField ageInput = new JTextField();
+        final JTextField ageInput = new JTextField(8);
         contentPane.add(ageInput, new GridBagConstraints(1, 3, 1, 1, 0, 0,
                 GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 

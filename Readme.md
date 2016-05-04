@@ -9,6 +9,7 @@ install dependency
 
 + CVC4
 + java 1.8 oracle
++ apache ant
 + xvfb # if run on server, no graphics
 
 set up

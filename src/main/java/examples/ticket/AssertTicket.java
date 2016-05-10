@@ -41,7 +41,7 @@ public class AssertTicket {
             JLabel nameLabel = new JLabel("Name");
             contentPane.add(nameLabel, gbc);
 
-            nameInput = new JTextField("oliver", 10);
+            nameInput = new JTextField("oliver", 8);
             gbc.gridx = 1;
             contentPane.add(nameInput, gbc);
             nameLabel.setLabelFor(nameInput);
@@ -53,7 +53,7 @@ public class AssertTicket {
             gbc.gridy = 2;
             contentPane.add(fromLabel, gbc);
 
-            distanceInput = new JTextField("0", 10);
+            distanceInput = new JTextField("0", 8);
             gbc.gridx = 1;
             gbc.gridy = 2;
             contentPane.add(distanceInput, gbc);
@@ -80,7 +80,7 @@ public class AssertTicket {
 
 
         {
-            buyButton = new JButton("Buy Ticket");
+            buyButton = new JButton("Buy");
             gbc.gridx = 0;
             gbc.gridy = 9;
             contentPane.add(buyButton, gbc);
@@ -177,6 +177,7 @@ public class AssertTicket {
             });
         }
 
+        frame.setPreferredSize(new Dimension(250,200));
         frame.pack();
         frame.setVisible(true);
 

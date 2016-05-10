@@ -92,4 +92,9 @@ public class TicketModel {
 
         price = price - coupon;
     }
+
+    public String toString() {
+        String ans = "customer " + name + "saved \n";
+        return ans;
+    }
 }

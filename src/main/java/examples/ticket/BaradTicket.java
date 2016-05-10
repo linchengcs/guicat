@@ -6,11 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Logger;
 
 
 public class BaradTicket {
-    private static Logger log = Logger.getLogger("Barad");
+//    private static Logger log = Logger.getLogger("Barad");
 
     private JButton buyButton;
     private JButton clearButton;
@@ -138,7 +137,7 @@ public class BaradTicket {
             gbc.gridy = 6;
             contentPane.add(checkLabel, gbc);
 
-            couponCheckBox = new JCheckBox("$10");
+            couponCheckBox = new JCheckBox("$100");
             gbc.gridx = 1;
             gbc.gridy = 6;
             contentPane.add(couponCheckBox, gbc);
@@ -151,7 +150,7 @@ public class BaradTicket {
             gbc.gridy = 16;
             contentPane.add(buyButton, gbc);
 
-             clearButton = new JButton("Clear");
+             clearButton = new JButton("Save");
             gbc.gridx = 1;
             gbc.gridy = 16;
             contentPane.add(clearButton, gbc);
@@ -187,7 +186,7 @@ public class BaradTicket {
                     }
 
                     if (couponCheckBox.isSelected()) {
-                        ticketModel.coupon = 10;
+                        ticketModel.coupon = 100;
                     } else {
                         ticketModel.coupon = 0;
                     }
@@ -201,7 +200,6 @@ public class BaradTicket {
 
 
                     String info = "";
-                    log.info(ticketModel.toString());
 
                     /*
               //      String tmpAgeString = (String)ageCombo.getSelectedItem();
@@ -234,6 +232,7 @@ public class BaradTicket {
 
                     if(ticketModel.checkModel()) {
                         ticketModel.computePrice();
+                        assert ticketModel.price > 0 : "@ Bug @, Price is not greater than 0!\n";
                         infoField.setText(String.valueOf(ticketModel.price));
                         System.out.println(String.valueOf(ticketModel.price));
                         System.out.println(String.valueOf(ticketModel.price));
@@ -271,7 +270,12 @@ public class BaradTicket {
 
             clearButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        infoField.setText("");
+                        ticketModel.name = nameInput.getText();
+                        ticketModel.ID = idInput.getText();
+                        ticketModel.from = Integer.parseInt(fromInput.getText());
+                        ticketModel.to = Integer.parseInt(toInput.getText());
+                        infoField.setText(ticketModel.toString());
+                        ticketModel = null;
                     }
                 });
         }

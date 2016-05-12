@@ -50,7 +50,8 @@ public class TicketModel {
             path.set(4, 1);
         }
 
-        return msg.isEmpty();
+   //     return msg.isEmpty();
+        return true;
     }
 
     public void computePrice() {

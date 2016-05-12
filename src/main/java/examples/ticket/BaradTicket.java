@@ -15,8 +15,6 @@ import java.util.Arrays;
 
 public class BaradTicket {
 //    private static Logger log = Logger.getLogger("Barad");
-    static int pathBranchIndex = 0;
-    static int pathBranchValue = 0;
     static ArrayList<Integer> path = new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0));
 
     private JButton buyButton;

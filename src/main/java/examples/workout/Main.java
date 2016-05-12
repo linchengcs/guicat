@@ -5,8 +5,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main extends JFrame {
+    static ArrayList<Integer> path = new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0));
     JLabel genderLabel;
     JLabel metabolismLabel;
     JLabel experienceLabel;
@@ -160,53 +166,72 @@ public class Main extends JFrame {
                 //set cardio coeficient
                 if (metabolism.equals("Slow")) {
                     cardioCoeficient = cardioCoeficient * 1.6;
+                    path.set(0, 0);
                 } else if (metabolism.equals("Normal")) {
                     cardioCoeficient = cardioCoeficient * 1.2;
+                    path.set(0, 1);
                 } else if (metabolism.equals( "Fast")) {
                     cardioCoeficient = cardioCoeficient * 0.9;
+                    path.set(0, 2);
                 }
                 if (gender.equals("Male")) {
+                    path.set(1, 0);
                     if (experience.equals("Beginner")) {
+                        path.set(2, 0);
                         if (age >= 0 && age <= 20) {
+                            path.set(3, 0);
                             cardioCoeficient = cardioCoeficient * 0.5;
                         }
                         if (age > 20 && age <= 30) {
+                            path.set(3, 1);
                             cardioCoeficient = cardioCoeficient * 1.2;
                         }
                         if (age > 30 && age <= 45) {
+                            path.set(3, 2);
                             cardioCoeficient = cardioCoeficient * 2.0;
                         }
                         if (age > 45) {
+                            path.set(3, 3);
                             cardioCoeficient = cardioCoeficient * 1.5;
                         }
                         repCoeficient = 12;
                         setCoeficient = 2;
                     } else if (experience.equals("Intermediate")) {
+                        path.set(2, 1);
                         if (age >= 0 && age <= 20) {
+                            path.set(3, 0);
                             cardioCoeficient = cardioCoeficient * 0.5;
                         }
                         if (age > 20 && age <= 30) {
+                            path.set(3, 1);
                             cardioCoeficient = cardioCoeficient * 1.2;
                         }
                         if (age > 30 && age <= 45) {
+                            path.set(3, 2);
                             cardioCoeficient = cardioCoeficient * 2.0;
                         }
                         if (age > 45) {
+                            path.set(3, 3);
                             cardioCoeficient = cardioCoeficient * 1.6;
                         }
                         repCoeficient = 10;
                         setCoeficient = 3;
                     } else if (experience.equals("Advanced")) {
+                        path.set(2, 2);
                         if (age >= 0 && age <= 20) {
+                            path.set(3, 0);
                             cardioCoeficient = cardioCoeficient * 0.5;
                         }
                         if (age > 20 && age <= 30) {
+                            path.set(3, 1);
                             cardioCoeficient = cardioCoeficient * 1.2;
                         }
                         if (age > 30 && age <= 45) {
+                            path.set(3, 2);
                             cardioCoeficient = cardioCoeficient * 2.0;
                         }
                         if (age > 45) {
+                            path.set(3, 3);
                             cardioCoeficient = cardioCoeficient * 1.7;
                         }
                         repCoeficient = 8;
@@ -308,47 +333,63 @@ public class Main extends JFrame {
                     workout = workout + "   \nSunday:\n";
                     workout = workout + "\t Free day\n";
                 } else if (gender.equals("Female")) {
+                    path.set(1, 1);
                     if (experience.equals("Beginner")) {
+                        path.set(2, 0);
                         if (age >= 0 && age <= 20) {
+                            path.set(3, 0);
                             cardioCoeficient = cardioCoeficient * 0.7;
                         }
                         if (age > 20 && age <= 30) {
+                            path.set(3, 1);
                             cardioCoeficient = cardioCoeficient * 1.5;
                         }
                         if (age > 30 && age <= 45) {
+                            path.set(3, 2);
                             cardioCoeficient = cardioCoeficient * 2.2;
                         }
                         if (age > 45) {
+                            path.set(3, 3);
                             cardioCoeficient = cardioCoeficient * 1.5;
                         }
                         repCoeficient = 20;
                         setCoeficient = 1;
                     } else if (experience.equals("Intermediate")) {
+                        path.set(2, 1);
                         if (age >= 0 && age <= 20) {
+                            path.set(3, 0);
                             cardioCoeficient = cardioCoeficient * 0.7;
                         }
                         if (age > 20 && age <= 30) {
+                            path.set(3, 1);
                             cardioCoeficient = cardioCoeficient * 1.5;
                         }
                         if (age > 30 && age <= 45) {
+                            path.set(3, 2);
                             cardioCoeficient = cardioCoeficient * 2.2;
                         }
                         if (age > 45) {
+                            path.set(3, 3);
                             cardioCoeficient = cardioCoeficient * 1.6;
                         }
                         repCoeficient = 15;
                         setCoeficient = 2;
                     } else if (experience.equals("Advanced")) {
+                        path.set(2, 2);
                         if (age >= 0 && age <= 20) {
+                            path.set(3, 0);
                             cardioCoeficient = cardioCoeficient * 0.7;
                         }
                         if (age > 20 && age <= 30) {
+                            path.set(3, 1);
                             cardioCoeficient = cardioCoeficient * 1.5;
                         }
                         if (age > 30 && age <= 45) {
+                            path.set(3, 2);
                             cardioCoeficient = cardioCoeficient * 2.2;
                         }
                         if (age > 45) {
+                            path.set(3,3);
                             cardioCoeficient = cardioCoeficient * 1.7;
                         }
                         repCoeficient = 12;
@@ -444,6 +485,7 @@ public class Main extends JFrame {
                     workout = workout + "\t Free day\n";
                 }
                 resultTextArea.setText(workout);
+                writePath();
             }
         });
 
@@ -454,6 +496,22 @@ public class Main extends JFrame {
 
 
 
+    }
+
+    public void writePath() {
+        System.out.println(path.toString());
+        String pathDir = ".";
+
+        File file = new File(pathDir + "/log/workout/path/path.txt");
+        file.getParentFile().mkdirs();
+        try {
+            FileWriter writer = new FileWriter(file, true);
+            writer.append(path.toString());
+            writer.append("\n");
+            writer.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

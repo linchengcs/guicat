@@ -1,6 +1,5 @@
 package guicat.testcase;
 
-import guicat.SymbolicTable;
 import guicat.config.GCConfig;
 import guicat.config.GCEntry;
 import org.w3c.dom.Document;
@@ -15,7 +14,10 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by oliver on 06/04/16.
@@ -186,7 +188,7 @@ public class EnumGenerator {
         System.out.println(SymbolicTable.getInstance().toString());
         System.out.println(EnumGenerator.getEnumConfig(guiFile));
 */
-        /*
+/*
         System.setProperty("guicat.conf", "./conf/barad-ticket/guicat.properties");
         String guiFile = "./log/barad-ticket/barad-ticket.GUI";
         String guitarTestcaseDir = "./log/barad-ticket/testcases";
@@ -195,8 +197,9 @@ public class EnumGenerator {
         System.out.println(GCConfig.getInstance().config.toString());
         System.out.println(SymbolicTable.getInstance().toString());
         System.out.println(EnumGenerator.getEnumConfig(guiFile));
-
 */
+
+
         assert args.length == 3 : "args for enumGenerator error";
         String guitarTestcaseDir = args[0];
         String enumGuitarTestcaseDir = args[1];

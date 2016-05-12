@@ -4,11 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by rick on 9/21/15.
  */
 public class Ticket extends JFrame {
     private JButton buy;
+    static ArrayList<Integer> path = new ArrayList<Integer>(Arrays.asList(0,0));
+
+
     //    private String myName;
     //    private String myAge;
 
@@ -116,10 +127,12 @@ public class Ticket extends JFrame {
                     display = "Wrong name; " + display1;
                     System.out.println(display);
                     info.setText(display);
+                    path.set(0, 0);
                 } else {
                     display = "Righ name; " + display1;
                     System.out.println(display);
                     info.setText(display);
+                    path.set(0, 1);
                 }
 
                 if (myAgeInt < 12) {
@@ -127,11 +140,15 @@ public class Ticket extends JFrame {
                     display = "Child; " + display1;
                     System.out.println(display);
                     info.setText(display);
+                    path.set(1, 0);
                 } else {
                     display = "Adult; " + display1;
                     System.out.println(display);
                     info.setText(display);
+                    path.set(1, 1);
                 }
+                System.out.println(path.toString());
+                writePath();
                 //System.out.println((myName.length() < 3 ? "wrong name" : "right name") + " , Your name/age: " + myName +"/" +myAge );
                 //System.out.println((myAge.length() >= 12 ? "adult" : "child") + " , Your name/age: " + myName + "/" + myAge);
 
@@ -154,6 +171,42 @@ public class Ticket extends JFrame {
             }
         });
 
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+           //     writePath();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
         //        cancel.addActionListener( e -> {
         //      info.setText("");
         //      nameInput.setText("");
@@ -175,6 +228,24 @@ public class Ticket extends JFrame {
 
     }
 
+    public void writePath() {
+        System.out.println("window closed, this is listener");
+        System.out.println(path.toString());
+        String pathDir = ".";
+
+        //    File file = new File(pathDir+ "/log/ticket/path/" + System.currentTimeMillis() + ".txt");
+        File file = new File(pathDir+ "/log/ticket/path/path.txt");
+      //  File file = new File(pathDir+ "/path.txt");
+        file.getParentFile().mkdirs();
+        try {
+            FileWriter writer = new FileWriter(file, true);
+            writer.append(path.toString());
+            writer.append("\n");
+            writer.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
       //  System.out.println(args.toString());

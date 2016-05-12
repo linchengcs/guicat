@@ -6,10 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class BaradTicket {
 //    private static Logger log = Logger.getLogger("Barad");
+    static int pathBranchIndex = 0;
+    static int pathBranchValue = 0;
+    static ArrayList<Integer> path = new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0,0,0,0));
 
     private JButton buyButton;
     private JButton clearButton;
@@ -82,7 +90,7 @@ public class BaradTicket {
             gbc.gridy = 3;
             contentPane.add(toLabel, gbc);
 
-             toInput = new JTextField("50", 10);
+            toInput = new JTextField("50", 10);
             gbc.gridx = 1;
             gbc.gridy = 3;
             contentPane.add(toInput, gbc);
@@ -97,7 +105,7 @@ public class BaradTicket {
             contentPane.add(ageLabel, gbc);
 
 
-             ageCombo = new JComboBox(ages);
+            ageCombo = new JComboBox(ages);
             ageCombo.setSelectedIndex(0);
             gbc.gridx = 1;
             gbc.gridy = 4;
@@ -145,12 +153,12 @@ public class BaradTicket {
         }
 
         {
-             buyButton = new JButton("Buy Ticket");
+            buyButton = new JButton("Buy Ticket");
             gbc.gridx = 0;
             gbc.gridy = 16;
             contentPane.add(buyButton, gbc);
 
-             clearButton = new JButton("Save");
+            clearButton = new JButton("Save");
             gbc.gridx = 1;
             gbc.gridy = 16;
             contentPane.add(clearButton, gbc);
@@ -163,7 +171,7 @@ public class BaradTicket {
             contentPane.add(priceLabel, gbc);
             priceLabel.setForeground(Color.BLUE);
 
-             infoField = new JTextField("ticket price");
+            infoField = new JTextField("ticket price");
             gbc.gridx = 1;
             gbc.gridy = 17;
             contentPane.add(infoField, gbc);
@@ -181,20 +189,26 @@ public class BaradTicket {
 
                     if (ageCombo.getSelectedIndex() == 0 ) {
                         ticketModel.ageLevel = 1;
+                        path.set(0, 0);
                     } else  {
                         ticketModel.ageLevel = 2;
+                        path.set(0, 1);
                     }
 
                     if (couponCheckBox.isSelected()) {
                         ticketModel.coupon = 100;
+                        path.set(1, 0);
                     } else {
                         ticketModel.coupon = 0;
+                        path.set(1, 1);
                     }
 
                     if(firstClassRadio.isSelected()) {
                         ticketModel.classLevel = 1;
+                        path.set(2, 0);
                     } else {
                         ticketModel.classLevel = 2;
+                        path.set(2, 1);
                     }
 
 
@@ -225,8 +239,8 @@ public class BaradTicket {
 
 
 
-               //     ticketModel.computePrice();
-              //      infoField.setText(String.valueOf(ticketModel.price));
+                    //     ticketModel.computePrice();
+                    //      infoField.setText(String.valueOf(ticketModel.price));
 
 
 
@@ -239,7 +253,7 @@ public class BaradTicket {
                     } else {
                         infoField.setText(ticketModel.msg);
                     }
-
+                    writePath();
                 }
             });
 
@@ -269,15 +283,15 @@ public class BaradTicket {
 
 
             clearButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        ticketModel.name = nameInput.getText();
-                        ticketModel.ID = idInput.getText();
-                        ticketModel.from = Integer.parseInt(fromInput.getText());
-                        ticketModel.to = Integer.parseInt(toInput.getText());
-                        infoField.setText(ticketModel.toString());
-                        ticketModel = null;
-                    }
-                });
+                public void actionPerformed(ActionEvent e) {
+                    ticketModel.name = nameInput.getText();
+                    ticketModel.ID = idInput.getText();
+                    ticketModel.from = Integer.parseInt(fromInput.getText());
+                    ticketModel.to = Integer.parseInt(toInput.getText());
+                    infoField.setText(ticketModel.toString());
+                    ticketModel = null;
+                }
+            });
         }
 
         frame.pack();
@@ -285,7 +299,21 @@ public class BaradTicket {
 
     }
 
+    public void writePath() {
+        System.out.println(path.toString());
+        String pathDir = ".";
 
+        File file = new File(pathDir+ "/log/barad-ticket/path/path.txt");
+        file.getParentFile().mkdirs();
+        try {
+            FileWriter writer = new FileWriter(file, true);
+            writer.append(path.toString());
+            writer.append("\n");
+            writer.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
     public static void main(String[] args){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {

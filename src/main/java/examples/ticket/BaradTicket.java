@@ -50,7 +50,7 @@ public class BaradTicket {
             JLabel nameLabel = new JLabel("Name");
             contentPane.add(nameLabel, gbc);
 
-            nameInput = new JTextField("oliver", 10);
+            nameInput = new JTextField("superman", 10);
             gbc.gridx = 1;
             contentPane.add(nameInput, gbc);
             nameLabel.setLabelFor(nameInput);
@@ -301,7 +301,7 @@ public class BaradTicket {
         System.out.println(path.toString());
         String pathDir = ".";
 
-        File file = new File(pathDir+ "/log/barad-ticket/path/path.txt");
+        File file = new File(pathDir+ "/log/barad-ticket/path/path-guitar.txt");
         file.getParentFile().mkdirs();
         try {
             FileWriter writer = new FileWriter(file, true);

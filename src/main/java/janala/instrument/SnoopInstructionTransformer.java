@@ -40,7 +40,7 @@ public class SnoopInstructionTransformer implements ClassFileTransformer {
 */
 
     //oliver
-    String[] include = {"tests", "oliver", "hello", "catg", "examples", "crosswordsage", "jgp"};
+    String[] include = {"tests", "oliver", "hello", "catg", "examples", "crosswordsage", "jgp","org/cesilko/rachota"};
     for (String s : include) {
       if(cname.startsWith(s))
         return false;

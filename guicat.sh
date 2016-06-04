@@ -52,7 +52,8 @@ cmd="java -cp $classpath guicat.util.PrintAccessbileName $AUT_MAINCLASS"
 eval $cmd > $AUTDIR"/accessbileName.txt"
 
 
-ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 500 -i 2000 -l $logFile"
+ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 100 -i 2000 -l $logFile"
+#echo $ripperCmd
 eval $ripperCmd
 
 gui2efgCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.graph.GUIStructure2GraphConverter -p EFGConverter -g $guiFile -e $efgFile"

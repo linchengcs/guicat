@@ -502,7 +502,8 @@ public class Main extends JFrame {
         System.out.println(path.toString());
         String pathDir = ".";
 
-        File file = new File(pathDir + "/log/workout/path/path.txt");
+     //   File file = new File(pathDir + "/log/workout/path/path.txt");
+        File file = new File(pathDir + "/log/workout/path/path-guitar.txt");
         file.getParentFile().mkdirs();
         try {
             FileWriter writer = new FileWriter(file, true);

@@ -41,7 +41,7 @@ public class AssertTicket {
             JLabel nameLabel = new JLabel("Name");
             contentPane.add(nameLabel, gbc);
 
-            nameInput = new JTextField("oliver", 8);
+            nameInput = new JTextField("superman", 8);
             gbc.gridx = 1;
             contentPane.add(nameInput, gbc);
             nameLabel.setLabelFor(nameInput);

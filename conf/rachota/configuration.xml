@@ -15,5 +15,47 @@
     </FullComponent>
 
   </TerminalComponents>
-  
+  <IgnoredComponents>
+    <!-- Ignore the gray menu item -->
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>System</Value>
+	  </Property> 
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Task</Name>
+	    <Value></Value>
+	  </Property> 
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Tool</Value>
+	  </Property> 
+	</Attributes>
+      </Component>
+    </FullComponent>
+    <FullComponent>
+      <Component>
+	<Attributes>
+	  <Property>
+	    <Name>Title</Name>
+	    <Value>Help</Value>
+	  </Property> 
+	</Attributes>
+      </Component>
+    </FullComponent>
+  </IgnoredComponents>
 </Configuration>

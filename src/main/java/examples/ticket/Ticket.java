@@ -234,7 +234,7 @@ public class Ticket extends JFrame {
         String pathDir = ".";
 
         //    File file = new File(pathDir+ "/log/ticket/path/" + System.currentTimeMillis() + ".txt");
-        File file = new File(pathDir+ "/log/ticket/path/path.txt");
+        File file = new File(pathDir+ "/log/ticket/path/path-guitar.txt");
       //  File file = new File(pathDir+ "/path.txt");
         file.getParentFile().mkdirs();
         try {

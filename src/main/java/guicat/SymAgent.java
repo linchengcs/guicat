@@ -44,6 +44,24 @@ public class SymAgent implements ClassFileTransformer {
                 }
                 Iterator<AbstractInsnNode> j = insns.iterator();
 
+                /*
+                GETFIELD   in1b
+                INVOKEVIRTUAL  in2b
+                 */
+                /*
+                : aload_0
+       9: getfield      #2                  // Field val$nameInput:Ljavax/swing/JTextField;
+      12: invokevirtual #7                  // Method javax/swing/JTextField.getAccessibleContext:()Ljavax/accessibility/AccessibleContext;
+      15: invokevirtual #8                  // Method javax/accessibility/AccessibleContext.getAccessibleName:()Ljava/lang/String;
+      18: ldc           #9                  // String nameInputAccessibleNameTEST
+      20: invokevirtual #10                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      23: ifeq          34
+      26: aload_0
+      27: getfield      #2                  // Field val$nameInput:Ljavax/swing/JTextField;
+      30: invokevirtual #6                  // Method javax/swing/JTextField.getText:()Ljava/lang/String;
+      33: pop
+
+                 */
                 while (j.hasNext()) {
                     AbstractInsnNode whyShouldIExist = j.next();
                     AbstractInsnNode in1a = whyShouldIExist.getNext();

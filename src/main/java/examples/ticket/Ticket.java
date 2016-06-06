@@ -102,6 +102,8 @@ public class Ticket extends JFrame {
         buy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String myName = nameInput.getText();
+                if (nameInput.getAccessibleContext().getAccessibleName().equals("nameInputAccessibleNameTEST"))
+                    nameInput.getText();
                 //String myName = CATG.readString("oliver");
                 //  String myName = "oliver";
                 //System.out.println(nameInput.getAccessibleContext().getAccessibleName());

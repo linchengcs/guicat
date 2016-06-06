@@ -1,7 +1,6 @@
 package guicat;
 
 
-import org.apache.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -15,10 +14,13 @@ import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
+
+
 
 public class SymAgent implements ClassFileTransformer {
 
-    private Logger logger = Logger.getLogger(SymbolicMirror.class);
+    private Logger logger = Logger.getLogger("SymbolicMirror.class");
 
 
     public static void premain(String agentArgs, Instrumentation inst) {
@@ -29,8 +31,8 @@ public class SymAgent implements ClassFileTransformer {
 
     @Override
     public byte[] transform(ClassLoader loader, String cname, Class<?> cclass, ProtectionDomain d, byte[] cbuf) throws IllegalClassFormatException {
-        if (!cname.startsWith("examples")) return cbuf;
-        logger.info("transforming: " + cname);
+   //     if (!cname.startsWith("examples")) return cbuf;
+   //     logger.info("transforming: " + cname);
 
         try {
             ClassReader cr = new ClassReader(cbuf);
@@ -62,8 +64,12 @@ public class SymAgent implements ClassFileTransformer {
       33: pop
 
                  */
+                /*
+                jTextField.getText ->
+                    if (jTextField.getAccessibleContext().getAccessibleName
+                 */
                 while (j.hasNext()) {
-                    AbstractInsnNode whyShouldIExist = j.next();
+                    AbstractInsnNode whyShouldIExist = j.next();  //should be aload_0
                     AbstractInsnNode in1a = whyShouldIExist.getNext();
                     if(in1a==null)break;
                     if (in1a.getOpcode() == Opcodes.GETFIELD) {

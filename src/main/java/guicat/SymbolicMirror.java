@@ -5,17 +5,22 @@ import guicat.config.GCEntry;
 
 import javax.swing.*;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class SymbolicMirror {
+    private static Logger log = Logger.getLogger("SymbolicMirror");
 
     public static String sgetText(Object o) {
         if (o instanceof JTextField) {
             JTextField jTextField = (JTextField) o;
             String key = jTextField.getAccessibleContext().getAccessibleName();
-            if (getConfig().get(key) != null)
+            if (getConfig().get(key) != null) {
+       //         log.info("instrumented getText of :" + key);
                 return getText(key);
-            else
+            } else {
+      //          log.info("skipped getText of: " + key);
                 return jTextField.getText();
+            }
         }
         return "";
 

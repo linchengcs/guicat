@@ -29,9 +29,14 @@ public class SymbolicEntry {
         SymbolicTable.currentKeyForMakeSymbolicString = accessibleName;
         String s = gcEntry.initString;
         symbolicString = CATG.readString(s);
+        int concrete = 0;
 
         if (gcEntry.symbolicType.equals("int")) {
-            int concrete = Integer.parseInt(symbolicString);
+            if (symbolicString == null || "".equals(symbolicString)) {
+                concrete = 0;
+            } else {
+                concrete = Integer.parseInt(symbolicString);
+            }
             intValue = new IntValue(concrete);
             intValueSymbol = intValue.MAKE_SYMBOLIC(null);
         }

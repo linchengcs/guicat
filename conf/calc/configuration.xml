@@ -14,6 +14,16 @@
         </Attributes>
       </Component>
     </FullComponent>
+    <FullComponent>
+      <Component>
+        <Attributes>
+          <Property>
+            <Name>Title</Name>
+            <Value>Find</Value>
+          </Property>
+        </Attributes>
+      </Component>
+    </FullComponent>
 
   </TerminalComponents>
   <IgnoredComponents>

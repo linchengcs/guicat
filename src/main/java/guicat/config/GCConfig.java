@@ -39,7 +39,7 @@ public class GCConfig {
             while ((line = reader.readLine()) != null) {
                 line=line.trim();
                 if (line.isEmpty() || line.startsWith("#")) continue;
-              //  System.out.println(line);
+           //     System.out.println(line);
                 String delims = ",";
                 String[] tokens = line.split(delims);
                 assert tokens.length == 4 : "guicat file format error.";
@@ -75,7 +75,7 @@ public class GCConfig {
     }
 
     public static void main(String[] args) {
-        System.setProperty("guicat.conf", "./conf/barad-ticket/guicat.properties");
+        System.setProperty("guicat.conf", "./conf/calc/guicat.properties");
         String a = System.getProperty("guicat.conf");
         GCConfig gcc =  GCConfig.getInstance();
         System.out.println(gcc.config.toString());

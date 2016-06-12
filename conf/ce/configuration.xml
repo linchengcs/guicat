@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Configuration>
+
+  <TerminalComponents>
+
+    <!-- Declare Create Shape as a terminal component -->
+    <FullComponent>
+      <Component>
+        <Attributes>
+          <Property>
+            <Name>Title</Name>
+            <Value>GeneralV</Value>
+          </Property>
+        </Attributes>
+      </Component>
+    </FullComponent>
+
+  </TerminalComponents>
+
+  <IgnoredComponents>
+    <!-- Ignore the gray menu item -->
+    <FullComponent>
+      <Component>
+        <Attributes>
+          <Property>
+            <Name>Title</Name>
+            <Value>Exit</Value>
+          </Property>
+        </Attributes>
+      </Component>
+    </FullComponent>
+  </IgnoredComponents>
+</Configuration>

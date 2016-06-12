@@ -138,6 +138,9 @@ task jarTestme(type: Jar, dependsOn: classes) {
     from (sourceSets.main.resources) {
         include("log4j.properties")
     }
+    from (sourceSets.main.resources) {
+        include("logback.xml")
+    }
 }
 
 task helloWorld(type: JavaExec, dependsOn: jarTestme) {
@@ -258,28 +261,7 @@ task guitarTestCaseTicketAllWidgets(type: JavaExec, dependsOn: guitarGui2EfgTick
 
 task guitarTicketAllWidgets(dependsOn: guitarTestCaseTicketAllWidgets) {}
 
-/*
-task guitarReplayTicketAllWidgets() {
-    fileTree(ticketLogDir + "/testcases/" ).each {File file ->
-        task "guitar_${file.name}" (type: JavaExec, dependsOn: guitarTestCaseTicketAllWidgets)        {
-//        classpath = files(ticketLogDir + "/dist/TicketAllWidgets.jar") + fileTree("lib")
-     classpath = fileTree(autDir) + fileTree("lib")
-        main = "edu.umd.cs.guitar.replayer.JFCReplayerMain"
-        jvmArgs = ["-Dlog4j.configuration=log/examples/ticket/guitar.log"]
-        args = ["-c", "examples.ticket.TicketAllWidgets"
-        , "-g", ticketLogDir + "/ticket.GUI"
-        , "-e",  ticketLogDir+"/ticket.EFG"
-        , "-t", ticketLogDir + "/testcases/" + file.name
-        , "-i", "2000"
-        , "-d", "200"
-        , "-l", ticketLogDir + "/log/" + file.name + ".log"
-        , "-gs", ticketLogDir + "/states/" + file.name + ".sta"
-        , "-cf", "./src/main/java/examples/ticket/configure/configuration.xml"
-        , "-ts"]
-        }
-    }
-}
-*/
+
 task catgTicketAllWidgets(){
     fileTree(ticketLogDir + "/testcases/" ).each {File file ->
         task "catg_${file.name}" (type: JavaExec, dependsOn: guitarTestCaseTicketAllWidgets)        {

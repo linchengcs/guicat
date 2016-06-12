@@ -1,6 +1,6 @@
 package examples.ticket;
 
-import org.chocosolver.solver.constraints.nary.nValue.amnv.rules.R;
+//import org.chocosolver.solver.constraints.nary.nValue.amnv.rules.R;
 
 import javax.swing.*;
 import java.awt.*;

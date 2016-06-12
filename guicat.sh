@@ -49,7 +49,7 @@ mkdir -p $AUTDIR"/testcases"
 
 
 cmd="java -cp $classpath guicat.util.PrintAccessbileName $AUT_MAINCLASS"
-eval $cmd > $AUTDIR"/accessbileName.txt"
+#eval $cmd > $AUTDIR"/accessbileName.txt"
 
 
 ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 100 -i 2000 -l $logFile"
@@ -65,6 +65,8 @@ testcaseCmd="java -Dlog4j.configuration=$logFile -cp $classpath  edu.umd.cs.guit
 #testcaseCmd="java -Dlog4j.configuration=$log4j -cp $classpath  edu.umd.cs.guitar.testcase.TestCaseGenerator -p BytecodeAnalysis  -e $efgFile -l $GUITAR_TC_LEN -m 200 -d $AUTTESTCASE --scope $CLASSPATH  --method pair --shared 0"
 #echo $testcaseCmd
 eval $testcaseCmd
+
+#exit
 
 enumCmd="java  -Dguicat.conf=$guicatConfigFile  -cp $classpath guicat.testcase.EnumGenerator $AUTTESTCASE $enumGuicatTestcase $guiFile"
 #echo $enumCmd

@@ -56,7 +56,7 @@ def concolic ():
     i = 1
     while i <= iters:
         print "iters: " + "{}".format(i)
-        time.sleep(2)
+        time.sleep(0.2)
         try:
             try:
                 with open ("isRealInput", "r") as myfile:

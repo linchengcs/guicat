@@ -14,13 +14,14 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** 
+
+/**
  * A collection of import check points (element) and the corresponding constraints 
  */
 public class History {
+  private final static org.slf4j.Logger logback = org.slf4j.LoggerFactory.getLogger(History.class);
   private final static Logger logger = MyLogger.getLogger(History.class.getName());
-  private final static Logger tester =
-      MyLogger.getTestLogger(Config.mainClass + "." + Config.iteration);
+//  private final static Logger tester =  MyLogger.getTestLogger(Config.mainClass + "." + Config.iteration);
 
   private List<Element> history; // A list of branches or scope begin/end
   public List<Element> getHistory() {
@@ -35,7 +36,7 @@ public class History {
   private int index;  // Always point to the next entry in the current path.
   public void setIndex(int index) { this.index = index; }
   public int getIndex() { return index; }
-  
+
   private final Solver solver;
   private boolean ignore;
   private boolean predictionFailed = false;
@@ -44,7 +45,7 @@ public class History {
   private final List<InputElement> inputs;
   private final Strategy strategy;
   private final FileUtil fileUtil;
-  
+
   public History(Solver solver, FileUtil fileUtil, Config config) {
     this.config = config;
     history = new ArrayList<Element>(1024);
@@ -72,7 +73,7 @@ public class History {
     SymbolicOrConstraint tmp;
     boolean res = first.concrete != 0;
     if (!res && last != null) {
-    	last = last.not();
+      last = last.not();
     }
     tmp = b2.symbolic.OR(last);
     return new SymbolicOrValue(res || b2.concrete, tmp);
@@ -91,14 +92,14 @@ public class History {
   }
 
   public static void createBackTrackHistory(int skipIndex, String fileName) throws Exception {
-    History.createBacktrackHistory(skipIndex, new FileInputStream(fileName), 
-        new FileOutputStream(fileName + ".bak"));    
+    History.createBacktrackHistory(skipIndex, new FileInputStream(fileName),
+            new FileOutputStream(fileName + ".bak"));
   }
-  
+
   @SuppressWarnings("unchecked")
   public static void createBacktrackHistory(int skipIndex, InputStream is, OutputStream os) {
     ObjectInputStream inputStream = null;
-    
+
     try {
       inputStream = new ObjectInputStream(is);
       Object tmp = inputStream.readObject();
@@ -136,10 +137,10 @@ public class History {
     }
   }
 
-@SuppressWarnings("unchecked")
-public static History readHistory(Solver solver, InputStream is) {
+  @SuppressWarnings("unchecked")
+  public static History readHistory(Solver solver, InputStream is) {
     History ret = new History(solver, new FileUtil(), Config.instance);
-    
+
     try {
       ObjectInputStream inputStream = new ObjectInputStream(is);
       try {
@@ -152,7 +153,7 @@ public static History readHistory(Solver solver, InputStream is) {
         inputStream.close();
       }
     } catch (IOException ex) {
-        logger.log(Level.WARNING, "", ex);
+      logger.log(Level.WARNING, "", ex);
     }
     ret.print();
     return ret;
@@ -165,6 +166,7 @@ public static History readHistory(Solver solver, InputStream is) {
       System.out.println("-------");
       for (Element e : history) {
         System.out.println(i + ":" + e);
+        logback.info("printing history: " + i + ":" + e);
         i++;
       }
     }
@@ -202,13 +204,13 @@ public static History readHistory(Solver solver, InputStream is) {
         skip++;
       } else if (!ignore && (!(tmp instanceof MethodElement) || !((MethodElement) tmp).isBegin)) {
         predictionFailed = true;
-        tester.log(Level.INFO, "Prediction failed");
+ //       tester.log(Level.INFO, "Prediction failed");
         logger.log(
-            Level.WARNING,
-            "!!!!!!!!!!!!!!!!! Prediction failed !!!!!!!!!!!!!!!!! index "
-                + index
-                + " history.size() "
-                + history.size());
+                Level.WARNING,
+                "!!!!!!!!!!!!!!!!! Prediction failed !!!!!!!!!!!!!!!!! index "
+                        + index
+                        + " history.size() "
+                        + history.size());
         logger.log(Level.WARNING, "At old iid " + tmp.getIid() + " at iid " + iid + " beginScope");
         current = new MethodElement(true, iid);
         clearAndSet(current);
@@ -235,13 +237,13 @@ public static History readHistory(Solver solver, InputStream is) {
         skip--;
       } else if (!ignore && (!(tmp instanceof MethodElement) || ((MethodElement) tmp).isBegin)) {
         predictionFailed = true;
-        tester.log(Level.INFO, "Prediction failed");
+    //    tester.log(Level.INFO, "Prediction failed");
         logger.log(
-            Level.WARNING,
-            "!!!!!!!!!!!!!!!!! Prediction failed !!!!!!!!!!!!!!!!! index "
-                + index
-                + " history.size() "
-                + history.size());
+                Level.WARNING,
+                "!!!!!!!!!!!!!!!!! Prediction failed !!!!!!!!!!!!!!!!! index "
+                        + index
+                        + " history.size() "
+                        + history.size());
         logger.log(Level.WARNING, "At old iid " + tmp.getIid() + " at iid " + iid + " endScope");
         current = new MethodElement(false, iid);
         clearAndSet(current);
@@ -261,37 +263,37 @@ public static History readHistory(Solver solver, InputStream is) {
   public void abstractData(boolean isEqual) {
     lastScope.isValidExpansion = lastScope.isValidExpansion && isEqual;
   }
-  
+
   /** Remove elements after index and set the element at index. */
   private void clearAndSet(Element e) {
     int len = history.size();
     for (int j = len - 1; j >= index; j--) {
       history.remove(j);
     }
-    history.add(e); 
+    history.add(e);
   }
 
   public void checkAndSetBranch(boolean result, Constraint constraint, int iid) {
     BranchElement current;
-    
+
     if (index < history.size()) {
       Element tmp = history.get(index);
       if (isEnd(tmp) || ignore) {
         current = new BranchElement(result, false, -1, iid);
         history.add(index, current);
       } else if (!ignore
-          && (!(tmp instanceof BranchElement) || ((BranchElement) tmp).getBranch() != result)) {
+              && (!(tmp instanceof BranchElement) || ((BranchElement) tmp).getBranch() != result)) {
         predictionFailed = true;
-        tester.log(Level.INFO, "Prediction failed " + ignore);
+     //   tester.log(Level.INFO, "Prediction failed " + ignore);
         logger.log(
-            Level.WARNING,
-            "!!!!!!!!!!!!!!!!! Prediction failed (checkAndSetBranch) !!!!!!!!!!!!!!!!! index "
-                + index
-                + " history.size() "
-                + history.size());
+                Level.WARNING,
+                "!!!!!!!!!!!!!!!!! Prediction failed (checkAndSetBranch) !!!!!!!!!!!!!!!!! index "
+                        + index
+                        + " history.size() "
+                        + history.size());
         logger.log(
-            Level.WARNING,
-            "At old iid " + tmp.getIid() + " at iid " + iid + " constraint " + constraint);
+                Level.WARNING,
+                "At old iid " + tmp.getIid() + " at iid " + iid + " constraint " + constraint);
         current = new BranchElement(result, false, -1, iid);
         clearAndSet(current);
       } else {
@@ -318,7 +320,7 @@ public static History readHistory(Solver solver, InputStream is) {
 
   public void solveAndSave() {
     int i = 0;
-    
+
     if (config.printConstraints) {
       for (Constraint c : pathConstraint) {
         System.out.println(i + ":" + c);
@@ -397,7 +399,7 @@ public static History readHistory(Solver solver, InputStream is) {
       throw new RuntimeException(e);
     }
   }
-  
+
   private ArrayList<Constraint> collectPathConstraints(int head, int n) {
     ArrayList<Constraint> ret = new ArrayList<Constraint>();
     for (int i = 0; i <= head; i++) {
@@ -466,13 +468,15 @@ public static History readHistory(Solver solver, InputStream is) {
       outputStream = new ObjectOutputStream(os);
       outputStream.writeObject(history);
       outputStream.close();
+      logback.info("=====history=====");
+      logback.info(history.toString());
     } catch (IOException e) {
       logger.log(Level.SEVERE, "", e);
       throw new RuntimeException("fail");
     }
   }
 
- 
+
   public Constraint removeLastBranch() {
     index--;
     BranchElement current = (BranchElement) history.get(index);

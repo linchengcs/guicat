@@ -9,7 +9,10 @@ import janala.utils.MyLogger;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
 public class CVC4Solver implements Solver {
   public static enum RESULT_TYPE {
@@ -57,9 +60,9 @@ public class CVC4Solver implements Solver {
   List<Constraint> constraints;
   int pathConstraintIndex;
 
-  private final static Logger logger = MyLogger.getLogger(CVC4Solver.class.getName());
-  private final static Logger tester =
-      MyLogger.getTestLogger(Config.mainClass + "." + Config.iteration);
+  private final static Logger logger = LoggerFactory.getLogger(CVC4Solver.class.getName());
+//  private final static Logger logger = MyLogger.getLogger(CVC4Solver.class.getName());
+//  private final static Logger tester =   MyLogger.getTestLogger(Config.mainClass + "." + Config.iteration);
 
   public void setInputs(List<InputElement> inputs) {
     this.inputs = inputs;
@@ -67,6 +70,7 @@ public class CVC4Solver implements Solver {
 
   public void setPathConstraint(List<Constraint> pathConstraint) {
     this.constraints = pathConstraint;
+    logger.info("set constraints/pathConstraint: " + pathConstraint.toString());
   }
 
   public void setPathConstraintIndex(int pathConstraintIndex) {
@@ -280,7 +284,7 @@ public class CVC4Solver implements Solver {
       return allTrue ? RESULT_TYPE.TRUE : RESULT_TYPE.UNKNOWN;
     } catch (IOException ioe) {
       ioe.printStackTrace();
-      logger.log(Level.SEVERE, "{0}", ioe);
+      logger.debug( "{0}", ioe);
       Runtime.getRuntime().halt(1);
       return RESULT_TYPE.UNKNOWN;
     }
@@ -378,13 +382,11 @@ public class CVC4Solver implements Solver {
       }
       if (!line.startsWith("sat")) {
         if (!line.contains("unsat")) {
-          logger.log(Level.SEVERE, line);
-          logger.log(
-              Level.SEVERE,
-              "Call to CVC4 failed (concolic.cvc4 = " + config.cvc4Command + ")");
+          logger.debug( line);
+          logger.debug(    "Call to CVC4 failed (concolic.cvc4 = " + config.cvc4Command + ")");
           Runtime.getRuntime().halt(1);
         }
-        logger.log(Level.INFO, "-- Infeasible");
+        logger.debug( "-- Infeasible");
         while ((line = br.readLine()) != null) {
           if (config.printFormulaAndSolutions) {
             System.out.println(line);
@@ -420,7 +422,7 @@ public class CVC4Solver implements Solver {
       }
     } catch (IOException ioe) {
       ioe.printStackTrace();
-      logger.log(Level.SEVERE, "{0}", ioe);
+      logger.debug( "{0}", ioe);
       Runtime.getRuntime().halt(1);
       return null;
     }
@@ -436,7 +438,7 @@ public class CVC4Solver implements Solver {
         String negatedSolution2 = solve(null, CONSTRAINT_TYPE.STR, soln);
         if (negatedSolution2 != null) {
           processResults(soln);
-          tester.log(Level.INFO, "Feasible = true at " + pathConstraintIndex);
+          logger.debug( "Feasible = true at " + pathConstraintIndex);
           return true;
         } else {
           if (extra != null) {
@@ -446,12 +448,12 @@ public class CVC4Solver implements Solver {
           }
         }
       } else {
-        tester.log(Level.INFO, "Feasible = false at " + pathConstraintIndex);
+        logger.debug( "Feasible = false at " + pathConstraintIndex);
         return false;
       }
       count++;
     }
-    tester.log(Level.INFO, "Feasible = false at " + pathConstraintIndex);
+    logger.debug( "Feasible = false at " + pathConstraintIndex);
     return false;
   }
 
@@ -471,6 +473,7 @@ public class CVC4Solver implements Solver {
               new String[] {
                 config.cvc4Command, "--lang", "cvc4", config.formulaFile
               });
+      logger.info(builder.toString( ) + builder.command().toString());
 
       builder.redirectErrorStream(true);
       Process process = builder.start();
@@ -487,12 +490,12 @@ public class CVC4Solver implements Solver {
 
     } catch (IOException ioe) {
       ioe.printStackTrace();
-      logger.log(Level.SEVERE, "{0}", ioe);
+      logger.debug( "{0}", ioe);
       Runtime.getRuntime().halt(1);
       return null;
     } catch (InterruptedException ie) {
       ie.printStackTrace();
-      logger.log(Level.SEVERE, "{0}", ie);
+      logger.debug( "{0}", ie);
       Runtime.getRuntime().halt(1);
       return null;
     }

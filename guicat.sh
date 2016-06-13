@@ -52,7 +52,7 @@ cmd="java -cp $classpath guicat.util.PrintAccessbileName $AUT_MAINCLASS"
 #eval $cmd > $AUTDIR"/accessbileName.txt"
 
 
-ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 100 -i 2000 -l $logFile"
+ripperCmd="java -Dlog4j.configuration=$log4j -cp $classpath edu.umd.cs.guitar.ripper.JFCRipperMain -c $AUT_MAINCLASS -g $guiFile -cf $configurationFile -d 10 -i 200 -l $logFile"
 #echo $ripperCmd
 eval $ripperCmd
 
@@ -76,7 +76,7 @@ eval $enumCmd
 for testcase in `find $enumGuicatTestcase -type f -name "*.tst" -printf '%f\n'`
 do
     testcase_id=${testcase%????}
-    python concolic.py -Dguicat.conf=$guicatConfigFile  32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $enumGuicatTestcase/$testcase_id.tst -i 2000 -d 200 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
+    python concolic.py -Dguicat.conf=$guicatConfigFile  32 --autosym -t $testcase_id edu.umd.cs.guitar.replayer.JFCReplayerMain "-c $AUT_MAINCLASS -g $guiFile -e $efgFile -t $enumGuicatTestcase/$testcase_id.tst -i 200 -d 10 -l $AUTDIR/logs/$testcase_id.log -gs $AUTDIR/states/$testcase_id.sta -cf $configurationFile -ts"
 #break
 done
 

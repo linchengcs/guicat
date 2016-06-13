@@ -194,6 +194,10 @@ task jarCatg(type: Jar, dependsOn: classes) {
     from ("build/classes/main") {
         include("catg/", "janala/")
     }
+
+    from (sourceSets.main.resources) {
+        include("logback.xml")
+    }
 }
 
 task jarSymAgent(type: Jar, dependsOn: classes) {

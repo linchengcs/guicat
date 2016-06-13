@@ -46,6 +46,7 @@ public class ConcolicInterpreter implements IVisitor {
   private final StaticInvocation staticInv;
   private final Config config;
 
+  private final static org.slf4j.Logger logback = org.slf4j.LoggerFactory.getLogger(ConcolicInterpreter.class);
   private final static Logger logger = MyLogger.getLogger(ConcolicInterpreter.class.getName());
 
   public ConcolicInterpreter(ClassNames cnames, Config config) {
@@ -223,6 +224,7 @@ public class ConcolicInterpreter implements IVisitor {
     }
     Main.writeOldStates();
     coverage.write(config.coverage);
+    logback.info("info of endExecution!!!!!!!");
   }
 
   public void visitAALOAD(AALOAD inst) {

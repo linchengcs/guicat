@@ -181,7 +181,7 @@ public class Ticket extends JFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
-           //     writePath();
+                //     writePath();
             }
 
             @Override
@@ -237,7 +237,7 @@ public class Ticket extends JFrame {
 
         //    File file = new File(pathDir+ "/log/ticket/path/" + System.currentTimeMillis() + ".txt");
         File file = new File(pathDir+ "/log/ticket/path/path-guitar.txt");
-      //  File file = new File(pathDir+ "/path.txt");
+        //  File file = new File(pathDir+ "/path.txt");
         file.getParentFile().mkdirs();
         try {
             FileWriter writer = new FileWriter(file, true);
@@ -250,7 +250,7 @@ public class Ticket extends JFrame {
     }
 
     public static void main(String[] args) {
-      //  System.out.println(args.toString());
+        //  System.out.println(args.toString());
         for (int i = 0; i < args.length; i++) ;
 
 //        javax.swing.SwingUtilities.invokeLater(new Runnable() {

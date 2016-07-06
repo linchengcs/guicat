@@ -53,9 +53,13 @@ task jarTicket(type: Jar, dependsOn: classes) {
     destinationDir = file(autDir)
     archiveName = "ticket.jar"
     from (sourceSets.main.output) {
-        includes = ["examples/ticket/Ticket.class", "examples/ticket/Ticket\$*.class"]
+        includes = ["examples/ticket/*.class", "examples/ticket/*.class"]
     }
-
+/*
+from (sourceSets.main.resources) {
+        include("logback.xml")
+    }
+*/
 }
 
 task Ticket(type: JavaExec, dependsOn: jarTicket) {

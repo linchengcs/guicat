@@ -15,8 +15,7 @@ install dependency
 set up
 ----
 
-+ vpn to wmu intranet
-+ git clone http://141.218.147.238/guicat
++ git clone https://github.com/sitstone/guicat
 + git checkout topic
 
 run

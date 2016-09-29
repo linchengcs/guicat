@@ -1,7 +1,7 @@
 guicat
 ====
 
-symbolic execution of java swing/awt GUI software to generate testcases. It is an artifact of our research paper [guicat](https://cs.wmich.edu/~zijiang/pub/ASECheng.pdf) 
+symbolic execution of java swing/awt GUI software to automated generate testcases. It is an artifact of our research paper [guicat](https://cs.wmich.edu/~zijiang/pub/ASECheng.pdf) 
 
 
 install dependency

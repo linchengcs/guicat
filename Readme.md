@@ -32,10 +32,6 @@ Arguments
 
 + guitar test case length : see ./conf/yourAut/yourAut.conf
 
-changes
-----
-
-+ no support for guicat-guitar.sh guitar-catg.sh, seems no necessary?
 
 
 
